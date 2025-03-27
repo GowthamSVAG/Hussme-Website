@@ -36,8 +36,8 @@ function AppContent() {
       <Routes>
         <Route index element={<Home />} />
         <Route path="/business" element={<Business />} />
-        {/* <Route path="/talent" element={<Talent />} /> */}
-        <Route path="/talent" element={<Management />} />
+        <Route path="/talent" element={<Talent />} />
+        {/* <Route path="/talent" element={<Management />} /> */}
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/digital" element={<Digital />} />
