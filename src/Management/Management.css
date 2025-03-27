@@ -34,6 +34,11 @@
   background-color: black;
   color: white;
 }
+.company-name {
+  font-size: xx-large;
+  padding-top: 5px;
+  font-weight: 600;
+}
 .cmpy-logo {
   display: flex;
   align-items: center;
@@ -81,21 +86,27 @@
 }
 /* Start of  Management Section */
 .management-section {
-  position: relative;
+  position: static;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  /* flex-direction: column; */
+  flex-direction: row !important;
+  /* background-color: #9747ff; */
+  /* justify-content: space-between; */
   width: 100%;
 }
 .mgmt-sidebar {
   position: fixed;
-  /* background-image: linear-gradient(to bottom right, #f08143 0%, #9747ff 90%); */
-  background-color: #9747ff;
-  min-width: 20%;
+  background-image: linear-gradient(
+    to right bottom,
+    #842bf8c1 10%,
+    #f77c35d8 99%
+  );
+  /* background-color: #842bf8; */
+  width: 20%;
   height: 95vh;
   display: flex;
   flex-direction: column;
-  border-left: 5px solid #f08143;
+  border-left: 5px solid #000000;
   transition: 0.5s;
   overflow: hidden;
 }
@@ -110,19 +121,25 @@
   margin: 0;
 }
 .mgmt-sidebar ul li {
-  margin-left: 5%;
   width: 100%;
+  height: fit-content;
   list-style-type: none;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 15px 0px;
+  margin: 15px 0 0 5px;
   border-radius: 45px 0px 0px 45px;
   cursor: pointer;
 }
+
 .mgmt-sidebar li:hover {
   background-color: #ffffff;
+  color: #000;
+}
+.mgmt-sidebar li:hover .mgmt-sidebar-title {
+  color: #000;
 }
 .mgmt-sidebar ul li a {
   position: relative;
@@ -139,32 +156,101 @@
 .mgmt-sidebar-title {
   margin: 0;
   padding: 0;
-  position: relative;
-  display: block;
+  min-width: 8ch !important;
   font-size: large;
-  font-weight: 500;
-  color: #000;
+  font-weight: 600;
+  color: #ffffff;
   text-align: start;
-  white-space: nowrap;
 }
 .mgmt-sidebar ul li a .mgmt-sidebar-icn {
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
+  margin-left: 10px;
   position: relative;
   display: block;
 }
 
 /* curve */
+
 .mgmt-sidebar ul li:hover a::before {
-  content:'';
+  content: "";
   position: absolute;
   right: 0;
-  top: -50;
+  top: -65px;
   width: 50px;
   height: 50px;
-  background-color: aqua;
-  /* background-color: transparent; */
+  background-color: transparent;
   border-radius: 50%;
-  box-shadow: 35px 35px 0 10px var(#ffffff);
+  box-shadow: 35px 35px 0 10px #fff;
   pointer-events: none;
+}
+
+.mgmt-sidebar ul li:hover a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -65px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 35px -35px 0 10px #fff;
+  pointer-events: none;
+}
+.mgmt-sidebar li:active {
+  background-color: #ffffff;
+  color: #000;
+}
+
+/* Content Show Section */
+.mgmt-content {
+  position: relative;
+  left: 20.5%;
+  display: flex;
+  justify-content: left;
+  width: 79%;
+}
+
+/* Active Sidebar Item */
+.active-sidebar-item {
+  background-color: #ffffff !important;
+  color: #000 !important;
+}
+
+.active-sidebar-item .mgmt-sidebar-title {
+  color: #000 !important;
+}
+
+.active-sidebar-item a::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -65px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 35px 35px 0 10px #fff;
+  pointer-events: none;
+}
+
+.active-sidebar-item a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -65px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 35px -35px 0 10px #fff;
+  pointer-events: none;
+}
+
+.active-sidebar-item a::before {
+  top: -65px;
+}
+
+.active-sidebar-item a::after {
+  bottom: -65px;
 }

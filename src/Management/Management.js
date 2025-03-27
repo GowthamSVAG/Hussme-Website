@@ -1,48 +1,45 @@
 import "../Management/Management.css";
-import React, { Component } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useUser } from "../Components/Context/UserContext"; // Import UserContext
-import { useState } from "react"; // Import useState
+import React, { useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useUser } from "../Components/Context/UserContext";
+import { ContentManagement } from "./ContentManagement";
+import { TrainingProcess } from "./TrainingProcess";
+import { Hiring } from "./Hiring";
+import { CompanyProfile } from "./CompanyProfile";
+import { Settings } from "./Settings";
 
 export function Management() {
-  const { user, logout } = useUser(); // Get user and logout from context
-  const [showLogout, setShowLogout] = useState(false); // State to toggle logout button visibility
+  const { user, logout } = useUser();
+  const [showLogout, setShowLogout] = useState(false);
+  const [activeComponent, setActiveComponent] = useState(<ContentManagement />);
+  const [activeIndex, setActiveIndex] = useState(0); // Track the active sidebar index
+
   const navigate = useNavigate();
 
-  function showSidebar(event) {
-    event.preventDefault();
-    const sidebar = document.querySelector(".sidebar");
-    sidebar.style.display = "flex";
-  }
-
-  function hideSidebar(event) {
-    event.preventDefault();
-    const sidebar = document.querySelector(".sidebar");
-    sidebar.style.display = "none";
-  }
-
   // Function to toggle the logout dropdown
-  const toggleLogout = () => {
-    setShowLogout(!showLogout);
-  };
+  const toggleLogout = () => setShowLogout(!showLogout);
 
-  // Function to handle logout click
+  // Function to handle logout
   const handleLogout = (e) => {
     e.preventDefault();
     logout();
-    setShowLogout(false); // Hide the logout button after logging out
+    setShowLogout(false);
   };
 
   // Function to navigate to change password page
   const handleChangePassword = (e) => {
     e.preventDefault();
-    setShowLogout(false); // Hide the dropdown
+    setShowLogout(false);
     navigate("/reset-password");
   };
 
   // Function to close dropdown when clicking outside
-  const closeDropdown = () => {
-    setShowLogout(false);
+  const closeDropdown = () => setShowLogout(false);
+
+  // Function to load components dynamically
+  const loadComponent = (component, index) => {
+    setActiveComponent(component);
+    setActiveIndex(index);
   };
 
   return (
@@ -74,13 +71,12 @@ export function Management() {
                 )}
               </div>
             ) : (
-              <>
-                <Link className="mgmt-login-button" to="/login">
-                  Login
-                </Link>
-              </>
+              <Link className="mgmt-login-button" to="/login">
+                Login
+              </Link>
             )}
           </div>
+          <div className="company-name">Hussme Pvt Ltd</div>
           <div className="cmpy-logo">
             <Link to="/">
               <img
@@ -92,58 +88,76 @@ export function Management() {
           </div>
         </div>
         {/* End of navbar */}
+
+        {/* Start of Sidebar */}
         <div className="management-section">
           <div className="mgmt-sidebar">
             <ul>
-              <li>
-                <Link>
+              <li
+                onClick={() => loadComponent(<ContentManagement />, 0)}
+                className={activeIndex === 0 ? "active-sidebar-item" : ""}
+              >
+                <NavLink>
                   <img
-                    src="https://i.ibb.co/zTQV8chR/project.png"
+                    src="https://i.ibb.co/Mx9t19CT/document-gear.png"
                     className="mgmt-sidebar-icn"
-                  ></img>
-                  <span className="mgmt-sidebar-title">Content Management</span>
-                </Link>
+                  />
+                  <div className="mgmt-sidebar-title">Content Management</div>
+                </NavLink>
               </li>
-              <li>
-                <Link>
+              <li
+                onClick={() => loadComponent(<TrainingProcess />, 1)}
+                className={activeIndex === 1 ? "active-sidebar-item" : ""}
+              >
+                <NavLink>
                   <img
-                    src="https://i.ibb.co/v6Pyt4G1/training.png"
+                    src="https://i.ibb.co/WvzP2QgX/chart-user.png"
                     className="mgmt-sidebar-icn"
-                  ></img>
-                  <span className="mgmt-sidebar-title">
-                    Processs & Training
-                  </span>
-                </Link>
+                  />
+                  <span className="mgmt-sidebar-title">Process & Training</span>
+                </NavLink>
               </li>
-              <li>
-                <Link>
+              <li
+                onClick={() => loadComponent(<Hiring />, 2)}
+                className={activeIndex === 2 ? "active-sidebar-item" : ""}
+              >
+                <NavLink>
                   <img
-                    src="https://i.ibb.co/DHQZXWQX/acquisition.png"
+                    src="https://i.ibb.co/s9sNfp8X/assign.png"
                     className="mgmt-sidebar-icn"
-                  ></img>
+                  />
                   <span className="mgmt-sidebar-title">Hiring</span>
-                </Link>
+                </NavLink>
               </li>
-              <li>
-                <Link>
+              <li
+                onClick={() => loadComponent(<CompanyProfile />, 3)}
+                className={activeIndex === 3 ? "active-sidebar-item" : ""}
+              >
+                <NavLink>
                   <img
-                    src="https://i.ibb.co/fVfNtpBq/user-avatar.png"
+                    src="https://i.ibb.co/svcBG24t/user-gear.png"
                     className="mgmt-sidebar-icn"
-                  ></img>
+                  />
                   <span className="mgmt-sidebar-title">Company Profile</span>
-                </Link>
+                </NavLink>
               </li>
-              <li>
-                <Link>
+              <li
+                onClick={() => loadComponent(<Settings />, 4)}
+                className={activeIndex === 4 ? "active-sidebar-item" : ""}
+              >
+                <NavLink>
                   <img
-                    src="https://i.ibb.co/ksFyq9bJ/account-settings.png"
+                    src="https://i.ibb.co/dszqfsqj/gears.png"
                     className="mgmt-sidebar-icn"
-                  ></img>
+                  />
                   <span className="mgmt-sidebar-title">Settings</span>
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </div>
+
+          {/* Render Dynamic Component */}
+          <div className="mgmt-content">{activeComponent}</div>
         </div>
       </div>
     </>
