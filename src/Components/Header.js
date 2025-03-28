@@ -129,6 +129,9 @@ export function Header() {
               <Link to="/management">Management</Link>
             </li>
             <li className="hideWhileMobileOn">
+              <Link to="/new-company">New Company</Link>
+            </li>
+            <li className="hideWhileMobileOn">
               <Link to="/blog">Blog</Link>
             </li>
             <li className="hideWhileMobileOn">

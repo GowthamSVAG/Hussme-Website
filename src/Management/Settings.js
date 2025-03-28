@@ -1,7 +1,7 @@
 import "../Management/ContentManagement.css";
 export function Settings(){
     return(
-        <div className="content-management-page">
+        <div className="management-page">
             <h1>Settings</h1>
         </div>
     )

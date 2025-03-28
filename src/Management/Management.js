@@ -12,7 +12,8 @@ export function Management() {
   const { user, logout } = useUser();
   const [showLogout, setShowLogout] = useState(false);
   const [activeComponent, setActiveComponent] = useState(<ContentManagement />);
-  const [activeIndex, setActiveIndex] = useState(0); // Track the active sidebar index
+const [activeIndex, setActiveIndex] = useState(0); // Track the active sidebar index
+
 
   const navigate = useNavigate();
 
@@ -41,6 +42,7 @@ export function Management() {
     setActiveComponent(component);
     setActiveIndex(index);
   };
+  
 
   return (
     <>
@@ -92,68 +94,69 @@ export function Management() {
         {/* Start of Sidebar */}
         <div className="management-section">
           <div className="mgmt-sidebar">
-            <ul>
-              <li
-                onClick={() => loadComponent(<ContentManagement />, 0)}
-                className={activeIndex === 0 ? "active-sidebar-item" : ""}
-              >
-                <NavLink>
-                  <img
-                    src="https://i.ibb.co/Mx9t19CT/document-gear.png"
-                    className="mgmt-sidebar-icn"
-                  />
-                  <div className="mgmt-sidebar-title">Content Management</div>
-                </NavLink>
-              </li>
-              <li
-                onClick={() => loadComponent(<TrainingProcess />, 1)}
-                className={activeIndex === 1 ? "active-sidebar-item" : ""}
-              >
-                <NavLink>
-                  <img
-                    src="https://i.ibb.co/WvzP2QgX/chart-user.png"
-                    className="mgmt-sidebar-icn"
-                  />
-                  <span className="mgmt-sidebar-title">Process & Training</span>
-                </NavLink>
-              </li>
-              <li
-                onClick={() => loadComponent(<Hiring />, 2)}
-                className={activeIndex === 2 ? "active-sidebar-item" : ""}
-              >
-                <NavLink>
-                  <img
-                    src="https://i.ibb.co/s9sNfp8X/assign.png"
-                    className="mgmt-sidebar-icn"
-                  />
-                  <span className="mgmt-sidebar-title">Hiring</span>
-                </NavLink>
-              </li>
-              <li
-                onClick={() => loadComponent(<CompanyProfile />, 3)}
-                className={activeIndex === 3 ? "active-sidebar-item" : ""}
-              >
-                <NavLink>
-                  <img
-                    src="https://i.ibb.co/svcBG24t/user-gear.png"
-                    className="mgmt-sidebar-icn"
-                  />
-                  <span className="mgmt-sidebar-title">Company Profile</span>
-                </NavLink>
-              </li>
-              <li
-                onClick={() => loadComponent(<Settings />, 4)}
-                className={activeIndex === 4 ? "active-sidebar-item" : ""}
-              >
-                <NavLink>
-                  <img
-                    src="https://i.ibb.co/dszqfsqj/gears.png"
-                    className="mgmt-sidebar-icn"
-                  />
-                  <span className="mgmt-sidebar-title">Settings</span>
-                </NavLink>
-              </li>
-            </ul>
+          <ul>
+  <li
+    onClick={() => loadComponent(<ContentManagement />, 0)}
+    className={activeIndex === 0 ? 'active-sidebar-item' : ''}
+  >
+    <NavLink>
+      <img
+        src="https://i.ibb.co/Mx9t19CT/document-gear.png"
+        className="mgmt-sidebar-icn"
+      />
+      <div className="mgmt-sidebar-title">Content Management</div>
+    </NavLink>
+  </li>
+  <li
+    onClick={() => loadComponent(<TrainingProcess />, 1)}
+    className={activeIndex === 1 ? 'active-sidebar-item' : ''}
+  >
+    <NavLink>
+      <img
+        src="https://i.ibb.co/WvzP2QgX/chart-user.png"
+        className="mgmt-sidebar-icn"
+      />
+      <span className="mgmt-sidebar-title">Process & Training</span>
+    </NavLink>
+  </li>
+  <li
+    onClick={() => loadComponent(<Hiring />, 2)}
+    className={activeIndex === 2 ? 'active-sidebar-item' : ''}
+  >
+    <NavLink>
+      <img
+        src="https://i.ibb.co/s9sNfp8X/assign.png"
+        className="mgmt-sidebar-icn"
+      />
+      <span className="mgmt-sidebar-title">Hiring</span>
+    </NavLink>
+  </li>
+  <li
+    onClick={() => loadComponent(<CompanyProfile />, 3)}
+    className={activeIndex === 3 ? 'active-sidebar-item' : ''}
+  >
+    <NavLink>
+      <img
+        src="https://i.ibb.co/svcBG24t/user-gear.png"
+        className="mgmt-sidebar-icn"
+      />
+      <span className="mgmt-sidebar-title">Company Profile</span>
+    </NavLink>
+  </li>
+  <li
+    onClick={() => loadComponent(<Settings />, 4)}
+    className={activeIndex === 4 ? 'active-sidebar-item' : ''}
+  >
+    <NavLink>
+      <img
+        src="https://i.ibb.co/dszqfsqj/gears.png"
+        className="mgmt-sidebar-icn"
+      />
+      <span className="mgmt-sidebar-title">Settings</span>
+    </NavLink>
+  </li>
+</ul>
+
           </div>
 
           {/* Render Dynamic Component */}
