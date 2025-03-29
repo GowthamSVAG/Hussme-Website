@@ -25,7 +25,7 @@ export function NewCompanyProfile() {
 
   // Function to close dropdown when clicking outside
   const closeDropdown = () => setShowLogout(false);
-  const [preview, setPreview] = useState("");
+  const [preview, setPreview] = useState("https://i.ibb.co/4wrxz3pC/image-upload-icon.png");
 
   const previewFile = (event) => {
     const file = event.target.files[0];
@@ -74,7 +74,7 @@ export function NewCompanyProfile() {
               </Link>
             )}
           </div>
-          <div className="new-company-name">Create New Company Profile</div>
+          {/* <div className="new-company-name">Create New Company Profile</div> */}
           <div className="cmpy-logo">
             <Link to="/">
               <img
@@ -85,22 +85,35 @@ export function NewCompanyProfile() {
             </Link>
           </div>
         </div>
+        <div className="new-company-name">Create New Company Profile</div>
         <div className="new-cmpy-form-conatiner">
+          
+
           <form className="new-cmpy-form" action="">
+            <div className="new-cmpny-input-logo-sec">
+              <label htmlFor="cmpy-logo" className="logo-label">
+                Company Logo
+              </label>
+
+             
+                <img
+                  src={preview}
+                  height="200"
+                  className="logo-preview"
+                  alt="Image preview..."
+                />
+             
+              <input
+                className="logo-input"
+                type="file"
+                onChange={previewFile}
+              />
+            </div>
             <div className="new-cmpny-input-sec">
               <label htmlFor="cmpy-name"> Company Name</label>
               <input type="text" id="cmpy-name" />
             </div>
-            <div className="new-cmpny-input-logo-sec">
-              <label htmlFor="cmpy-logo"> Company Logo</label>
-              <div>
-                <input type="file" onChange={previewFile} />
-                <br />
-                {preview && (
-                  <img src={preview} height="200" alt="Image preview..." />
-                )}
-              </div>
-            </div>
+
             <div className="new-cmpny-input-sec">
               <label htmlFor="industry"> Industry</label>
               <input type="text" id="industry" />
@@ -112,6 +125,10 @@ export function NewCompanyProfile() {
             <div className="new-cmpny-input-sec">
               <label htmlFor="cmpy-phone"> Company Phone</label>
               <input type="tel" id="cmpy-phone" />
+            </div>
+            <div className="new-cmpny-input-sec">
+              <label htmlFor="cmpy-website"> Company Website</label>
+              <input type="url" id="cmpy-website" />
             </div>
             <div className="new-cmpny-input-sec">
               <label htmlFor="cmpy-address"> Company Address</label>
@@ -133,12 +150,10 @@ export function NewCompanyProfile() {
               <label htmlFor="cmpy-country"> Country</label>
               <input type="text" id="cmpy-country" />
             </div>
-            <div className="new-cmpny-input-sec">
-              <label htmlFor="cmpy-website"> Company Website</label>
-              <input type="url" id="cmpy-website" />
-            </div>
 
-            <button type="submit">Create Company Profile</button>
+            <button type="submit" className="new-cmpy-button">
+              Create Company Profile
+            </button>
           </form>
         </div>
       </div>
