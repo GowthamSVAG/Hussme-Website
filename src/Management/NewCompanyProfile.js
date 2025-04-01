@@ -25,7 +25,9 @@ export function NewCompanyProfile() {
 
   // Function to close dropdown when clicking outside
   const closeDropdown = () => setShowLogout(false);
-  const [preview, setPreview] = useState("https://i.ibb.co/4wrxz3pC/image-upload-icon.png");
+  const [preview, setPreview] = useState(
+    "https://i.ibb.co/4wrxz3pC/image-upload-icon.png"
+  );
 
   const previewFile = (event) => {
     const file = event.target.files[0];
@@ -87,73 +89,84 @@ export function NewCompanyProfile() {
         </div>
         <div className="new-company-name">Create New Company Profile</div>
         <div className="new-cmpy-form-conatiner">
-          
-
           <form className="new-cmpy-form" action="">
             <div className="new-cmpny-input-logo-sec">
-              <label htmlFor="cmpy-logo" className="logo-label">
-                Company Logo
-              </label>
+              <div className="col-img">
+                <label htmlFor="cmpy-logo" className="logo-label">
+                  Company Logo
+                </label>
 
-             
-                <img
-                  src={preview}
-                  height="200"
-                  className="logo-preview"
-                  alt="Image preview..."
+                <input
+                  className="logo-input"
+                  type="file"
+                  onChange={previewFile}
                 />
-             
-              <input
-                className="logo-input"
-                type="file"
-                onChange={previewFile}
+              </div>
+              <img
+                src={preview}
+                height="200"
+                className="logo-preview"
+                alt="Image preview..."
               />
             </div>
-            <div className="new-cmpny-input-sec">
-              <label htmlFor="cmpy-name"> Company Name</label>
-              <input type="text" id="cmpy-name" />
-            </div>
 
             <div className="new-cmpny-input-sec">
-              <label htmlFor="industry"> Industry</label>
-              <input type="text" id="industry" />
+              <input type="text" id="cmpy-name" placeholder="Company Name" />
             </div>
-            <div className="new-cmpny-input-sec">
-              <label htmlFor="cmpy-email"> Company Email</label>
-              <input type="email" id="cmpy-email" />
+            <div className="row-input-fields">
+              <div className="new-cmpny-input-sec">
+                <input type="text" id="industry" placeholder="Industry" />
+              </div>
+              <div className="new-cmpny-input-sec">
+                <input
+                  type="email"
+                  id="cmpy-email"
+                  placeholder="Company Email"
+                />
+              </div>
             </div>
-            <div className="new-cmpny-input-sec">
-              <label htmlFor="cmpy-phone"> Company Phone</label>
-              <input type="tel" id="cmpy-phone" />
+            <div className="row-input-fields">
+              <div className="new-cmpny-input-sec">
+                <input type="tel" id="cmpy-phone" placeholder="Company Phone" />
+              </div>
+              <div className="new-cmpny-input-sec">
+                <input
+                  type="url"
+                  id="cmpy-website"
+                  placeholder=" Company Website"
+                />
+              </div>
             </div>
-            <div className="new-cmpny-input-sec">
-              <label htmlFor="cmpy-website"> Company Website</label>
-              <input type="url" id="cmpy-website" />
+            <div className="new-cmpny-input-sec ">
+              <textarea
+                className="address"
+                type="text"
+                id="cmpy-address"
+                placeholder="Company Address"
+              />
             </div>
-            <div className="new-cmpny-input-sec">
-              <label htmlFor="cmpy-address"> Company Address</label>
-              <input type="text" id="cmpy-address" />
+            <div className="row-input-fields">
+              <div className="new-cmpny-input-sec">
+                <input type="text" id="cmpy-city" placeholder="City" />
+              </div>
+              <div className="new-cmpny-input-sec">
+                <input type="text" id="cmpy-state" placeholder="State" />
+              </div>
             </div>
-            <div className="new-cmpny-input-sec">
-              <label htmlFor="cmpy-city"> City</label>
-              <input type="text" id="cmpy-city" />
+            <div className="row-input-fields">
+              <div className="new-cmpny-input-sec">
+                <input type="text" id="cmpy-zip" placeholder="Zip Code" />
+              </div>
+              <div className="new-cmpny-input-sec">
+                <input type="text" id="cmpy-country" placeholder="Country" />
+              </div>
             </div>
-            <div className="new-cmpny-input-sec">
-              <label htmlFor="cmpy-state"> State</label>
-              <input type="text" id="cmpy-state" />
+            <div className="row-input-fields">
+        
+              <button type="submit" className="new-cmpy-button">
+                Create Company Profile
+              </button>
             </div>
-            <div className="new-cmpny-input-sec">
-              <label htmlFor="cmpy-zip"> Zip Code</label>
-              <input type="text" id="cmpy-zip" />
-            </div>
-            <div className="new-cmpny-input-sec">
-              <label htmlFor="cmpy-country"> Country</label>
-              <input type="text" id="cmpy-country" />
-            </div>
-
-            <button type="submit" className="new-cmpy-button">
-              Create Company Profile
-            </button>
           </form>
         </div>
       </div>
