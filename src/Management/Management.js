@@ -1,6 +1,7 @@
 import "../Management/Management.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import axios from 'axios';
 import { useUser } from "../Components/Context/UserContext";
 import { ContentManagement } from "./ContentManagement";
 import { TrainingProcess } from "./TrainingProcess";
@@ -11,31 +12,57 @@ import { Settings } from "./Settings";
 export function Management() {
   const { user, logout } = useUser();
   const [showLogout, setShowLogout] = useState(false);
+  const [showCompanyDropdown, setShowCompanyDropdown] = useState(false);
   const [activeComponent, setActiveComponent] = useState(<ContentManagement />);
-const [activeIndex, setActiveIndex] = useState(0); // Track the active sidebar index
-
+  const [activeIndex, setActiveIndex] = useState(0); // Track the active sidebar index
+  const [companyProfile, setCompanyProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
   // Function to toggle the logout dropdown
-  const toggleLogout = () => setShowLogout(!showLogout);
+  const toggleLogout = (e) => {
+    e.stopPropagation();
+    setShowLogout(!showLogout);
+    setShowCompanyDropdown(false);
+  };
+
+  // Function to toggle the company logo dropdown
+  const toggleCompanyDropdown = (e) => {
+    e.stopPropagation();
+    setShowCompanyDropdown(!showCompanyDropdown);
+    setShowLogout(false);
+  };
+
+  // Function to handle logout and navigate to home
+  const handleLogoutAndNavigate = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    logout();
+    navigate("/");
+  };
 
   // Function to handle logout
   const handleLogout = (e) => {
     e.preventDefault();
     logout();
     setShowLogout(false);
+    setShowCompanyDropdown(false);
   };
 
   // Function to navigate to change password page
   const handleChangePassword = (e) => {
     e.preventDefault();
     setShowLogout(false);
+    setShowCompanyDropdown(false);
     navigate("/reset-password");
   };
 
-  // Function to close dropdown when clicking outside
-  const closeDropdown = () => setShowLogout(false);
+  // Function to close dropdowns when clicking outside
+  const closeDropdowns = () => {
+    setShowLogout(false);
+    setShowCompanyDropdown(false);
+  };
 
   // Function to load components dynamically
   const loadComponent = (component, index) => {
@@ -43,46 +70,111 @@ const [activeIndex, setActiveIndex] = useState(0); // Track the active sidebar i
     setActiveIndex(index);
   };
   
+  // Fetch company profile data on component mount
+  useEffect(() => {
+    const fetchCompanyProfile = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        
+        if (!token) {
+          navigate('/login');
+          return;
+        }
+        
+        const response = await axios.get('http://localhost:8000/api/company/get-company-profile', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        
+        setCompanyProfile(response.data);
+      } catch (error) {
+        console.error("Error fetching company profile:", error);
+        
+        // If profile not found, redirect to create profile
+        if (error.response && error.response.status === 404) {
+          navigate('/new-company-profile');
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchCompanyProfile();
+  }, [navigate]);
+
+  // Add click handler to close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = () => {
+      closeDropdowns();
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
+  // Helper function to get proper image URL
+  const getImageUrl = (logoPath) => {
+    if (!logoPath) return "https://i.ibb.co/4wrxz3pC/image-upload-icon.png";
+    
+    // If it's a full URL already (like a base64 string), return as is
+    if (logoPath.startsWith('data:image')) return logoPath;
+    
+    // Otherwise, prepend the server URL
+    return `http://localhost:8000${logoPath}`;
+  };
+
+  if (loading) {
+    return <div className="loading">Loading...</div>;
+  }
 
   return (
     <>
-      <div className="mgmt-page" onClick={closeDropdown}>
+      <div className="mgmt-page" onClick={closeDropdowns}>
         {/* Start of navbar */}
         <div className="mgmt-navbar">
-          <div className="mgmt-login">
-            {user ? (
-              <div
-                className="user-dropdown-container"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <span className="desk-username" onClick={toggleLogout}>
-                  {user.username}
-                </span>
-                {showLogout && (
-                  <div className="mgmt-left logout-dropdown">
-                    <Link
-                      className="mgmt-change-password-button"
-                      onClick={handleChangePassword}
-                    >
-                      Change Password
-                    </Link>
-                    <Link className="mgmt-logout-button" onClick={handleLogout}>
-                      Logout
-                    </Link>
-                  </div>
-                )}
-              </div>
+          {/* Left side - Company Logo */}
+          <div className="company-logo-container" onClick={(e) => toggleCompanyDropdown(e)}>
+            {companyProfile && companyProfile.logo ? (
+              <img 
+                src={getImageUrl(companyProfile.logo)} 
+                alt={companyProfile.companyName}
+                className="company-logo"
+                title="Click for options"
+              />
             ) : (
-              <Link className="mgmt-login-button" to="/login">
-                Login
-              </Link>
+              <div className="logo-placeholder">Logo</div>
+            )}
+            
+            {showCompanyDropdown && (
+              <div className="company-dropdown">
+                <div className="dropdown-header">
+                  {companyProfile?.companyName}
+                </div>
+               
+                <Link className="dropdown-item" onClick={(e) => loadComponent(<CompanyProfile />, 3)}>
+                  Edit Profile
+                </Link>
+                <Link className="dropdown-item logout-btn" onClick={handleLogoutAndNavigate}>
+                  Logout & Go Home
+                </Link>
+              </div>
             )}
           </div>
-          <div className="company-name">Hussme Pvt Ltd</div>
-          <div className="cmpy-logo">
+          
+          {/* Center - Company Name */}
+          <div className="company-name">
+            {companyProfile ? companyProfile.companyName : "Company Name"}
+          </div>
+          
+          {/* Right side - Website Logo */}
+          <div className="website-logo-container">
             <Link to="/">
               <img
-                className="mgmt-logo"
+                className="website-logo"
                 src="https://i.ibb.co/PvSFSPcB/hussme-Logo-2-1-white.jpg"
                 alt="Hussme"
               />

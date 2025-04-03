@@ -89,7 +89,7 @@ export function Login() {
     }
 
     try {
-      const response = await fetch(process.env.REACT_APP_API_URL + "/auth", {
+      const response = await fetch("http://localhost:8000/api/auth", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -101,10 +101,33 @@ export function Login() {
       if (response.ok) {
         login(result.Token);
         toast.success("Login Successful!");
-        // Redirect to home after a short delay to allow user to see the toast
-        setTimeout(() => {
-          navigate("/");
-        }, 1500);
+        
+        // Check if user has a company profile
+        try {
+          const profileResponse = await fetch("http://localhost:8000/api/company/get-company-profile", {
+            headers: {
+              'Authorization': `Bearer ${result.Token}`
+            }
+          });
+          
+          // If profile exists, redirect to management page
+          if (profileResponse.ok) {
+            setTimeout(() => {
+              navigate("/management");
+            }, 1500);
+          } else {
+            // If profile doesn't exist, redirect to create profile page
+            setTimeout(() => {
+              navigate("/new-company-profile");
+            }, 1500);
+          }
+        } catch (profileError) {
+          console.error("Error checking profile:", profileError);
+          // Default fallback - redirect to new company profile
+          setTimeout(() => {
+            navigate("/new-company-profile");
+          }, 1500);
+        }
       } else {
         toast.error(
           result.message || "Login failed. Please check your credentials."

@@ -45,12 +45,12 @@
 
 .new-cmpy-form-conatiner {
   margin-top: 1%;
-  width: 100%;
+  min-width: 100%;
   height: 90%;
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center !important;
   align-items: center;
   /* margin: auto; */
   border-radius: 10px;
@@ -188,6 +188,32 @@ resize: none !important;
 .new-cmpy-button:hover {
   background: linear-gradient(to bottom right, #8b34fc, #ff8239);
   /* transform: scale(1); */
+}
+
+/* Add error styling for form validation */
+input.error, textarea.error {
+    border: 1px solid #ff3860;
+    background-color: #ffeded;
+}
+
+.error-message {
+    color: #ff3860;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Toast notifications styling adjustments */
+.Toastify__toast {
+    border-radius: 4px;
+}
+
+.Toastify__toast--success {
+    /* background-color: #48bb78; */
+}
+
+.Toastify__toast--error {
+    background-color: #ff3860;
 }
 
 @media (max-width: 950px) {

@@ -6,3 +6,162 @@
     font-size: xx-large;
     box-shadow: rgba(50, 50, 93, 0) 15px 1px 15px -0px, rgba(0, 0, 0, 0.3) 15px 0px 10px -1px;
 }
+
+.content-management-page {
+    width: 100%;
+    min-height:fit-content;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+}
+
+.management-navbar {
+    background-color: #9747ff;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.company-logo-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.company-logo {
+    max-height: 50px;
+    max-width: 150px;
+    object-fit: contain;
+}
+
+.logo-placeholder {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.company-name-container {
+    flex: 2;
+    text-align: center;
+}
+
+.company-name {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.user-menu-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.username {
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: background-color 0.3s;
+}
+
+.username:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.logout-dropdown {
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    margin-top: 5px;
+    padding: 10px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+}
+
+.logout-button, .change-password-button {
+    text-decoration: none;
+    color: #333;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.logout-button:hover, .change-password-button:hover {
+    background-color: #f0f0f0;
+}
+
+.login-button {
+    text-decoration: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.management-content {
+    max-height: fit-content;
+    background-color: white;
+    padding: 2rem;
+    flex-grow: 1;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.company-details {
+    margin-top: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.company-details h2 {
+    margin-top: 0;
+    color: #9747ff;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.company-details p {
+    margin: 0.8rem 0;
+    color: #333;
+}
+
+.company-details strong {
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .management-navbar {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .company-name {
+        font-size: 1.2rem;
+    }
+    
+    .management-content {
+        padding: 1rem;
+    }
+}
