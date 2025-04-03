@@ -115,7 +115,7 @@ export function NewCompanyProfile() {
       
       // Make API request
       const response = await axios.post(
-        'http://localhost:8000/api/company/update-company-profile', 
+        process.env.REACT_APP_API_URL +'/api/company/update-company-profile', 
         formDataToSubmit,
         {
           headers: {

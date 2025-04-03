@@ -58,7 +58,7 @@ export function CompanyProfile() {
                     return;
                 }
                 
-                const response = await axios.get('http://localhost:8000/api/company/get-company-profile', {
+                const response = await axios.get(process.env.REACT_APP_API_URL +'/company/get-company-profile', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -180,7 +180,7 @@ export function CompanyProfile() {
             
             // Make API request
             const response = await axios.post(
-                'http://localhost:8000/api/company/update-company-profile', 
+                process.env.REACT_APP_API_URL +'/company/update-company-profile', 
                 formDataToSubmit,
                 {
                     headers: {
@@ -221,7 +221,7 @@ export function CompanyProfile() {
         if (logoPath.startsWith('data:image')) return logoPath;
         
         // Otherwise, prepend the server URL
-        return `http://localhost:8000${logoPath}`;
+        return `process.env.REACT_APP_API_URL +${logoPath}`;
     };
 
     // If still loading, show a loading message

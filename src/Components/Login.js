@@ -89,7 +89,7 @@ export function Login() {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/api/auth", {
+      const response = await fetch(process.env.REACT_APP_API_URL +"/auth", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -104,7 +104,7 @@ export function Login() {
         
         // Check if user has a company profile
         try {
-          const profileResponse = await fetch("http://localhost:8000/api/company/get-company-profile", {
+          const profileResponse = await fetch(process.env.REACT_APP_API_URL +"/company/get-company-profile", {
             headers: {
               'Authorization': `Bearer ${result.Token}`
             }
