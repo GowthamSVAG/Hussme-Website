@@ -62,7 +62,7 @@ export function ContentManagement() {
 
     // If still loading, show a loading message
     if (loading) {
-        return <div className="loading">Loading...</div>;
+        return  <div className="loading-container"><div className="loading">Loading...</div></div> ;
     }
 
     return (

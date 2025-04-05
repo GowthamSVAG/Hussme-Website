@@ -18,7 +18,7 @@ import { NewCompanyProfile } from "./Management/NewCompanyProfile";
 
 function AppContent() {
   const location = useLocation();
-  const hideHeaderFooter = location.pathname.startsWith("/management" ) || location.pathname.startsWith("/new-company");
+  const hideHeaderFooter = location.pathname.startsWith("/management") || location.pathname.startsWith("/new-company");
 
   return (
     <div className="container">

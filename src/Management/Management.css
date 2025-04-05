@@ -132,17 +132,21 @@
 .company-logo-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   cursor: pointer;
   position: relative;
-  max-width: fit-content;
+  width: fit-content;
+  height: fit-content;
+
 }
 
 .company-logo {
-  max-width: 50px;
-  max-height: 50px;
-  object-fit: contain;
-  border-radius: 50%;
+  /* background-color: #333; */
+ width: 60px;
+  height:60px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10%;
   background-color: #ffffff;
   padding: 2px;
   transition: transform 0.3s ease;

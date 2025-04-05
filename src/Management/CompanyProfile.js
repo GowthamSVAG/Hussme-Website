@@ -220,13 +220,15 @@ export function CompanyProfile() {
         // If it's a full URL already (like a base64 string), return as is
         if (logoPath.startsWith('data:image')) return logoPath;
         
-        // Otherwise, prepend the server URL
-        return `process.env.REACT_APP_API_URL +${logoPath}`;
+        // Otherwise, prepend the server URLreturn `${process.env.REACT_APP_API_URL}${logoPath}`;return process.env.REACT_APP_API_URL + `${logoPath}`;
+        // Remove /api from the URL when constructing image path since logo paths already include the correct structure
+        const baseUrl = process.env.REACT_APP_API_URL.replace('/api', '');
+        return baseUrl + logoPath;
     };
 
     // If still loading, show a loading message
     if (loading) {
-        return <div className="loading">Loading...</div>;
+        return <div className="loading-container"><div className="loading">Loading...</div></div> ;
     }
 
     return (

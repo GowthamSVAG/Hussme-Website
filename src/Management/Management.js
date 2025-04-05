@@ -124,11 +124,13 @@ export function Management() {
     if (logoPath.startsWith('data:image')) return logoPath;
     
     // Otherwise, prepend the server URL
-    return process.env.REACT_APP_API_URL +`${logoPath}`;
+    // Remove /api from the URL when constructing image path since logo paths already include the correct structure
+    const baseUrl = process.env.REACT_APP_API_URL.replace('/api', '');
+    return baseUrl + logoPath;
   };
 
   if (loading) {
-    return <div className="loading">Loading...</div>;
+    return  <div className="loading-container"><div className="loading">Loading...</div></div> ;
   }
 
   return (
