@@ -81,7 +81,7 @@ export function Management() {
           return;
         }
         
-        const response = await axios.get('http://localhost:8000/api/company/get-company-profile', {
+        const response = await axios.get(process.env.REACT_APP_API_URL +'/company/get-company-profile', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -124,7 +124,7 @@ export function Management() {
     if (logoPath.startsWith('data:image')) return logoPath;
     
     // Otherwise, prepend the server URL
-    return `http://localhost:8000${logoPath}`;
+    return process.env.REACT_APP_API_URL +`${logoPath}`;
   };
 
   if (loading) {

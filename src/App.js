@@ -14,8 +14,6 @@ import { Login } from "./Components/Login";
 import { Reset } from "./Components/Pages/Password Reset/Reset-Password";
 import { Otp } from "./Components/Pages/Password Reset/Otp";
 import { Management } from "./Management/Management";
-import { Rootlayout } from "./Layout/RootLayout";
-import { ContentManagement } from "./Management/ContentManagement";
 import { NewCompanyProfile } from "./Management/NewCompanyProfile";
 
 function AppContent() {

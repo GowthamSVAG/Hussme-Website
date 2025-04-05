@@ -115,7 +115,7 @@ export function NewCompanyProfile() {
       
       // Make API request
       const response = await axios.post(
-        process.env.REACT_APP_API_URL +'/api/company/update-company-profile', 
+        process.env.REACT_APP_API_URL +'/company/update-company-profile', 
         formDataToSubmit,
         {
           headers: {
@@ -281,7 +281,7 @@ export function NewCompanyProfile() {
               className="new-cmpy-button"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Creating...' : 'Create Company Profile'}
+              {isSubmitting ? 'Creating...' : 'Submit'}
             </button>
           </div>
         </form>

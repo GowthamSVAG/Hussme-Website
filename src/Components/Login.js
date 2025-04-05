@@ -113,19 +113,21 @@ export function Login() {
           // If profile exists, redirect to management page
           if (profileResponse.ok) {
             setTimeout(() => {
+              // navigate("/management");
               navigate("/management");
             }, 1500);
           } else {
             // If profile doesn't exist, redirect to create profile page
             setTimeout(() => {
-              navigate("/new-company-profile");
+              // navigate("/");
+              navigate("/new-company");
             }, 1500);
           }
         } catch (profileError) {
           console.error("Error checking profile:", profileError);
           // Default fallback - redirect to new company profile
           setTimeout(() => {
-            navigate("/new-company-profile");
+            navigate("/new-company");
           }, 1500);
         }
       } else {
