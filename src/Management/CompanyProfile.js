@@ -83,7 +83,7 @@ export function CompanyProfile() {
                 
                 // If profile not found, redirect to create profile
                 if (error.response && error.response.status === 404) {
-                    navigate('/new-company-profile');
+                    navigate('/new-company');
                 }
             } finally {
                 setLoading(false);
