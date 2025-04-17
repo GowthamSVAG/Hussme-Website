@@ -72,6 +72,7 @@ nav ul li a:hover {
   color: transparent; /* Fallback for non-supporting browsers */
 }
 
+
 nav li:first-child {
   margin-right: auto;
 }
@@ -262,4 +263,67 @@ nav li:first-child {
 .sidebar .change-password-button {
   margin-left: 0;
   width: 90%;
+}
+
+
+
+/* From Uiverse.io by reglobby */ 
+.user-profile-1 {
+  width: 131px;
+  height: 51px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  background: linear-gradient(
+    to bottom right,
+    #2e8eff 20%,
+    #b344d8 80%
+  );
+  /* background-color: rgba(46, 142, 255, 0.2); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+}
+.login-name:hover{
+  background: none;
+  /* background: linear-gradient(to right, #f08143 26%, #9747ff 58%); */
+  background-clip: text; /* Standard property */
+  -webkit-background-clip: text; /* WebKit-specific property */
+  -webkit-text-fill-color:#fff; /* Ensures the text remains transparent */
+  color: transparent; 
+
+ color: #fff;
+  /* background-color: rgba(46, 142, 255, 0.2); */
+
+}
+.user-profile-1:hover,
+.user-profile-1:focus {
+  background: linear-gradient(
+    to top left,
+    #2e8eff 20%,
+    #b344d8 80%
+  );
+  /* box-shadow: 0 0 10px rgba(46, 143, 255, 0.673); */
+  outline: none;
+}
+
+
+.user-profile-inner {
+  width: 127px;
+  height: 47px;
+  border-radius: 13px;
+  background-color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.user-profile-inner svg {
+  width: 27px;
+  height: 27px;
+  fill: #fff;
 }

@@ -130,7 +130,9 @@ export function Management() {
   };
 
   if (loading) {
-    return  <div className="loading-container"><div className="loading">Loading...</div></div> ;
+    return  <div className="loader-container">
+    <span class="loader"></span>
+  </div> ;
   }
 
   return (
@@ -142,8 +144,10 @@ export function Management() {
           <div className="company-logo-container" onClick={(e) => toggleCompanyDropdown(e)}>
             {companyProfile && companyProfile.logo ? (
               <img 
-                src={getImageUrl(companyProfile.logo)} 
-                alt={companyProfile.companyName}
+              src="https://i.ibb.co/Tx7tzcQ6/freepicdownloader-com-square-p-letter-logo-medium.jpg "
+                // src={getImageUrl(companyProfile.logo)} 
+                // alt={companyProfile.companyName}
+                alt="https://i.ibb.co/Tx7tzcQ6/freepicdownloader-com-square-p-letter-logo-medium.jpg"
                 className="company-logo"
                 title="Click for options"
               />
@@ -168,7 +172,7 @@ export function Management() {
           </div>
           
           {/* Center - Company Name */}
-          <div className="company-name">
+          <div className="center-company-name">
             {companyProfile ? companyProfile.companyName : "Company Name"}
           </div>
           

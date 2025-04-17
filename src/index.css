@@ -7,4 +7,6 @@ body {
   box-sizing: border-box;
   font-family:"M PLUS Rounded 1c", serif;
   font-style: normal;
+  outline: none;
+  
 }

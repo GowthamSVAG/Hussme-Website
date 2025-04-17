@@ -11,3 +11,9 @@ a{
   color:white;
   text-decoration: none;
 }
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
