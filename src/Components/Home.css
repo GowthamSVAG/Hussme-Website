@@ -235,7 +235,7 @@
   }
   .illu-section {
     min-width: 100%;
-    background-image: url("https://i.ibb.co/3mV1nWpW/vecteezy-isometric-style-illustration-about-a-business-team-having-a-6552077-Photoroom.png");
+    /* background-image: url("https://i.ibb.co/3mV1nWpW/vecteezy-isometric-style-illustration-about-a-business-team-having-a-6552077-Photoroom.png"); */
     height: 400px;
     margin-top: 40px;
     margin-bottom: 50px;
@@ -246,6 +246,7 @@
     max-height: fit-content;
     align-items: center;
     max-width: 100%;
+    padding: 0;
   }
   .home-slogan {
     text-align: left !important;
@@ -538,7 +539,7 @@
   height: 500px;
   border-radius: 15px;
   width: 350px;
-  object-fit: fill;
+  object-fit: contain;
   box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
 }
 .containers {
@@ -641,7 +642,7 @@
   .img-container,
   .img-container img {
     max-height: 10%;
-    width: 80%;
+    width: 90%;
 
   }
 
@@ -1097,7 +1098,7 @@
   align-content: center;
   justify-content: space-evenly;
 }
-.box {
+.status-box {
   display: flex;
   flex-direction: column;
   width: fit-content;
@@ -1176,7 +1177,7 @@
     flex-direction: column;
     gap: 25px;
   }
-  .box {
+  .status-box {
     width: 100%;
   }
   .count {

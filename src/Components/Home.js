@@ -346,28 +346,28 @@ export function Home() {
       {/* Start of Company Work Progress Count */}
       <div className="work-status-container">
         <div className="status-list">
-          <div className="box">
+          <div className="status-box">
             <div className="icon icon-1"></div>
             <div className="count" data-num="20+">
               5
             </div>
             <div className="progress-name">Projects Completed</div>
           </div>
-          <div className="box">
+          <div className="status-box">
             <div className="icon icon-2"></div>
             <div className="count" data-num="50">
               5
             </div>
             <div className="progress-name">Employer Solution</div>
           </div>
-          <div className="box">
+          <div className="status-box">
             <div className="icon icon-3"></div>
             <div className="count" data-num="100">
               5
             </div>
             <div className="progress-name">Job Seekers</div>
           </div>
-          <div className="box">
+          <div className="status-box">
             <div className="icon icon-4"></div>
             <div className="count" data-num="10+">
               1
