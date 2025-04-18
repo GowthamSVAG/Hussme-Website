@@ -69,7 +69,7 @@ export function Header() {
             <li onClick={hideSidebar}>
               <Link to="/contact">Contact US</Link>
             </li>
-            <li onClick={hideSidebar}>
+            {/* <li onClick={hideSidebar}>
               <div className="username-logout-buttons">
                 {user ? (
                   <div className="mobile-user-menu">
@@ -122,7 +122,7 @@ export function Header() {
                   </>
                 )}
               </div>
-            </li>
+            </li> */}
           </ul>
 
           <ul className="desk-navbar">
@@ -142,19 +142,19 @@ export function Header() {
             <li className="hideWhileMobileOn">
               <Link to="/talent">Talent</Link>
             </li>
-            <li className="hideWhileMobileOn">
+            {/* <li className="hideWhileMobileOn">
               <Link to="/management">Management</Link>
-            </li>
-            <li className="hideWhileMobileOn">
+            </li> */}
+            {/* <li className="hideWhileMobileOn">
               <Link to="/new-company">New Company</Link>
-            </li>
+            </li> */}
             <li className="hideWhileMobileOn">
               <Link to="/blog">Blog</Link>
             </li>
             <li className="hideWhileMobileOn">
               <Link to="/contact">Contact US</Link>
             </li>
-            <li className="hideWhileMobileOn">
+            {/* <li className="hideWhileMobileOn">
               {user ? (
                 <div
                   className="user-dropdown-container"
@@ -202,7 +202,7 @@ export function Header() {
                   </Link>
                 </>
               )}
-            </li>
+            </li> */}
             <li className="menu-button" onClick={showSidebar}>
               <Link to="#">
                 <svg
