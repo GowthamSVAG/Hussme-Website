@@ -238,7 +238,7 @@ export function Home() {
                 <li>Website hosting and regular maintenance</li>
                 <li>Facebook, Instagram, and X marketing</li>
               </ul>
-              <Link to="/business">
+              <Link to="/service">
                 <button className="button-57">
                   <span className="text">Package & Pricing</span>
                   <span>Package & Pricing</span>
@@ -262,7 +262,7 @@ export function Home() {
                 <li>Business reach out with the work request</li>
                 <li>Online trainings and carrier assistance</li>
               </ul>
-              <Link to="/talent">
+              <Link to="/service">
                 <button className="button-57">
                   <span className="text">Package & Pricing</span>
                   <span>Package & Pricing</span>
