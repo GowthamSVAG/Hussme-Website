@@ -3,7 +3,7 @@ export function Digital() {
   return (
     <div className="des-container">
       <div className="des-heading">
-        Mastering Digital Marketing: Strategies for Success
+        Mastering Digital Marketing Strategies for Success
       </div>
       <div className="des-img"></div>
 

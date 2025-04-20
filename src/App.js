@@ -5,8 +5,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Footer } from "./Components/Footer";
 import { Header } from "./Components/Header";
 import { Home } from "./Components/Home";
-import { Business } from "./Components/Pages/Business";
-import { Talent } from "./Components/Pages/Talent";
+import { Service } from "./Components/Pages/Service";
 import { Blog } from "./Components/Pages/Blog";
 import { ContactUs } from "./Components/Pages/Contactus";
 import { Digital } from "./Components/Pages/Blogs/Digital-Detail";
@@ -26,8 +25,7 @@ function AppContent() {
       <ScrollToTop />
       <Routes>
         <Route index element={<Home />} />
-        <Route path="/business" element={<Business />} />
-        <Route path="/talent" element={<Talent />} />
+        <Route path="/service" element={<Service />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/digital" element={<Digital />} />

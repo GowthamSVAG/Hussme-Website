@@ -179,11 +179,11 @@
 }
 .address::placeholder{
 font-size: larger;
-font-family:"M PLUS Rounded 1c", serif;
+font-family:"poppins", serif;
 font-weight: 500;
 padding: 5px 0px 0px 0px;
 resize: none !important;
-/* font-family: ; */
+
 }
 .new-cmpy-button:hover {
   background: linear-gradient(to bottom right, #8b34fc, #ff8239);

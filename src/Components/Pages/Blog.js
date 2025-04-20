@@ -5,9 +5,7 @@ export function Blog() {
   return (
     <div className="blog-container">
       <div className="blog-frame">
-        <div className="blog-name">
-          <h2>Blog</h2>
-        </div>
+      
         <div className="cards-container">
           <div className="blog-cards-container">
             <div className="blog-card">

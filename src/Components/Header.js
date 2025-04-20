@@ -58,11 +58,9 @@ export function Header() {
               <Link to="/">Home</Link>
             </li>
             <li onClick={hideSidebar}>
-              <Link to="/business">Business</Link>
+              <Link to="/service">Services</Link>
             </li>
-            <li onClick={hideSidebar}>
-              <Link to="/talent">Talent</Link>
-            </li>
+           
             <li onClick={hideSidebar}>
               <Link to="/blog">Blog</Link>
             </li>
@@ -137,11 +135,9 @@ export function Header() {
               <Link to="/">Home</Link>
             </li>
             <li className="hideWhileMobileOn">
-              <Link to="/business">Business</Link>
+              <Link to="/service">Services</Link>
             </li>
-            <li className="hideWhileMobileOn">
-              <Link to="/talent">Talent</Link>
-            </li>
+            
             {/* <li className="hideWhileMobileOn">
               <Link to="/management">Management</Link>
             </li> */}

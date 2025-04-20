@@ -8,27 +8,27 @@ import { MdAddTask } from "react-icons/md";
 import { VscTasklist } from "react-icons/vsc";
 import nexticn from "../Components/Assets/svg/chevron-right-solid.svg";
 import backicn from "../Components/Assets/svg/back-chevron-right-solid (1).svg";
-
+import { set } from "@cloudinary/url-gen/actions/variable";
+import { FaFileLines } from "react-icons/fa6";
+import { LuNotepadText } from "react-icons/lu";
 export function ContentManagement() {
   const { user, logout } = useUser();
   const navigate = useNavigate();
   const [showLogout, setShowLogout] = useState(false);
   const [companyProfile, setCompanyProfile] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [NewTask, setNewTask] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [showTaskStatus, setShowTaskStatus] = useState(true);
   const [buttonAction, setActiveButton] = useState(null);
   const scrollRef = useRef(null);
   const approvedScrollRef = useRef(null);
 
-  const showNewTask = () => {
-    if (NewTask == true) {
-      setNewTask(false);
-    } else {
-      setNewTask(true);
-    }
-  };
+  const [NewTask, setNewTask] = useState(false);
+  const [showFirstHalf, setShowFirstHalf] = useState(true);
+  const [showSecondHalf, setShowSecondHalf] = useState(true);
+  const [showCurrentTaskStatus, setShowCurrentTaskStatus] = useState(false);
+  const [showCompletedTaskStatus, setShowCompletedTaskStatus] = useState(false);
+
   // Function to toggle the logout dropdown
   const toggleLogout = () => setShowLogout(!showLogout);
 
@@ -132,11 +132,45 @@ export function ContentManagement() {
       setShowFeedback(true);
     }
   };
+  const assignTask = () => {
+    if (showTaskStatus == true) {
+      setNewTask(true);
+      setShowTaskStatus(false);
+      setShowFirstHalf(false);
+      setShowSecondHalf(false);
+      setShowCompletedTaskStatus(false);
+    } else {
+      setShowTaskStatus(true);
+      setShowFirstHalf(true);
+      setShowSecondHalf(true);
+      setShowCompletedTaskStatus(false);
+      setNewTask(false);
+    }
+  };
   const taskStatus = () => {
     if (showTaskStatus == true) {
       setShowTaskStatus(false);
+      setShowFirstHalf(false);
+      setShowSecondHalf(false);
+      setShowCurrentTaskStatus(true);
     } else {
       setShowTaskStatus(true);
+      setShowFirstHalf(true);
+      setShowSecondHalf(true);
+      setShowCurrentTaskStatus(false);
+    }
+  };
+  const completedTask = () => {
+    if (showTaskStatus == true) {
+      setShowTaskStatus(false);
+      setShowFirstHalf(false);
+      setShowSecondHalf(false);
+      setShowCompletedTaskStatus(true);
+    } else {
+      setShowTaskStatus(true);
+      setShowFirstHalf(true);
+      setShowSecondHalf(true);
+      setShowCompletedTaskStatus(false);
     }
   };
   const disableButton = () => {
@@ -149,27 +183,31 @@ export function ContentManagement() {
 
   return (
     <div className="content-management-page">
-      {/* First Half */}
       <div className="task-row">
         <div className="task-title-and-new-task">
           <div className="task-title">Task Approval&Pending</div>
-          <div className="new-task-button" onClick={showNewTask}>
+          <div className="new-task-button" onClick={assignTask}>
             + Assign New Task
           </div>
           <div className="approved-list-container">
-            <div className="appproved-list-btn">Launched List</div>
+            <span class="tooltiptext">Launched Reports</span>
+            <div className="appproved-list-btn">
+              <LuNotepadText
+                style={{ height: "30px", width: "30px", color: "grey" }}
+              />
+            </div>
           </div>
         </div>
-
+        {/* First Half */}
         <div className="task-boxes">
-          {NewTask ? (
+          {NewTask && (
             <div className="assign-new-task">
               <div className="assign-new-task-row">
                 <div className="new-task-form-title">
                   Add New Task <MdAddTask style={{ marginLeft: "8px" }} />
                 </div>
                 <img
-                  onClick={() => showNewTask(false)}
+                  onClick={() => assignTask(false)}
                   width="48"
                   height="48"
                   src="https://img.icons8.com/fluency/48/delete-sign.png"
@@ -193,7 +231,7 @@ export function ContentManagement() {
                   ></textarea>
                 </div>
 
-                <div className="new-task-row">
+                <div className="new-task-row task-row-2">
                   <div className="new-task-input-box">
                     <label for="new-task-date" className="new-task-date-label">
                       Target Posting Date:
@@ -210,22 +248,23 @@ export function ContentManagement() {
                     </label>
                     <input type="date" className="new-task-date" />
                   </div>
-                </div>
-                <div className="new-task-row-submit">
-                  <button type="submit" className="new-task-row-submit-btn">
-                    Submit Task
-                    <VscTasklist
-                      style={{
-                        marginLeft: "8px",
-                        height: "30px",
-                        width: "30px",
-                      }}
-                    />
-                  </button>
+                  <div className="new-task-row-submit">
+                    <button type="submit" className="new-task-row-submit-btn">
+                      Submit Task
+                      <VscTasklist
+                        style={{
+                          marginLeft: "8px",
+                          height: "30px",
+                          width: "30px",
+                        }}
+                      />
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>
-          ) : showTaskStatus ? (
+          )}
+          {showFirstHalf && (
             <div className="task-arrows">
               <img
                 src={backicn}
@@ -255,7 +294,7 @@ export function ContentManagement() {
                     <div className="cart-task-box">
                       <div className="top-id-card">
                         <div className="name-task">Task id:</div>
-                        <div className="task-number">#1</div>
+                        <div className="task-number">#2</div>
                       </div>
                       <div className="bottom-title-card">
                         <div className="task-box-title">Summer offer</div>
@@ -271,7 +310,7 @@ export function ContentManagement() {
                     <div className="cart-task-box">
                       <div className="top-id-card">
                         <div className="name-task">Task id:</div>
-                        <div className="task-number">#1</div>
+                        <div className="task-number">#3</div>
                       </div>
                       <div className="bottom-title-card">
                         <div className="task-box-title">Summer offer</div>
@@ -287,7 +326,7 @@ export function ContentManagement() {
                     <div className="cart-task-box">
                       <div className="top-id-card">
                         <div className="name-task">Task id:</div>
-                        <div className="task-number">#1</div>
+                        <div className="task-number">#3</div>
                       </div>
                       <div className="bottom-title-card">
                         <div className="task-box-title">Summer offer</div>
@@ -303,7 +342,7 @@ export function ContentManagement() {
                     <div className="cart-task-box">
                       <div className="top-id-card">
                         <div className="name-task">Task id:</div>
-                        <div className="task-number">#1</div>
+                        <div className="task-number">#3</div>
                       </div>
                       <div className="bottom-title-card">
                         <div className="task-box-title">Summer offer</div>
@@ -319,7 +358,7 @@ export function ContentManagement() {
                     <div className="cart-task-box">
                       <div className="top-id-card">
                         <div className="name-task">Task id:</div>
-                        <div className="task-number">#1</div>
+                        <div className="task-number">#4</div>
                       </div>
                       <div className="bottom-title-card">
                         <div className="task-box-title">Summer offer</div>
@@ -338,7 +377,8 @@ export function ContentManagement() {
                 onClick={scrollRight}
               />
             </div>
-          ) : (
+          )}
+          {showCurrentTaskStatus && (
             <div className="show-task-status-container">
               <div className="status-col status-col-1">
                 <div className="status-task-id">
@@ -447,42 +487,152 @@ export function ContentManagement() {
         </div>
       </div>
       {/* Second Half */}
-      <div className="task-approved-row">
-        <div className="approve-title"> Approved & Yet to launch 🚀</div>
-        <div className="task-arrows">
-          <img
-            src={backicn}
-            alt=""
-            className="assign-task-btn back"
-            onClick={approvedScrollLeft}
-          />
-          <div className="task-approved-row-container" ref={approvedScrollRef}>
-            <div className="yet-task-box-wrapper">
-              <div className="yet-task-box">
-                <div className="inner-triangle-container">
-                  <div className="yet-task-id">
-                    <div className="yet-id">#1</div>
-                    <div className="yet-title">Task id</div>
+      {showSecondHalf && (
+        <div className="task-approved-row">
+          <div className="approve-title"> Approved & Yet to launch 🚀</div>
+          <div className="task-arrows">
+            <img
+              src={backicn}
+              alt=""
+              className="assign-task-btn back"
+              onClick={approvedScrollLeft}
+            />
+            <div
+              className="task-approved-row-container"
+              ref={approvedScrollRef}
+            >
+              <div className="yet-task-box-wrapper">
+                <div className="yet-task-box">
+                  <div className="inner-triangle-container">
+                    <div className="yet-task-id">
+                      <div className="yet-id">#1</div>
+                    </div>
+                    <button className="yet-preview-btn" onClick={completedTask}>
+                      Preview
+                    </button>
+                    <div className="yet-task-title">Summer offer</div>
                   </div>
-                  {/* <button className="yet-preview-btn">
-                    Preview
-                  </button> */}
-                 
-<button className="yet-preview-btn">Preview</button>
+                </div>
+              </div>
+              <div className="yet-task-box-wrapper">
+                <div className="yet-task-box">
+                  <div className="inner-triangle-container">
+                    <div className="yet-task-id">
+                      <div className="yet-id">#2</div>
+                    </div>
+                    <button className="yet-preview-btn" onClick={completedTask}>
+                      Preview
+                    </button>
+                    <div className="yet-task-title">Summer offer</div>
+                  </div>
+                </div>
+              </div>
+              <div className="yet-task-box-wrapper">
+                <div className="yet-task-box">
+                  <div className="inner-triangle-container">
+                    <div className="yet-task-id">
+                      <div className="yet-id">#3</div>
+                    </div>
+                    <button className="yet-preview-btn" onClick={completedTask}>
+                      Preview
+                    </button>
+                    <div className="yet-task-title">Summer offer</div>
+                  </div>
+                </div>
+              </div>
 
-                  <div className="yet-task-title">Summer offer</div>
+              <div className="yet-task-box-wrapper">
+                <div className="yet-task-box">
+                  <div className="inner-triangle-container">
+                    <div className="yet-task-id">
+                      <div className="yet-id">#4</div>
+                    </div>
+                    <button className="yet-preview-btn" onClick={completedTask}>
+                      Preview
+                    </button>
+                    <div className="yet-task-title">Summer offer</div>
+                  </div>
+                </div>
+              </div>
+              <div className="yet-task-box-wrapper">
+                <div className="yet-task-box">
+                  <div className="inner-triangle-container">
+                    <div className="yet-task-id">
+                      <div className="yet-id">#5</div>
+                    </div>
+                    <button className="yet-preview-btn" onClick={completedTask}>
+                      Preview
+                    </button>
+                    <div className="yet-task-title">Summer offer</div>
+                  </div>
                 </div>
               </div>
             </div>
+            <img
+              src={nexticn}
+              alt=""
+              className="assign-task-btn next"
+              onClick={approvedScrollRight}
+            />
           </div>
-          <img
-            src={nexticn}
-            alt=""
-            className="assign-task-btn next"
-            onClick={approvedScrollRight}
-          />
         </div>
-      </div>
+      )}
+      {showCompletedTaskStatus && (
+        <div className="show-task-status-container">
+          <div className="status-col status-col-1-completed">
+            <div className="status-task-id">
+              <div className="task-id for-gradient-font">Task ID</div>
+              <div className="task-id-number">#1</div>
+            </div>
+            <div className="status-task-title">
+              <div className="task-title-status for-gradient-font">
+                Task Title
+              </div>
+              <div className="task-title-name-status">Summer offer</div>
+            </div>
+            <div className="status-task-des">
+              <div className="task-des for-gradient-font">Task Description</div>
+              <div className="task-des-name">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod,
+                magnam.
+              </div>
+            </div>
+            <div className="status-task-dates">
+              <label className="for-gradient-font">Target Date</label>
+              <div className="status-target-date">
+                <input type="date" name="" id="" />
+              </div>
+              <label className="for-gradient-font">Deadline Date</label>
+              <div className="status-deadline-date">
+                <input type="date" name="" id="" />
+              </div>
+            </div>
+          </div>
+          <div className="status-col status-col-2-completed">
+            <div className="status-title-preview for-gradient-font">
+              Task Preview
+            </div>
+            <div className="task-preview-img-container">
+              <img
+                src="https://i.ibb.co/MxsfPnN5/9198056-4116738.jpg"
+                className="task-preview-img"
+                alt=""
+              />
+            </div>
+          </div>
+          <div className="row-3-col-1-btn">
+            <img
+              onClick={() => completedTask(false)}
+              width="28"
+              height="28"
+              padding="10px"
+              src="https://img.icons8.com/fluency/48/delete-sign.png"
+              alt="delete-sign"
+              className="completed-status-cross-symbol "
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

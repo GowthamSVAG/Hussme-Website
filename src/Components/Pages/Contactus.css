@@ -5,105 +5,139 @@
   display: flex;
   flex-direction: column;
 }
-.contact-title {
+
+.contact-starting-container {
   width: 100%;
-  min-height: 50px;
-  font-family: "poppins";
-  font-size: 45px;
-  font-weight: 700;
-}
-.contact-intro {
-  width: 100%;
-  min-height: 700px;
-  /* background-color: antiquewhite; */
+  height: 95vh;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  background-size: cover;
   align-items: center;
 }
-@media screen and (max-width: 1140px) {
-  .contact-intro {
-    flex-direction: column;
-    min-height: 800px;
-    width: 100%;
-    /* background-color: aquamarine; */
-  }
-  .left-contact {
-    min-width: 100%;
-    background-size: cover;
-    max-height: 400px;
-    /* background-color: antiquewhite; */
-    /* min-height: 250px; */
-  }
-  .right-contact {
-    min-height: 400px;
-    min-width: 95%;
-    /* background-color: orange; */
-    margin-bottom: 50px;
-  }
-}
-.left-contact {
-  width: 50%;
-
-  min-height: 600px;
-  background-image: url("../Assets/Home-Blog/contactus.png");
+.contact-illu-section {
+  animation-delay: 3s;
+  min-width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* transform: scaleX(-1); */
+  border-radius: 50px 0px 0px 0px;
+  background-image: url("../Assets/svg/Blog-img-1.svg");
   background-repeat: no-repeat;
+  background-size: 85%;
   background-position: center;
-  background-size: contain;
 }
-.right-contact {
-  width: 50%;
-  max-height: 550px;
+
+.contact-company-motive-slogan-section {
+  padding-left: 50px;
+  min-width: 40%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  /* background-color:gray ; */
-  gap: 30px;
+  align-items: start;
 }
 .contact-slogan {
-  width: 80%;
-  height: fit-content;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   display: flex;
+  text-align: left;
   flex-direction: column;
-  /* background-color: blue; */
-}
-.contact-line-1,
-.contact-line-2 {
-  text-align: left;
-  width: fit-content;
-  height: fit-content;
-  font-family: "poppins";
-  font-size: 75px;
-  line-height: 80px;
-  font-weight: 700;
-}
-.contact-line-2 {
-  display: flex;
-  flex-direction: row;
-}
-.symbol-color {
-  color: blueviolet;
-}
-.contact-detail {
-  width: 80%;
-  font-size: x-large;
+  gap: 5px;
+  font-size: 35px;
   font-weight: 500;
+  line-height: 45px;
+}
+
+.contact-slogan-part {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: left;
   text-align: left;
 }
-.contact-button {
-  height: 50px;
-  width: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "poppins";
-cursor: pointer;
-  font-size: 25px;
+
+.contact-slogan-1 {
+  font-size: 45px;
   font-weight: 600;
-  color: white;
-  border-radius: 3px;
-  background-color: #9747ff;
+  color: #9955f2e9;
+  margin-top: -5px;
+  margin-right: 0px;
+}
+.contact-slogan-2 {
+  font-size: 45px;
+  font-weight: 600;
+  color: #f08143;
+  margin-right: -5px;
+  margin-top: -8px;
+  margin-left: 5px;
+}
+
+.contact-underline {
+  position: relative;
+  height: 5px;
+  overflow: hidden;
+  margin: 0;
+  width: 40%;
+  object-fit: cover;
+  margin-top: 0px;
+  margin-bottom: 15px;
+}
+.contact-des {
+  line-height: 33px;
+  width: 90%;
+  color: #3d3d3d;
+  text-align: justify;
+  font-weight: 500;
+  font-size: x-large;
+}
+
+@media screen and (max-width: 1550px) {
+  .contact-underline {
+    right: 5%;
+    max-width: 50%;
+  }
+}
+@media screen and (max-width: 1250px) {
+  .contact-underlv ine {
+    max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .contact-starting-container {
+    flex-direction: column-reverse;
+    height: fit-content;
+    margin-bottom: 20px;
+  }
+  .contact-illu-section {
+    min-width: 100%;
+    height: 500px;
+  }
+  .contact-company-motive-slogan-section {
+    margin-top: 20px;
+    max-height: fit-content;
+    align-items: center;
+    max-width: 100%;
+    padding: 0;
+  }
+  .contact-slogan {
+    text-align: left !important;
+    justify-content: center;
+    width: fit-content;
+    padding-left: 40px;
+  }
+  .contact-slogan-part {
+    min-width: 100%;
+    justify-content: left;
+    text-align: left;
+  }
+  .contact-underline {
+    left: 0px;
+    max-width: 30%;
+  }
 }
 
 /* Start of Contact detail input */
@@ -114,25 +148,25 @@ cursor: pointer;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  background: rgb(255, 255, 255);
+  background-image: linear-gradient(to bottom, #ffffffae 45%, #9d58f6 100%);
+  /* background: rgb(255, 255, 255);
   background: linear-gradient(
     0deg,
     rgba(255, 255, 255, 0.8547794117647058) 33%,
     rgba(240, 129, 67, 0.8547794117647058) 35%,
     rgba(162, 78, 232, 0.7875525210084033) 66%,
     rgba(255, 255, 255, 0.7875525210084033) 67%
-  );
+  ); */
 }
 .contact-info-title {
-  font-size: 35px;
-  font-family: "poppins";
-  font-weight: 600;
-  background: #f08143;
-  background: linear-gradient(to bottom, #f38c50 45%, #9c58f6 70%);
+  font-family:"poppins", serif;
+  font-size: 37px;
+  background: linear-gradient(to bottom right, #ff7b2f, #8731f7);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+  font-weight: 600;
 }
 .contact-input-box {
   height: 90%;
@@ -145,7 +179,8 @@ cursor: pointer;
   justify-content: center;
   gap: 10px;
   border: 2px solid #9d58f6d0;
-  margin-bottom: 30px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 .row {
   width: 95%;
@@ -242,7 +277,7 @@ label {
 label {
   min-height: fit-content;
   text-align: left;
-  font-family: "poppins";
+  font-family:"poppins", serif;
   font-size: larger;
   font-weight: 500;
   display: flex;

@@ -43,7 +43,7 @@
   color: white;
 }
 .center-company-name {
-  width:fit-content;
+  width: fit-content;
   color: black;
   font-size: 1.5rem;
   font-weight: 600;
@@ -68,7 +68,8 @@
   transform: scale(1.05);
 }
 
-.mgmt-mobile-username, .desk-username {
+.mgmt-mobile-username,
+.desk-username {
   font-size: x-large;
   font-style: italic;
   background: #f08143;
@@ -87,7 +88,7 @@
   top: 65px;
   right: 250px;
   background-color: white;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   z-index: 100;
   display: flex;
@@ -133,14 +134,12 @@
   justify-content: left;
   cursor: pointer;
   position: relative;
-
-
 }
 
 .company-logo {
   /* background-color: #333; */
- width: 45px;
-  height:45px;
+  width: 45px;
+  height: 45px;
   object-fit: cover;
   object-position: center;
   border-radius: 10%;
@@ -189,15 +188,20 @@
   margin-top: 55px;
 }
 .mgmt-sidebar {
+  background: hsla(266, 100%, 64%, 1);
+
+background: linear-gradient(225deg, hsla(266, 100%, 64%, 1) 0%, hsla(22, 85%, 60%, 1) 100%);
+
+background: -moz-linear-gradient(225deg, hsla(266, 100%, 64%, 1) 0%, hsla(22, 85%, 60%, 1) 100%);
+
+background: -webkit-linear-gradient(225deg, hsla(266, 100%, 64%, 1) 0%, hsla(22, 85%, 60%, 1) 100%);
+
+filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#9747FF", endColorstr="#F08143", GradientType=1 );
   position: fixed;
   /* background-image: url('https://i.ibb.co/67GvrQHV/sidebar-1.jpg'); */
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: linear-gradient(
-    to bottom,
-    #7104ff94 10%,
-    #ff5e00a6 99%
-  );
+  /* background-image: linear-gradient(to bottom, #7104ff94 10%, #ff5e00a6 99%); */
   width: 20%;
   min-height: 100%;
   top: 55px;
@@ -370,7 +374,7 @@
   top: 65px;
   right: 0;
   background-color: white;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   z-index: 100;
   display: flex;

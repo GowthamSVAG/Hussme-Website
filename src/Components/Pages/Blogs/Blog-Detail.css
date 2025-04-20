@@ -9,7 +9,7 @@
 }
 .des-title {
   font-size: 45px;
-  font-family: "poppins";
+  font-family:"poppins", serif;
   font-weight: 600;
 }
 .des-heading {
@@ -150,7 +150,7 @@
 .des-intro {
   font-size: 40px;
   font-weight: 600;
-  font-family: "poppins";
+  font-family:"poppins", serif;
   line-height: 40px;
 }
 .intro-description {

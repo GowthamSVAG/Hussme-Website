@@ -20,11 +20,9 @@ export function Footer() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/business">Business</Link>
+              <Link to="/service">Services</Link>
             </li>
-            <li>
-              <Link to="/talent">Talent</Link>
-            </li>
+           
             <li>
               <Link to="/blog">Blog</Link>
             </li>
