@@ -1,10 +1,5 @@
 import "../Components/Home.css";
 import React, { useEffect } from "react";
-import s1 from "../Components/Assets/Carousal/slide-1.jpg";
-import s2 from "../Components/Assets/Carousal/slide-2.png";
-import s3 from "../Components/Assets/Carousal/slide-3.png";
-import outlev from "../Components/Assets/svg/our lev.svg";
-import hand from "../Components/Assets/Home-Header-Footer/handshake.jpg";
 import d1 from "../Components/Assets/Our Levers/digital.jpg";
 import staff1 from "../Components/Assets/Our Levers/staff.jpg";
 import c1 from "../Components/Assets/Our Levers/consultation.jpg";
