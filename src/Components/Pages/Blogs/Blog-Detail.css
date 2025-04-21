@@ -6,10 +6,11 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 50px;
+  font-family: "poppins", serif !important;
 }
 .des-title {
   font-size: 45px;
-  font-family:"poppins", serif;
+  font-family: "poppins", serif !important;
   font-weight: 600;
 }
 .des-heading {
@@ -43,7 +44,6 @@
   box-shadow: #9747ff5d 5px 5px, #9747ff4d 10px 10px, #9747ff33 15px 15px,
     #9747ff1a 20px 20px;
 
-  /* Chamfered Top-Right Corner without Clipping Box Shadow */
   -webkit-mask-image: polygon(
     0% 0%,
     calc(100% - 50px) 0%,
@@ -61,6 +61,9 @@
 }
 
 @media screen and (max-width: 1200px) {
+  .spl-point-left{
+    margin: 0px 0px 0px 20px !important;
+  }
   .des-img {
     max-height: 350px;
     border-top-right-radius: 10px;
@@ -74,8 +77,7 @@
   .des-point {
     margin-bottom: 15px;
   }
-  .spl-point {
-  }
+
   .des-heading {
     font-size: 27px;
   }
@@ -90,6 +92,10 @@
 }
 
 @media screen and (max-width: 1000px) {
+  .des-img {
+    box-shadow: #9747ffb0 5px 5px, #9747ff4d 0px 0px, #9747ff33 0px 0px,
+      #9747ff1a 0px 0px;
+  }
   .spl-point {
     flex-direction: column;
   }
@@ -103,19 +109,23 @@
     width: 95% !important;
   }
   .point-des {
-    margin-left: 25px !important;
+    margin-left: 5px !important;
   }
   .icn-bold-title {
-    margin-left: 35px !important;
+    margin-left: 10px !important;
     height: fit-content;
   }
   .spl-point-des {
-    margin-left: 40px !important;
+    margin-left: 20px !important;
     text-indent: 30px;
     min-height: fit-content;
   }
   .des-point {
     text-align: left;
+  }
+  .intro-description {
+    text-align: justify !important;
+    width: 95% !important;
   }
 }
 
@@ -150,7 +160,7 @@
 .des-intro {
   font-size: 40px;
   font-weight: 600;
-  font-family:"poppins", serif;
+  font-family: "poppins", serif !important;
   line-height: 40px;
 }
 .intro-description {
@@ -187,6 +197,13 @@
 
 .point-des {
   margin-left: 30px;
+  text-align: left;
+  margin-top: 5px;
+  font-size: larger;
+  font-weight: 500;
+}
+.spl-point-left {
+  margin-left: 20px;
   text-align: left;
   margin-top: 5px;
   font-size: larger;

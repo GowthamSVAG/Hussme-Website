@@ -74,7 +74,7 @@ form {
 .login-container h1 {
   font-size: 36px;
   margin: -10px 0;
-  font-family:"poppins", serif;
+    font-family:"poppins", serif !important;
 }
 
 .forgot-link a {
@@ -254,7 +254,7 @@ form {
   color: white;
   font-size: x-large;
   font-weight: 500;
-  font-family:"poppins", serif;
+    font-family:"poppins", serif !important;
   border-radius: 10px;
   border: 2px solid white;
   box-shadow: none;

@@ -1,5 +1,6 @@
 .footer{
   margin-top: auto;
+  font-family:"poppins", serif !important;
 }
 .footer-col {
   padding-top:25px;
@@ -43,15 +44,15 @@
 }
 .col-1 p {
   margin: 0 auto;
-  width: 300px;
+  width: 310px;
   font-size: medium;
   color: aliceblue;
-  text-align: left;
+  text-align: justify;
 }
 
 .col-2 {
   min-width: 20%;
-  height: 150px;
+  height: 110px;
   display: flex;
   flex-direction: column;
   margin-bottom: 0;
@@ -116,11 +117,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f08143;
+  /* background-color: #f08143; */
+  background-image: linear-gradient(to bottom right, #ff7b2fdf, #8731f7df );
   border-radius: 24px;
+  /* transition: all 0.3s ease-in-out; */
+  /* ; */
 }
 .contact-btn:hover {
-  background-color: #8a2be2;
+  background-image: linear-gradient(to bottom right, #ff7b2f, #8731f7 );
+  /* background-color: #8a2be2; */
+  /* transition: all 0.3s ease-in-out; */
 }
 .contact-btn a {
   font-size: 17px;
@@ -136,8 +142,10 @@
   gap: 5px;
 }
 .mobile {
-  padding-right: 32px;
-  margin: 0 auto;
+  width: 100%;
+  justify-content: left;
+  /* padding-left: -12px; */
+  /* margin: 0 auto; */
   align-items: center;
   display: flex;
   gap: 2px;
@@ -153,8 +161,9 @@
   color: rgb(255, 255, 255);
 }
 .mail {
-  margin: 0 auto;
+  /* margin: 0 auto; */
   display: flex;
+  margin-left:5px ;
   justify-content: left;
   gap: 5px;
 }

@@ -4,6 +4,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  font-family:"poppins", serif !important;
 }
 
 .contact-starting-container {
@@ -23,14 +24,14 @@
   align-items: center;
   /* transform: scaleX(-1); */
   border-radius: 50px 0px 0px 0px;
-  background-image: url("../Assets/svg/Blog-img-1.svg");
+  background-image: url("../Assets/Home-Blog/contactus.png");
   background-repeat: no-repeat;
-  background-size: 85%;
+  background-size: 70%;
   background-position: center;
 }
 
 .contact-company-motive-slogan-section {
-  padding-left: 50px;
+  /* padding-left: 50px; */
   min-width: 40%;
   height: 100%;
   display: flex;
@@ -77,6 +78,7 @@
 
 .contact-underline {
   position: relative;
+  /* left: 15%; */
   height: 5px;
   overflow: hidden;
   margin: 0;
@@ -96,13 +98,14 @@
 
 @media screen and (max-width: 1550px) {
   .contact-underline {
-    right: 5%;
+    left: -6%;
     max-width: 50%;
   }
 }
-@media screen and (max-width: 1250px) {
-  .contact-underlv ine {
-    max-width: 50%;
+@media screen and (max-width: 1200px) {
+  .contact-underline {
+    left: 0%;
+    /* max-width: 50%; */
   }
 }
 
@@ -113,8 +116,9 @@
     margin-bottom: 20px;
   }
   .contact-illu-section {
-    min-width: 100%;
-    height: 500px;
+    background-size:contain;
+    min-width: 90%;
+    height: 400px;
   }
   .contact-company-motive-slogan-section {
     margin-top: 20px;
@@ -129,14 +133,18 @@
     width: fit-content;
     padding-left: 40px;
   }
+  .contact-des{
+    width: 90%;
+    text-align: center;
+    font-weight: 430;
+  }
   .contact-slogan-part {
     min-width: 100%;
     justify-content: left;
     text-align: left;
   }
   .contact-underline {
-    left: 0px;
-    max-width: 30%;
+    max-width: 40%;
   }
 }
 
@@ -159,7 +167,7 @@
   ); */
 }
 .contact-info-title {
-  font-family:"poppins", serif;
+    font-family:"poppins", serif !important;
   font-size: 37px;
   background: linear-gradient(to bottom right, #ff7b2f, #8731f7);
   background-clip: text;
@@ -170,7 +178,7 @@
 }
 .contact-input-box {
   height: 90%;
-  width: 50%;
+  width: 60%;
   border-radius: 10px;
   background-color: rgb(255, 255, 255);
   display: flex;
@@ -236,10 +244,8 @@ label {
   min-width: 60%;
   display: flex;
   flex-direction: column;
-  /* justify-content: left; */
 }
 .message {
-  /* width: 100%; */
   height: 120px;
   padding: 10px 16px;
 }
@@ -250,9 +256,9 @@ label {
   display: flex;
   height: fit-content;
   align-items: center;
-
   gap: 40px;
   justify-content: center;
+  
 }
 .submit-button,
 .reset-button {
@@ -267,7 +273,13 @@ label {
     rgba(0, 0, 0, 0.09) 0px 22px 16px;
 }
 .submit-button {
-  background-color: #9747ff;
+  background-image: linear-gradient(to top left, #ff7b2fdf, #8731f7df );
+  /* background-color: #9747ff; */
+  color: white;
+}
+.submit-button:hover {
+  background-image: linear-gradient(to top left, #ff7b2f, #8731f7 );
+  /* background-color: #9747ff; */
   color: white;
 }
 .reset-button {
@@ -277,7 +289,7 @@ label {
 label {
   min-height: fit-content;
   text-align: left;
-  font-family:"poppins", serif;
+    font-family:"poppins", serif !important;
   font-size: larger;
   font-weight: 500;
   display: flex;
@@ -288,10 +300,23 @@ label {
   margin: 0;
   color: red;
 }
+@media screen and (max-width: 1500px){
+  .contact-input-box {
+    width: 70%;
+  }
+  .message-box {
+    width: 95%;
+    
+  }
+  .inner-box{
+    width: 100%;
+  }
+}
 @media screen and (max-width: 1050px) and (min-width: 900px) {
   .input-field {
-    max-width: 45% !important;
+    /* max-width: 45% !important; */
   }
+  
 }
 @media screen and (max-width: 900px) {
   .contact-input-box {

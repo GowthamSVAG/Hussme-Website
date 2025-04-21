@@ -179,7 +179,7 @@
 }
 .address::placeholder{
 font-size: larger;
-font-family:"poppins", serif;
+  font-family:"poppins", serif !important;
 font-weight: 500;
 padding: 5px 0px 0px 0px;
 resize: none !important;

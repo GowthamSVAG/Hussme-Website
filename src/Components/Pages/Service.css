@@ -6,6 +6,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family:"poppins", serif !important;
 }
 /* Start of Business Front Detail Section */
 .service-starting-container {
@@ -176,6 +177,14 @@
   align-items: center;
 }
 @media screen and (max-width: 1200px) {
+  .service-illu-section{
+    height: 350px;
+  }
+  .service-des{
+    width: 90%;
+    text-align: center;
+    font-weight: 430;
+  }
   .bus-blog-card-back {
     background: rgb(240, 129, 67);
     background: linear-gradient(
@@ -226,6 +235,7 @@
   .static-card-title {
     line-height: 5px;
   }
+
 }
 
 .bus-blog-card:hover .bus-card-img {

@@ -27,7 +27,7 @@ export function Digital() {
           <div className="point-container">
             <div className="des-point">1.Understanding Your Audience</div>
           </div>
-          <div className="point-des">
+          <div className="spl-point-left">
             To effectively reach your audience, you need to understand who they
             are. This involves:
           </div>

@@ -22,7 +22,7 @@ export function Footer() {
             <li>
               <Link to="/service">Services</Link>
             </li>
-           
+
             <li>
               <Link to="/blog">Blog</Link>
             </li>

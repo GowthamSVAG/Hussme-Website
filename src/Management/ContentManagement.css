@@ -83,7 +83,7 @@
   border-radius: 10px;
   height: 91vh;
   font-size: xx-large;
-  font-family:"poppins", serif;
+    font-family:"poppins", serif !important;
   box-shadow: rgba(50, 50, 93, 0) 15px 1px 15px -0px,
     rgba(0, 0, 0, 0.3) 15px 0px 10px -1px;
 }
@@ -290,7 +290,7 @@
   border: 2px solid #b81eff;
   width: 100%;
   height: 50px;
-  font-family:"poppins", serif;
+    font-family:"poppins", serif !important;
   font-size: large;
   font-weight: 500;
   padding: 10px 10px;
@@ -305,7 +305,7 @@
   border: 2px solid #b81eff;
   width: 100%;
   min-height: 220px;
-  font-family:"poppins", serif;
+    font-family:"poppins", serif !important;
   font-size: medium;
 
   font-weight: 500;
@@ -324,7 +324,7 @@
 }
 .new-task-date {
   width: 200px;
-  font-family:"poppins", serif;
+    font-family:"poppins", serif !important;
   font-size: large;
   font-weight: 500;
   padding: 5px 10px;
@@ -366,7 +366,7 @@
   height: 100%;
   display: flex;
   align-items: center;
-  font-family:"poppins", serif;
+    font-family:"poppins", serif !important;
   cursor: pointer;
 }
 
@@ -615,7 +615,7 @@
 .task-title-name-status,
 .task-des-name {
   padding-left: 10px;
-  font-family:"poppins", serif;
+    font-family:"poppins", serif !important;
   text-align: left;
   font-size: 18px;
   font-weight: 500;
@@ -636,7 +636,7 @@
 .status-deadline-date input {
   width: 80%;
   padding: 5px;
-  font-family:"poppins", serif;
+    font-family:"poppins", serif !important;
   font-size: medium;
   font-weight: 500;
   color: #686868;
@@ -688,7 +688,7 @@
 .feedback-textarea {
   width: 100%;
   min-height: 100px;
-  font-family:"poppins", serif;
+    font-family:"poppins", serif !important;
   font-size: medium;
   font-weight: 500;
   padding: 5px 10px;
@@ -765,7 +765,7 @@
   border-radius: 10px;
   cursor: pointer;
   overflow: hidden;
-  font-family:"poppins", serif;
+    font-family:"poppins", serif !important;
   isolation: isolate;
 }
 .custom-button-disable {
@@ -776,7 +776,7 @@
   cursor: not-allowed;
   opacity: 0.8;
   overflow: hidden;
-  font-family:"poppins", serif;
+    font-family:"poppins", serif !important;
   isolation: isolate;
 }
 
@@ -1027,7 +1027,7 @@
   background-color: #9747ff;
   padding: 5px 10px 5px 10px;
   --color: #ffffff;
-  font-family:"poppins", serif;
+    font-family:"poppins", serif !important;
   display: inline-block;
   margin-right: 20px;
   margin-bottom: 30px;
