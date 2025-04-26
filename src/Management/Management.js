@@ -144,8 +144,8 @@ export function Management() {
           <div className="company-logo-container" onClick={(e) => toggleCompanyDropdown(e)}>
             {companyProfile && companyProfile.logo ? (
               <img 
-              src="https://i.ibb.co/Tx7tzcQ6/freepicdownloader-com-square-p-letter-logo-medium.jpg "
-                // src={getImageUrl(companyProfile.logo)} 
+              // src="https://i.ibb.co/Tx7tzcQ6/freepicdownloader-com-square-p-letter-logo-medium.jpg "
+                src={getImageUrl(companyProfile.logo)} 
                 // alt={companyProfile.companyName}
                 alt="https://i.ibb.co/Tx7tzcQ6/freepicdownloader-com-square-p-letter-logo-medium.jpg"
                 className="company-logo"
