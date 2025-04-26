@@ -93,6 +93,7 @@
   min-height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .task-row {
@@ -111,6 +112,8 @@
   flex-direction: row;
   justify-content: space-between;
   height: fit-content;
+  margin-bottom:1%;
+  margin-top: 1%;
 }
 .task-title {
   width: fit-content;
@@ -118,10 +121,11 @@
   display: flex;
   align-items: center;
   margin: 0;
-  padding: 0;
+  padding: 0 0 0 25px;
   text-align: left;
-  font-size: x-large;
-  font-weight: 500;
+  font-size: larger;
+  font-weight: 550;
+
 }
 .new-task-button {
   position: relative;
@@ -393,7 +397,7 @@
   display: grid;
   grid-template-columns: auto;
   grid-gap: 20px;
-  padding: 15px;
+  padding: 20px;
   flex: none;
   transition: all 0.3s ease-in-out;
 }
@@ -427,8 +431,8 @@
   border-radius: 10px;
   background-color: #ffffff00;
   transition: all 0.5s ease-in-out;
-  min-width: 300px;
-  height: 280px;
+  min-width: 250px;
+  height: 250px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -447,14 +451,14 @@
 }
 .task-number,
 .name-task {
-  font-size: x-large;
-  font-weight: 500;
+  font-size: larger;
+  font-weight: 510;
   color: #000000;
 }
 .name-task::first-letter {
   color: #9e3abf;
-  font-weight: 650;
-  letter-spacing: -2px;
+  font-weight: 550;
+  letter-spacing: -1px;
 }
 .task-number {
   background: linear-gradient(
@@ -898,10 +902,11 @@
   align-items: center;
 }
 .approve-title {
-  width: 100%;
-  font-size: x-large;
-  font-weight: 500;
+  width: 98%;
+  padding: 10px 0 10px 25px;
   text-align: left;
+  font-size: larger;
+  font-weight: 550;
 }
 .task-approved-row-container {
   max-width: 93%;
@@ -922,9 +927,10 @@
   /* scroll-snap-align: start; */
   background-color: #4e46e500;
   border-radius: 10px;
-  margin: 15px;
+  margin: 20px;
   transition: all 0.3s ease-in-out;
-  box-shadow: rgba(0, 0, 0, 0.45) 10px 10px 15px -10px;
+  /* box-shadow: rgba(0, 0, 0, 0.45) 10px 10px 15px -10px; */
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   /* background-color: #ffffff; */
 }
 .yet-task-box {
@@ -942,10 +948,10 @@
   grid-template-columns: auto;
   flex: none;
   transition: all 0.3s ease-in-out;
-  min-width: 300px;
-  height: 280px;
+  min-width: 250px;
+  height: 250px;
+  background-image: url('https://i.ibb.co/gMXnzp7y/123.png');
   background-size: cover;
-  background-image: url("https://i.ibb.co/rRVQdpn5/yet-front.png");
   background-position: left;
   background-repeat: no-repeat;
   border-radius: 10px;
@@ -953,7 +959,9 @@
 }
 
 .yet-task-box:hover {
-  background-image: url("https://i.ibb.co/KxHf39XQ/yet-back.png");
+  /* background-image: url("https://i.ibb.co/qLkbXNdP/632.png"); */
+  background-image: url("https://i.ibb.co/mrt28Dh0/453.png");
+
   transition: all 0.3s ease-in-out;
 }
 
@@ -974,21 +982,19 @@
   width: auto;
 }
 .yet-task-id {
-  min-height: 55%;
-  font-size: 30px;
-  font-weight: 500;
+  min-height: 50%;
+  font-size: x-large;
+  font-weight: 550;
   color: #000000;
-  padding-right: 10px;
+  padding-right: 5px;
 }
 .yet-id,
 .yet-title {
   width: 100%;
   text-align: right;
-  line-height: 33px;
+  /* line-height: 33px; */
 }
-.yet-title {
-  font-size: x-large;
-}
+
 .yet-id {
   background: linear-gradient(
     to top right,
@@ -1007,11 +1013,12 @@
 }
 
 .yet-task-title {
-  width: 100%;
+  width: 90%;
   font-family: "poppins", sans-serif;
-  font-size: xx-large;
-  font-weight: 550;
-  text-align: center;
+  font-size: 21px;
+  font-weight: 500;
+  text-align: left;
+  padding-bottom: 5px;
   background: linear-gradient(
     to top,
     #000000 10%,

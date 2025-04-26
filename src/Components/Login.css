@@ -164,7 +164,8 @@ form {
   line-height: 14px;
   letter-spacing: 1.2px;
   transition: 0.2s 0.1s;
-  background-image: linear-gradient(90deg, #020202b8, #9747ff);
+  /* background-image: linear-gradient(90deg, #020202b8, #9747ff); */
+  background-image: linear-gradient(to bottom left, #f08243df, #9747ffdf);
   border: 0 solid;
   overflow: hidden;
 }
@@ -174,7 +175,9 @@ form {
 }
 
 .login-btn:hover {
-  width: 52%;
+  /* width: 52%; */
+  /* scale: 1.05; */
+  background-image: linear-gradient(to bottom left, #f08143, #9747ff);
   transition: all 0.3s ease-in;
 }
 
