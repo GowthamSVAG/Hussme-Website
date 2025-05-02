@@ -131,7 +131,7 @@ export function Management() {
 
   if (loading) {
     return  <div className="loader-container">
-    <span class="loader"></span>
+    <span className="loader"></span>
   </div> ;
   }
 

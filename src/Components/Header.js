@@ -103,7 +103,7 @@ export function Header() {
                       role="button"
                       className="user-profile-1"
                     >
-                      <div class="user-profile-inner">
+                      <div className="user-profile-inner">
                         <svg
                           aria-hidden="true"
                           xmlns="http://www.w3.org/2000/svg"
@@ -138,9 +138,9 @@ export function Header() {
               <Link to="/service">Services</Link>
             </li>
             
-            {/* <li className="hideWhileMobileOn">
+            <li className="hideWhileMobileOn">
               <Link to="/management">Management</Link>
-            </li> */}
+            </li>
             {/* <li className="hideWhileMobileOn">
               <Link to="/new-company">New Company</Link>
             </li> */}
@@ -150,7 +150,7 @@ export function Header() {
             <li className="hideWhileMobileOn">
               <Link to="/contact">Contact US</Link>
             </li>
-            {/* <li className="hideWhileMobileOn">
+            <li className="hideWhileMobileOn">
               {user ? (
                 <div
                   className="user-dropdown-container"
@@ -182,7 +182,7 @@ export function Header() {
                       role="button"
                       className="user-profile-1"
                     >
-                      <div class="user-profile-inner">
+                      <div className="user-profile-inner">
                         <svg
                           aria-hidden="true"
                           xmlns="http://www.w3.org/2000/svg"
@@ -198,7 +198,7 @@ export function Header() {
                   </Link>
                 </>
               )}
-            </li> */}
+            </li>
             <li className="menu-button" onClick={showSidebar}>
               <Link to="#">
                 <svg
