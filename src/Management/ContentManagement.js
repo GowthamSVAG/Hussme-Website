@@ -561,21 +561,6 @@ export function ContentManagement() {
                 <div className="new-task-row task-row-2">
                   <div className="new-task-input-box">
                     <label
-                      htmlFor="targetPostingDate"
-                      className="new-task-date-label"
-                    >
-                      Target Posting Date:
-                    </label>
-                    <input
-                      type="date"
-                      name="targetPostingDate"
-                      className="new-task-date"
-                      value={taskForm.targetPostingDate}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className="new-task-input-box">
-                    <label
                       htmlFor="submissionForReview"
                       className="new-task-date-label"
                     >
@@ -589,6 +574,22 @@ export function ContentManagement() {
                       onChange={handleInputChange}
                     />
                   </div>
+                  <div className="new-task-input-box">
+                    <label
+                      htmlFor="targetPostingDate"
+                      className="new-task-date-label"
+                    >
+                      Target Posting Date:
+                    </label>
+                    <input
+                      type="date"
+                      name="targetPostingDate"
+                      className="new-task-date"
+                      value={taskForm.targetPostingDate}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
                   <div className="new-task-row-submit">
                     <button type="submit" className="new-task-row-submit-btn">
                       Submit Task
@@ -685,7 +686,7 @@ export function ContentManagement() {
                       type="date"
                       name="targetPostingDate"
                       value={formatDateForDisplay(
-                        selectedTask?.targetPostingDate
+                        selectedTask?.submissionForReview
                       )}
                       readOnly
                     />
@@ -696,7 +697,7 @@ export function ContentManagement() {
                       type="date"
                       name="submissionForReview"
                       value={formatDateForDisplay(
-                        selectedTask?.submissionForReview
+                        selectedTask?.targetPostingDate
                       )}
                       readOnly
                     />
@@ -860,7 +861,7 @@ export function ContentManagement() {
                 <input
                   type="date"
                   value={formatDateForDisplay(
-                    selectedRolledBackTask?.targetPostingDate
+                    selectedRolledBackTask?.submissionForReview
                   )}
                   readOnly
                 />
@@ -870,7 +871,7 @@ export function ContentManagement() {
                 <input
                   type="date"
                   value={formatDateForDisplay(
-                    selectedRolledBackTask?.submissionForReview
+                    selectedRolledBackTask?.targetPostingDate
                   )}
                   readOnly
                 />

@@ -1,6 +1,6 @@
 .footer{
   margin-top: auto;
-  font-family:"poppins", serif !important;
+   font-family: "Kumbh Sans", sans-serif !important;
 }
 .footer-col {
   padding-top:25px;
@@ -130,7 +130,7 @@
 }
 .contact-btn a {
   font-size: 17px;
-  font-weight: 600;
+  font-weight: 450;
   font-style: bold;
   text-decoration: none;
   color: rgb(255, 255, 255);

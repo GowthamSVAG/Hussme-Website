@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../Components/Assets/Home-Header-Footer/hussme Logo-2 1-white.jpg";
+import logo from "../Components/Assets/Home-Header-Footer/hussme-sep-logo.png";
 import "../Components/Header.css";
 import cross from "../Components/Assets/Home-Header-Footer/cross.png";
 import { useUser } from "../Components/Context/UserContext"; // Import UserContext
@@ -49,6 +49,7 @@ export function Header() {
   return (
     <div className="nav-bar" onClick={closeDropdown}>
       <header>
+      {/* <Link href="#" class="animated-link">HoverMe</Link> */}
         <nav>
           <ul className="sidebar">
             <li onClick={hideSidebar}>
@@ -126,31 +127,31 @@ export function Header() {
           <ul className="desk-navbar">
             <li>
               <div className="logo">
-                <Link to="/">
+                <Link to="/" >
                   <img src={logo} alt="" />
                 </Link>
               </div>
             </li>
             <li className="hideWhileMobileOn">
-              <Link to="/">Home</Link>
+              <Link to="/"  className="logo-link">Home</Link>
             </li>
             <li className="hideWhileMobileOn">
-              <Link to="/service">Services</Link>
+              <Link to="/service"  className="logo-link">Services</Link>
             </li>
             
-            <li className="hideWhileMobileOn">
-              <Link to="/management">Management</Link>
-            </li>
             {/* <li className="hideWhileMobileOn">
-              <Link to="/new-company">New Company</Link>
+              <Link to="/management"  className="logo-link">Management</Link>
+            </li> */}
+            {/* <li className="hideWhileMobileOn">
+              <Link to="/new-company"  className="logo-link">New Company</Link>
             </li> */}
             <li className="hideWhileMobileOn">
-              <Link to="/blog">Blog</Link>
+              <Link to="/blog"  className="logo-link">Blog</Link>
             </li>
             <li className="hideWhileMobileOn">
-              <Link to="/contact">Contact US</Link>
+              <Link to="/contact"  className="logo-link">Contact US</Link>
             </li>
-            <li className="hideWhileMobileOn">
+            {/* <li className="hideWhileMobileOn">
               {user ? (
                 <div
                   className="user-dropdown-container"
@@ -198,7 +199,7 @@ export function Header() {
                   </Link>
                 </>
               )}
-            </li>
+            </li> */}
             <li className="menu-button" onClick={showSidebar}>
               <Link to="#">
                 <svg

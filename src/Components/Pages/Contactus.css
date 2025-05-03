@@ -4,7 +4,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  font-family:"poppins", serif !important;
+   font-family: "Kumbh Sans", sans-serif !important;
 }
 
 .contact-starting-container {
@@ -62,14 +62,14 @@
 
 .contact-slogan-1 {
   font-size: 45px;
-  font-weight: 600;
+  font-weight: 450;
   color: #9955f2e9;
   margin-top: -5px;
   margin-right: 0px;
 }
 .contact-slogan-2 {
   font-size: 45px;
-  font-weight: 600;
+  font-weight: 450;
   color: #f08143;
   margin-right: -5px;
   margin-top: -8px;
@@ -167,14 +167,14 @@
   ); */
 }
 .contact-info-title {
-    font-family:"poppins", serif !important;
+     font-family: "Kumbh Sans", sans-serif !important;
   font-size: 37px;
   background: linear-gradient(to bottom right, #ff7b2f, #8731f7);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  font-weight: 600;
+  font-weight: 450;
 }
 .contact-input-box {
   height: 90%;
@@ -289,7 +289,7 @@ label {
 label {
   min-height: fit-content;
   text-align: left;
-    font-family:"poppins", serif !important;
+     font-family: "Kumbh Sans", sans-serif !important;
   font-size: larger;
   font-weight: 500;
   display: flex;

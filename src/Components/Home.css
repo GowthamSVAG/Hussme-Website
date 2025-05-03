@@ -8,7 +8,7 @@
   justify-content: center;
   align-items: center;
   /* background: rgb(255, 255, 255); */
-  font-family: "poppins", sans-serif;
+  font-family: "Kumbh Sans", sans-serif;
 }
 .starting-container {
   width: 100%;
@@ -70,14 +70,14 @@
 
 .slogan-1 {
   font-size: 45px;
-  font-weight: 600;
+  font-weight: 450;
   color: #9955f2e9;
   margin-top: -5px;
   margin-right: -4px;
 }
 .slogan-2 {
   font-size: 45px;
-  font-weight: 600;
+  font-weight: 450;
   color: #f08143;
   margin-left: 15px;
   margin-top: -4px;
@@ -176,15 +176,20 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  background-image: linear-gradient(to right, #f0824359, #a560ff6f);
+  /* background-image: linear-gradient(to right, #f0824359, #a560ff6f);
   box-shadow: inset 0px 5px 10px -1px rgb(255, 255, 255),
-    inset 0px -5px 10px -1px rgb(255, 255, 255);
+    inset 0px -5px 10px -1px rgb(255, 255, 255); */
+    background-color: #e9def9;
 }
 .levers {
   margin-top: 15px;
   width: 95%;
   display: flex;
   font-size: xx-large;
+  font-weight: 450;
+}
+.levers .tex{
+  color: #965eef;
   font-weight: 600;
 }
 
@@ -398,7 +403,7 @@
   width: 70%;
   line-height: 38px;
   font-size: 25px;
-  font-weight: 600;
+  font-weight: 450;
 }
 /* Front and Back Faces */
 .card-front,
@@ -461,7 +466,7 @@
   justify-content: center;
 }
 .bottom-title h2 {
-  font-family: "poppins", serif;
+  font-family: " font-family: "Kumbh Sans", sans-serif;", serif;
   font-size: large;
   padding: 0;
   margin: 0;
@@ -520,7 +525,7 @@
   display: flex;
   flex-direction: column;
   width: 70%;
-  min-height: 700px;
+  min-height: 450px;
   align-self: center;
   gap: 40px;
 }
@@ -572,7 +577,7 @@
   padding-left: 20px;
   width: 100%;
   font-size: xx-large;
-  font-weight: 600;
+  font-weight: 450;
 }
 .content-list ul {
   padding-left: 70px;
@@ -776,17 +781,17 @@
 .progress-name {
   max-width: 140px;
   text-align: center;
-  font-family: "poppins", serif;
+  font-family: " font-family: "Kumbh Sans", sans-serif;", serif;
   font-size: x-large;
-  font-weight: 600;
+  font-weight: 450;
 }
 .count {
   display: flex;
   justify-content: center;
   width: 100%;
-  font-family: "poppins", serif;
+  font-family: " font-family: "Kumbh Sans", sans-serif;", serif;
   font-size: 40px;
-  font-weight: 600;
+  font-weight: 450;
   color: #9747ff;
 }
 .icon {
@@ -950,7 +955,7 @@
     height: 500px;
     justify-content: center;
     font-size: 25px;
-    font-weight: 600;
+    font-weight: 450;
     align-items: center;
     /* gap: 20px; */
     background: white;
@@ -1009,7 +1014,7 @@
   width: 95%;
   text-align: left;
   font-size: 50px;
-  font-weight: 600;
+  font-weight: 450;
   font-style: normal;
 }
 
@@ -1203,7 +1208,7 @@
   padding: 0px;
   border-radius: 50%;
   font-size: 58px;
-  font-weight: 600;
+  font-weight: 450;
   display: flex;
   justify-content: center;
   align-items: center;

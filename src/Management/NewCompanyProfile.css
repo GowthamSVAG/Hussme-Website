@@ -32,7 +32,7 @@
 .new-company-name {
   margin-top: 1%;
   font-size: xx-large;
-  font-weight: 600;
+  font-weight: 450;
   background: #f08143;
   background: linear-gradient(to bottom, #8b34fc, #ff8239);
   background-clip: text; /* Standard property */
@@ -179,7 +179,7 @@
 }
 .address::placeholder{
 font-size: larger;
-  font-family:"poppins", serif !important;
+   font-family: "Kumbh Sans", sans-serif !important;
 font-weight: 500;
 padding: 5px 0px 0px 0px;
 resize: none !important;

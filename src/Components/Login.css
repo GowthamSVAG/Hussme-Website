@@ -74,7 +74,7 @@ form {
 .login-container h1 {
   font-size: 36px;
   margin: -10px 0;
-    font-family:"poppins", serif !important;
+     font-family: "Kumbh Sans", sans-serif !important;
 }
 
 .forgot-link a {
@@ -128,7 +128,7 @@ form {
   height: 48px;
   text-align: center;
   font-size: larger;
-  font-weight: 600;
+  font-weight: 450;
   color: white;
   background-color: #4275ce;
   border-radius: 12px;
@@ -257,7 +257,7 @@ form {
   color: white;
   font-size: x-large;
   font-weight: 500;
-    font-family:"poppins", serif !important;
+     font-family: "Kumbh Sans", sans-serif !important;
   border-radius: 10px;
   border: 2px solid white;
   box-shadow: none;
@@ -279,7 +279,7 @@ form {
 
 .password-requirements p {
   margin: 0 0 8px;
-  font-weight: 600;
+  font-weight: 450;
   color: #444;
 }
 

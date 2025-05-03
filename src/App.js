@@ -14,16 +14,18 @@ import { Reset } from "./Components/Pages/Password Reset/Reset-Password";
 import { Otp } from "./Components/Pages/Password Reset/Otp";
 import { Management } from "./Management/Management";
 import { NewCompanyProfile } from "./Management/NewCompanyProfile";
+import { Admin } from "./Components/Admin";
 
 function AppContent() {
   const location = useLocation();
-  const hideHeaderFooter = location.pathname.startsWith("/management") || location.pathname.startsWith("/new-company");
+  const hideHeaderFooter = location.pathname.startsWith("/management") || location.pathname.startsWith("/new-company")||location.pathname.startsWith("/admin");;
 
   return (
     <div className="container">
       {!hideHeaderFooter && <Header />}
       <ScrollToTop />
       <Routes>
+        <Route path="/admin" element={<Admin />} />
         <Route index element={<Home />} />
         <Route path="/service" element={<Service />} />
         <Route path="/blog" element={<Blog />} />

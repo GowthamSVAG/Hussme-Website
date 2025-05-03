@@ -107,7 +107,7 @@ export function Home() {
       </div>
       <div className="our-levers">
         <div className="levers">
-          <div className="tex">Our Levers</div>
+          <div className="tex">Levers</div>
         </div>
         <div className="row-container">
           <div className="img-container">
@@ -244,7 +244,7 @@ export function Home() {
         </div>
 
         {/* Talent Card */}
-        <div className="talent-container">
+        {/* <div className="talent-container">
           <div className="talent-img-section">
             <img src={t1} alt="" />
           </div>
@@ -265,7 +265,7 @@ export function Home() {
               </Link>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       {/* End of Business & Talent Card Section  */}
 

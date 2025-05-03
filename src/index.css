@@ -1,7 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Righteous&family=Teachers:ital,wght@0,400..800;1,400..800&display=swap");
-/* Apply to all elements */
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap');
 * {
-    font-family:"poppins", serif !important;
+     font-family: "Kumbh Sans", sans-serif !important;
   box-sizing: border-box; /* optional, but good for layout consistency */
 }
 body {

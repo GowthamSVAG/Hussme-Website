@@ -46,7 +46,7 @@
   width: fit-content;
   color: black;
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 450;
   text-align: center;
   flex: 1;
 }
@@ -78,7 +78,7 @@
   -webkit-background-clip: text; /* WebKit-specific property */
   -webkit-text-fill-color: transparent; /* Ensures the text remains transparent */
   color: transparent;
-  font-weight: 600;
+  font-weight: 450;
   cursor: pointer;
 }
 
@@ -140,7 +140,7 @@
   /* background-color: #333; */
   width: 45px;
   height: 45px;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   border-radius: 10%;
   background-color: #ffffff;

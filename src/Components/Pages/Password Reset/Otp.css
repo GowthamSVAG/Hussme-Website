@@ -28,7 +28,7 @@
 }
 .otp-text {
   font-size: x-large;
-  font-weight: 600;
+  font-weight: 450;
   margin-bottom: 20px;
 }
 .otp-form {
@@ -65,7 +65,7 @@
   border-radius: 5px;
   border-width: 0px;
   font-size: x-large;
-  font-weight: 600;
+  font-weight: 450;
   background-color: #9747ff;
 }
 
@@ -88,7 +88,7 @@
 }
 .new-pass-text{
     font-size: x-large;
-    font-weight: 600;
+    font-weight: 450;
     margin-bottom: 20px;
 }
 .new-pass-form{
@@ -103,7 +103,7 @@
     font-size: larger;
     width: 100%;
     text-align: left;
-    font-weight: 600;
+    font-weight: 450;
 }
 .new-pass-form input{
     width: 100%;
@@ -125,7 +125,7 @@
     border-radius: 5px;
     border-width: 0px;
     font-size: larger;
-    font-weight: 600;
+    font-weight: 450;
     background-color: #9747ff;
     color: azure;
     margin-top: 20px;
@@ -187,7 +187,7 @@
 
 .reset-password-requirements p {
   margin: 0 0 8px;
-  font-weight: 600;
+  font-weight: 450;
   color: #444;
 }
 

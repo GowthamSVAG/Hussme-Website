@@ -24,7 +24,7 @@
 .edit-toggle-button {
     padding: 8px 16px;
     border-radius: 4px;
-    font-weight: 600;
+    font-weight: 450;
     cursor: pointer;
     transition: all 0.3s ease;
     border: none;
@@ -86,7 +86,7 @@
     color: #9747ff;
     margin-bottom: 0.5rem;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 450;
 }
 
 .info-group p {
@@ -135,7 +135,7 @@
 }
 
 .logo-label {
-    font-weight: 600;
+    font-weight: 450;
     margin-bottom: 0.5rem;
     color: #9747ff;
 }
@@ -163,7 +163,7 @@
 }
 
 .form-group label {
-    font-weight: 600;
+    font-weight: 450;
     margin-bottom: 0.5rem;
     color: #333;
 }
@@ -212,7 +212,7 @@
     color: white;
     border: none;
     border-radius: 4px;
-    font-weight: 600;
+    font-weight: 450;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
