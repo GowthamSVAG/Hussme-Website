@@ -49,7 +49,6 @@ export function Header() {
   return (
     <div className="nav-bar" onClick={closeDropdown}>
       <header>
-      {/* <Link href="#" class="animated-link">HoverMe</Link> */}
         <nav>
           <ul className="sidebar">
             <li onClick={hideSidebar}>

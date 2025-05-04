@@ -1,6 +1,6 @@
 import "../Components/Footer.css";
 import { Link } from "react-router-dom";
-import logofooter from "../Components/Assets/Home-Header-Footer/hussme Logo-2 2-black.jpg";
+import logofooter from "../Components/Assets/Home-Header-Footer/hussme-sep-logo.png";
 import mobile from "../Components/Assets/Home-Header-Footer/envelope (1).png";
 import mail from "../Components/Assets/Home-Header-Footer/outgoing.png";
 export function Footer() {
