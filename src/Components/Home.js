@@ -224,12 +224,12 @@ export function Home() {
             <div className="content-list">
               <div className="content-heading">Business</div>
               <ul>
-                <li>Business profiling and plan</li>
-                <li>Quick on-demand staff selection on contract basis</li>
-                <li>Dedicated recruitment team for full-time hiring</li>
-                <li>New hire online training</li>
-                <li>Website hosting and regular maintenance</li>
-                <li>Facebook, Instagram, and X marketing</li>
+                <li><div className="dot-list"></div>Business profiling and plan</li>
+                <li><div className="dot-list"></div>Quick on-demand staff selection on contract basis</li>
+                <li><div className="dot-list"></div>Dedicated recruitment team for full-time hiring</li>
+                <li><div className="dot-list"></div>New hire online training</li>
+                <li><div className="dot-list"></div>Website hosting and regular maintenance</li>
+                <li><div className="dot-list"></div>Facebook, Instagram, and X marketing</li>
               </ul>
               <Link to="/service">
                 <button className="button-57">
