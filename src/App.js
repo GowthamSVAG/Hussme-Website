@@ -25,12 +25,12 @@ function AppContent() {
       {!hideHeaderFooter && <Header />}
       <ScrollToTop />
       <Routes>
-        <Route path="/admin" element={<Admin />} />
         <Route index element={<Home />} />
         <Route path="/service" element={<Service />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/digital" element={<Digital />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="/login" element={<Login />} />
         <Route path="/reset-password" element={<Reset />} />
         <Route path="/otp" element={<Otp />} />
