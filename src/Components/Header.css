@@ -23,14 +23,15 @@ header {
   z-index: 100;
   display: flex;
   align-items: center;
-  background-color: #1B1525;
+  background-color: #1b1525;
+  /* background-color: #ffffff; */
 }
 nav {
   min-width: 95%;
   padding-right: 25px;
 }
 nav ul {
-  margin: 0 auto;
+  margin: 0;
   width: 100%;
   list-style: none;
   display: flex;
@@ -57,7 +58,7 @@ li {
   position: relative;
   display: inline-block;
   align-items: center;
-     font-family: "Kumbh Sans", sans-serif !important;
+  font-family: "Kumbh Sans", sans-serif !important;
   font-size: large;
   font-weight: 450;
   text-decoration: none;
@@ -71,7 +72,11 @@ li {
   width: 0%;
   height: 3px;
   border-radius: 2px;
-  background: linear-gradient(to right, #9747ff,#f08143); /* Customize your gradient */
+  background: linear-gradient(
+    to right,
+    #9747ff,
+    #f08143
+  ); /* Customize your gradient */
   transition: width 0.4s ease;
 }
 
@@ -86,7 +91,6 @@ li {
   -webkit-text-fill-color: transparent; 
   color: transparent; 
 } */
-
 
 nav li:first-child {
   margin-right: auto;
@@ -108,23 +112,33 @@ nav li:first-child {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-     font-family: "Kumbh Sans", sans-serif !important;
-  font-size: 20px;
+  font-family: "Kumbh Sans", sans-serif !important;
+  font-size: 25px;
+  font-weight: 600;
   gap: 15px;
-  text-shadow: #b3b3b3 0px 0px 0.1px;
+  color:white;
+  /* text-shadow: #000000 0px 0px 2px; */
 }
 .sidebar a {
   width: 100%;
+  
 }
 .sidebar li {
   display: flex;
   justify-content: center;
+  padding-left: 25px;
 }
-
+.sidebar li a{
+  color:black !important;
+}
 .menu-button {
   display: none;
+  padding-right: 25px;
 }
 @media (max-width: 910px) {
+  .logo{
+
+  }
   .hideWhileMobileOn {
     display: none;
   }
@@ -132,10 +146,10 @@ nav li:first-child {
     display: block;
   }
 }
-.sidebar li:last-child {
+/* .sidebar li:last-child {
   width: 100%;
   padding-left: 0 !important;
-}
+} */
 .username-logout-buttons {
   display: flex;
   flex-direction: column;
@@ -155,9 +169,9 @@ nav li:first-child {
 .username-logout-buttons .login-button {
   margin-left: 0px !important;
 }
-.sidebar li:last-child {
+/* .sidebar li:last-child {
   padding-left: 60px;
-}
+} */
 .desk-username {
   font-size: x-large;
   font-weight: 450;
@@ -207,10 +221,8 @@ nav li:first-child {
   font-style: italic;
   font-weight: 500;
   color: #ffffff;
-  text-shadow: -1px -1px 0 #000000,  
-               1px -1px 0 #000000,
-               -1px 1px 0 #000000,
-               0.5px 0.5px 0 #000000;
+  text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000,
+    0.5px 0.5px 0 #000000;
   cursor: pointer; /* Add cursor pointer to indicate it's clickable */
   transition: all 0.3s ease;
 }
@@ -280,49 +292,36 @@ nav li:first-child {
   width: 90%;
 }
 
-
-
-/* From Uiverse.io by reglobby */ 
+/* From Uiverse.io by reglobby */
 .user-profile-1 {
   width: 131px;
   height: 51px;
   border-radius: 15px;
   cursor: pointer;
   transition: 0.3s ease;
-  background: linear-gradient(
-    to bottom right,
-    #2e8eff 20%,
-    #b344d8 80%
-  );
+  background: linear-gradient(to bottom right, #2e8eff 20%, #b344d8 80%);
   /* background-color: rgba(46, 142, 255, 0.2); */
   display: flex;
   align-items: center;
   justify-content: center;
- 
 }
-.login-name:hover{
+.login-name:hover {
   background: none;
   /* background: linear-gradient(to right, #f08143 26%, #9747ff 58%); */
   background-clip: text; /* Standard property */
   -webkit-background-clip: text; /* WebKit-specific property */
-  -webkit-text-fill-color:#fff; /* Ensures the text remains transparent */
-  color: transparent; 
+  -webkit-text-fill-color: #fff; /* Ensures the text remains transparent */
+  color: transparent;
 
- color: #fff;
+  color: #fff;
   /* background-color: rgba(46, 142, 255, 0.2); */
-
 }
 .user-profile-1:hover,
 .user-profile-1:focus {
-  background: linear-gradient(
-    to top left,
-    #2e8eff 20%,
-    #b344d8 80%
-  );
+  background: linear-gradient(to top left, #2e8eff 20%, #b344d8 80%);
   /* box-shadow: 0 0 10px rgba(46, 143, 255, 0.673); */
   outline: none;
 }
-
 
 .user-profile-inner {
   width: 127px;

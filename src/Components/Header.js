@@ -206,7 +206,7 @@ export function Header() {
                   height="40px"
                   viewBox="0 -960 960 960"
                   width="40px"
-                  fill="9747FF"
+                  fill="#FFFFFF"
                 >
                   <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
                 </svg>
