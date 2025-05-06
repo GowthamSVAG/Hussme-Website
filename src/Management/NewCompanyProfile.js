@@ -12,17 +12,30 @@ export function NewCompanyProfile() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     companyName: "",
+    dba: "",
+    fedraltaxid: "",
     industry: "",
     email: "",
     phone: "",
     website: "",
-    address: "",
+    address1: "",
+    address2: "",
     city: "",
-    state: "",
     zip: "",
+    state: "",
     country: "",
+    linkedin: "",
+    facebook: "",
+    insta: "",
+    x: "",
+    youtube: "",
+    fontfamily: "",
+    color1: "#ffffff", // Using the color you specified
+    color2: "#ffffff",
+    color3: "#ffffff",
   });
   const [formErrors, setFormErrors] = useState({});
+  const [wasValidated, setWasValidated] = useState(false);
   const [preview, setPreview] = useState(
     "https://i.ibb.co/4wrxz3pC/image-upload-icon.png"
   );
@@ -53,6 +66,7 @@ export function NewCompanyProfile() {
   );
 
   const handleSelect = (city) => {
+    setFormData({ ...formData, city });
     setInput(city);
     setShowList(false);
   };
@@ -101,15 +115,27 @@ export function NewCompanyProfile() {
     const { id, value } = e.target;
     const fieldMapping = {
       "cmpy-name": "companyName",
-      industry: "industry",
+      "cmpy-dba": "dba",
+      "cmpy-fedraltaxid": "fedraltaxid",
+      "cmpy-industry": "industry",
       "cmpy-email": "email",
       "cmpy-phone": "phone",
       "cmpy-website": "website",
-      "cmpy-address": "address",
+      "cmpy-address1": "address1",
+      "cmpy-address2": "address2",
       "cmpy-city": "city",
-      "cmpy-state": "state",
       "cmpy-zip": "zip",
+      "cmpy-state": "state",
       "cmpy-country": "country",
+      "cmpy-linkedin": "linkedin",
+      "cmpy-facebook": "facebook",
+      "cmpy-insta": "insta",
+      "cmpy-x": "x",
+      "cmpy-youtube": "youtube",
+      "cmpy-fontfamily": "fontfamily",
+      "cmpy-color1": "color1",
+      "cmpy-color2": "color2",
+      "cmpy-color3": "color3",
     };
 
     setFormData({
@@ -118,20 +144,11 @@ export function NewCompanyProfile() {
     });
   };
 
-  const validateForm = () => {
-    const errors = {};
-    if (!formData.companyName.trim())
-      errors.companyName = "Company name is required";
-    if (!formData.industry.trim()) errors.industry = "Industry is required";
-    if (!formData.email.trim()) errors.email = "Email is required";
-    if (!formData.phone.trim()) errors.phone = "Phone number is required";
-    return errors;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = validateForm();
     setFormErrors(errors);
+    setWasValidated(true);
     if (Object.keys(errors).length > 0) {
       toast.error("Please fill in all required fields");
       return;
@@ -170,44 +187,44 @@ export function NewCompanyProfile() {
     }
   };
 
+  const validateForm = () => {
+    const errors = {};
+    if (!formData.companyName.trim())
+      errors.companyName = "Company name is required";
+    if (!formData.industry.trim()) errors.industry = "Industry is required";
+    if (!formData.email.trim()) errors.email = "Email is required";
+    if (!formData.phone.trim()) errors.phone = "Phone number is required";
+    if (!formData.dba.trim()) errors.dba = "DBA is required";
+    if (!formData.fedraltaxid.trim())
+      errors.fedraltaxid = "Federal Tax ID is required";
+    return errors;
+  };
+
+  // Function to get the right placeholder for each field
+  const getPlaceholder = (fieldName, defaultText) => {
+    // If field has been validated and has an error, show the error message
+    if (wasValidated && formErrors[fieldName]) {
+      return formErrors[fieldName];
+    }
+    // Otherwise show the default placeholder
+    return defaultText;
+  };
+
   return (
     <div className="new-cmpy">
       <ToastContainer position="top-right" autoClose={3000} />
       <div className="new-company-name">Create New Company Profile</div>
       <div className="new-cmpy-form-conatiner">
         <form className="new-cmpy-form" onSubmit={handleSubmit}>
-          {/* <div className="new-cmpny-input-logo-sec">
-            <div className="col-img">
-              <label htmlFor="cmpy-logo" className="logo-label">
-                Company Logo
-              </label>
-              <input
-                className="logo-input"
-                type="file"
-                onChange={previewFile}
-                accept="image/*"
-              />
-            </div>
-            <img
-              src={preview}
-              height="200"
-              className="logo-preview"
-              alt="Image preview..."
-            />
-          </div> */}
-
-          <div className="new-cmpny-input-sec for-1st-row">
+          <div className="for-1st-row">
             <input
               type="text"
               id="cmpy-name"
-              placeholder="Company Name"
+              placeholder={getPlaceholder("companyName", "Company Name")}
               onChange={handleInputChange}
               value={formData.companyName}
-              className={formErrors.companyName ? "error" : ""}
+              className={formErrors.companyName && wasValidated ? "error" : ""}
             />
-            {formErrors.companyName && (
-              <span className="error-message">{formErrors.companyName}</span>
-            )}
             <div className="new-cmpny-input-logo-sec">
               <div className="col-img">
                 <label htmlFor="cmpy-logo" className="logo-label">
@@ -218,65 +235,61 @@ export function NewCompanyProfile() {
                   type="file"
                   onChange={previewFile}
                   accept="image/*"
+                  id="cmpy-logo"
                 />
               </div>
-              <img
-                src={preview}
-                height="200"
-                className="logo-preview"
-                alt="Image preview..."
-              />
+              <div className="logo-preview">
+                <img src={preview} height="200" alt="Image preview..." />
+              </div>
             </div>
           </div>
           <div className="new-cmpny-input-sec">
             <input
               type="text"
-              id="dba"
-              placeholder="DBA"
+              id="cmpy-dba"
+              placeholder={getPlaceholder("dba", "DBA")}
               onChange={handleInputChange}
               value={formData.dba}
+              className={formErrors.dba && wasValidated ? "error" : ""}
             />
+
             <input
               type="text"
-              id="taxid"
-              placeholder="Federal Tax ID/ EIN"
+              id="cmpy-fedraltaxid"
+              placeholder={getPlaceholder("fedraltaxid", "Federal Tax ID/EIN")}
               onChange={handleInputChange}
-              value={formData.industry}
+              value={formData.fedraltaxid}
+              className={formErrors.fedraltaxid && wasValidated ? "error" : ""}
             />
+
             <input
               type="text"
-              id="industry"
-              placeholder="Industry"
+              id="cmpy-industry"
+              placeholder={getPlaceholder("industry", "Industry")}
               onChange={handleInputChange}
               value={formData.industry}
-              className={formErrors.industry ? "error" : ""}
+              className={formErrors.industry && wasValidated ? "error" : ""}
             />
-            {formErrors.industry && (
-              <span className="error-message">{formErrors.industry}</span>
-            )}
 
             <input
               type="email"
               id="cmpy-email"
-              placeholder="Company Email"
+              placeholder={getPlaceholder("email", "Company Email")}
               onChange={handleInputChange}
               value={formData.email}
-              className={formErrors.email ? "error" : ""}
+              className={formErrors.email && wasValidated ? "error" : ""}
             />
-            {formErrors.email && (
-              <span className="error-message">{formErrors.email}</span>
-            )}
+
             <input
               type="tel"
+              maxLength={13}
               id="cmpy-phone"
-              placeholder="Company Phone"
+              placeholder={getPlaceholder("phone", "Company Phone")}
               onChange={handleInputChange}
               value={formData.phone}
-              className={formErrors.phone ? "error" : ""}
+              className={formErrors.phone && wasValidated ? "error" : ""}
             />
-            {formErrors.phone && (
-              <span className="error-message">{formErrors.phone}</span>
-            )}
+
             <input
               type="url"
               id="cmpy-website"
@@ -287,33 +300,33 @@ export function NewCompanyProfile() {
 
             <input
               type="text"
-              id="cmpy-address-1"
+              id="cmpy-address1"
               placeholder="Company Address 1"
               onChange={handleInputChange}
               value={formData.address1}
             />
             <input
               type="text"
-              id="cmpy-address-2"
+              id="cmpy-address2"
               placeholder="Company Address 2"
               onChange={handleInputChange}
               value={formData.address2}
             />
-            <div style={{ position: "relative", width: "90%" }}>
+            <div className="city-list">
               <input
                 type="text"
                 id="cmpy-city"
-                value={input}
+                value={formData.city}
                 onChange={(e) => {
-                  setInput(e.target.value);
+                  const value = e.target.value;
+                  setFormData({ ...formData, city: value });
+                  setInput(value);
                   setShowList(true);
                 }}
                 onFocus={() => setShowList(true)}
-                onBlur={() => setTimeout(() => setShowList(false), 150)} // allow time for item click
+                onBlur={() => setTimeout(() => setShowList(false), 150)}
                 placeholder="City"
-                className="cmpy-city"
                 autoComplete="off"
-                style={{ width: "100%" }}
               />
 
               {showList && filteredCities.length > 0 && (
@@ -354,6 +367,14 @@ export function NewCompanyProfile() {
               onChange={handleInputChange}
               value={formData.zip}
             />
+
+            <input
+              type="text"
+              id="cmpy-state"
+              placeholder="State"
+              onChange={handleInputChange}
+              value={formData.state}
+            />
             <input
               type="text"
               id="cmpy-country"
@@ -363,69 +384,87 @@ export function NewCompanyProfile() {
             />
           </div>
 
-          <div className="new-cmpy-social-detail-sec">
-            <div className="cmpy-social-title">Social Platforms Details</div>
-            <div className="new-cmpny-input-sec">
+          <div className="cmpy-brand-title">Social Platforms Details</div>
+
+          <div className="new-cmpny-input-sec">
+            <input
+              type="text"
+              id="cmpy-linkedin"
+              placeholder="LinkedIn"
+              onChange={handleInputChange}
+              value={formData.linkedin}
+            />
+            <input
+              type="text"
+              id="cmpy-facebook"
+              placeholder="Facebook"
+              onChange={handleInputChange}
+              value={formData.facebook}
+            />
+            <input
+              type="text"
+              id="cmpy-insta"
+              placeholder="Instagram"
+              onChange={handleInputChange}
+              value={formData.insta}
+            />
+            <input
+              type="text"
+              id="cmpy-x"
+              placeholder="X"
+              onChange={handleInputChange}
+              value={formData.x}
+            />
+            <input
+              type="text"
+              id="cmpy-youtube"
+              placeholder="YouTube"
+              onChange={handleInputChange}
+              value={formData.youtube}
+            />
+          </div>
+
+          <div className="cmpy-brand-title">Company Brand Details</div>
+          <div className="new-cmpny-input-brand-sec">
+            <div className="brand-row">
               <input
                 type="text"
-                id="cmpy-country"
-                placeholder="LinkedIN"
+                id="cmpy-fontfamily"
+                placeholder="Font Family"
+                className="brand-input"
                 onChange={handleInputChange}
-                value={formData.country}
-              />
-              <input
-                type="text"
-                id="cmpy-country"
-                placeholder="Facebook"
-                onChange={handleInputChange}
-                value={formData.country}
-              />
-              <input
-                type="text"
-                id="cmpy-country"
-                placeholder="Instagram"
-                onChange={handleInputChange}
-                value={formData.country}
-              />
-              <input
-                type="text"
-                id="cmpy-country"
-                placeholder="X"
-                onChange={handleInputChange}
-                value={formData.country}
-              />
-              <input
-                type="text"
-                id="cmpy-country"
-                placeholder="Youtube"
-                onChange={handleInputChange}
-                value={formData.country}
+                value={formData.fontfamily}
               />
             </div>
-          </div>
-          <div className="cmpy-brand-template-sec">
-            <div className="cmpy-brand-title">Comapny Brand Details</div>
-            <div className="new-cmpny-input-sec">
+            <div className="brand-row">
+              <label htmlFor="cmpy-color1">Color1</label>
               <input
-                type="text"
-                id="cmpy-country"
-                placeholder="Font Family"
-                onChange={handleInputChange}
-                value={formData.country}
-              />
-              <input
+                className="color-input"
                 type="color"
-                id="cmpy-country"
-                placeholder="Color Pallete Color 1"
+                id="cmpy-color1"
                 onChange={handleInputChange}
-                value={formData.country}
+                value={formData.color1}
               />
+            </div>
+            <div className="brand-row">
+              <label htmlFor="cmpy-color2">Color2</label>
               <input
-                type="text"
-                id="cmpy-country"
-                placeholder="Color Pallete Color 2"
+                className="color-input"
+                type="color"
+                id="cmpy-color2"
                 onChange={handleInputChange}
-                value={formData.country}
+                value={formData.color2}
+              />
+            </div>
+            <div className="brand-row">
+              <label htmlFor="cmpy-color3">Color3</label>
+              <input
+                className="color-input"
+                type="color"
+                id="cmpy-color3"
+                placeholder="Color Pallete Color 3 (Optional)"
+                onChange={handleInputChange}
+                value={formData.color3}
               />
             </div>
           </div>
@@ -435,6 +474,7 @@ export function NewCompanyProfile() {
               type="submit"
               className="new-cmpy-button"
               disabled={isSubmitting}
+              style={{ backgroundColor: formData.color1 }}
             >
               {isSubmitting ? "Creating..." : "Submit"}
             </button>
