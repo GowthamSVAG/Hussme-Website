@@ -7,7 +7,6 @@ import { ContentManagement } from "./ContentManagement";
 import { TrainingProcess } from "./TrainingProcess";
 import { Hiring } from "./Hiring";
 import { CompanyProfile } from "./CompanyProfile";
-import { Settings } from "./Settings";
 
 export function Management() {
   const { user, logout } = useUser();
@@ -17,7 +16,6 @@ export function Management() {
   const [activeIndex, setActiveIndex] = useState(0); // Track the active sidebar index
   const [companyProfile, setCompanyProfile] = useState(null);
   const [loading, setLoading] = useState(true);
-
   const navigate = useNavigate();
 
   // Function to toggle the logout dropdown
@@ -88,6 +86,7 @@ export function Management() {
         });
         
         setCompanyProfile(response.data);
+     
       } catch (error) {
         console.error("Error fetching company profile:", error);
         
@@ -144,9 +143,7 @@ export function Management() {
           <div className="company-logo-container" onClick={(e) => toggleCompanyDropdown(e)}>
             {companyProfile && companyProfile.logo ? (
               <img 
-              // src="https://i.ibb.co/Tx7tzcQ6/freepicdownloader-com-square-p-letter-logo-medium.jpg "
                 src={getImageUrl(companyProfile.logo)} 
-                // alt={companyProfile.companyName}
                 alt="https://i.ibb.co/Tx7tzcQ6/freepicdownloader-com-square-p-letter-logo-medium.jpg"
                 className="company-logo"
                 title="Click for options"
@@ -241,18 +238,7 @@ export function Management() {
       <span className="mgmt-sidebar-title">Company Profile</span>
     </NavLink>
   </li>
-  <li
-    onClick={() => loadComponent(<Settings />, 4)}
-    className={activeIndex === 4 ? 'active-sidebar-item' : ''}
-  >
-    <NavLink>
-      <img
-        src="https://i.ibb.co/dszqfsqj/gears.png"
-        className="mgmt-sidebar-icn"
-      />
-      <span className="mgmt-sidebar-title">Settings</span>
-    </NavLink>
-  </li>
+  
 </ul>
 
           </div>

@@ -33,6 +33,7 @@ export function NewCompanyProfile() {
     color1: "#ffffff", // Using the color you specified
     color2: "#ffffff",
     color3: "#ffffff",
+    logoUrl: "", // Add this to store the logo URL
   });
   const [formErrors, setFormErrors] = useState({});
   const [wasValidated, setWasValidated] = useState(false);
@@ -164,9 +165,15 @@ export function NewCompanyProfile() {
         return;
       }
 
+      // Make sure the logoUrl from the uploaded image is included in the submission
+      const dataToSubmit = {
+        ...formData,
+        logo: formData.logoUrl, // Make sure to include the logo URL with the appropriate field name expected by your backend
+      };
+
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/company/update-company-profile`,
-        formData,
+        dataToSubmit,
         {
           headers: {
             Authorization: `Bearer ${token}`,
