@@ -18,16 +18,29 @@ export function CompanyProfile() {
   const [logoFile, setLogoFile] = useState(null);
   const [formData, setFormData] = useState({
     companyName: "",
+    dba: "",
+    fedraltaxid: "",
     industry: "",
     email: "",
     phone: "",
     website: "",
-    address: "",
+    address1: "",
+    address2: "",
     city: "",
-    state: "",
     zip: "",
+    state: "",
     country: "",
+    linkedin: "",
+    facebook: "",
+    insta: "",
+    x: "",
+    youtube: "",
+    fontfamily: "",
+    color1: "#ffffff",
+    color2: "#ffffff",
+    color3: "#ffffff",
   });
+
   const [formErrors, setFormErrors] = useState({});
 
   // Function to toggle the logout dropdown
@@ -70,16 +83,29 @@ export function CompanyProfile() {
         setCompanyProfile(response.data);
         setFormData({
           companyName: response.data.companyName || "",
+          dba: response.data.dba || "",
+          fedraltaxid: response.data.fedraltaxid || "",
           industry: response.data.industry || "",
           email: response.data.email || "",
           phone: response.data.phone || "",
           website: response.data.website || "",
-          address: response.data.address || "",
+          address1: response.data.address1 || "",
+          address2: response.data.address2 || "",
           city: response.data.city || "",
-          state: response.data.state || "",
           zip: response.data.zip || "",
+          state: response.data.state || "",
           country: response.data.country || "",
+          linkedin: response.data.linkedin || "",
+          facebook: response.data.facebook || "",
+          insta: response.data.insta || "",
+          x: response.data.x || "",
+          youtube: response.data.youtube || "",
+          fontfamily: response.data.fontfamily || "",
+          color1: response.data.color1 || "#ffffff",
+          color2: response.data.color2 || "#ffffff",
+          color3: response.data.color3 || "#ffffff",
         });
+
         setPreview(
           response.data.logo ||
             "https://i.ibb.co/4wrxz3pC/image-upload-icon.png"
@@ -105,15 +131,27 @@ export function CompanyProfile() {
     // Map form field IDs to formData property names
     const fieldMapping = {
       "cmpy-name": "companyName",
-      industry: "industry",
+      "cmpy-dba": "dba",
+      "cmpy-taxid": "fedraltaxid",
+      "cmpy-industry": "industry",
       "cmpy-email": "email",
       "cmpy-phone": "phone",
       "cmpy-website": "website",
-      "cmpy-address": "address",
+      "cmpy-address1": "address1",
+      "cmpy-address2": "address2",
       "cmpy-city": "city",
       "cmpy-state": "state",
       "cmpy-zip": "zip",
       "cmpy-country": "country",
+      "cmpy-linkedin": "linkedin",
+      "cmpy-facebook": "facebook",
+      "cmpy-insta": "insta",
+      "cmpy-twitter": "x",
+      "cmpy-youtube": "youtube",
+      "cmpy-fontfamily": "fontfamily",
+      "cmpy-color1": "color1",
+      "cmpy-color2": "color2",
+      "cmpy-color3": "color3",
     };
 
     setFormData({
@@ -264,63 +302,123 @@ export function CompanyProfile() {
         {!editMode ? (
           // View Mode
           <div className="company-details-view">
-            <div className="company-logo-section">
+            <div className="company-info-section">
               <img
                 src={getImageUrl(companyProfile.logo)}
                 alt={companyProfile.companyName}
                 className="profile-logo"
               />
-            </div>
-            <div className="company-info-section">
-              <div className="info-row">
-                <div className="info-group">
-                  <h3>Company Name</h3>
-                  <p>{companyProfile.companyName}</p>
-                </div>
-                <div className="info-group">
-                  <h3>Industry</h3>
-                  <p>{companyProfile.industry}</p>
-                </div>
+              <div className="info-group">
+                <h3>Company Name</h3>
+                <p>{companyProfile.companyName || "N/A"}</p>
               </div>
-              <div className="info-row">
-                <div className="info-group">
-                  <h3>Email</h3>
-                  <p>{companyProfile.email}</p>
-                </div>
-                <div className="info-group">
-                  <h3>Phone</h3>
-                  <p>{companyProfile.phone}</p>
-                </div>
+              <div className="info-group">
+                <h3>Doing Business As (DBA)</h3>
+                <p>{companyProfile.dba || "N/A"}</p>
               </div>
-              <div className="info-row">
-                <div className="info-group">
-                  <h3>Website</h3>
-                  <p>{companyProfile.website || "N/A"}</p>
-                </div>
-                <div className="info-group">
-                  <h3>Address</h3>
-                  <p>{companyProfile.address || "N/A"}</p>
-                </div>
+              <div className="info-group">
+                <h3>Federal Tax ID</h3>
+                <p>{companyProfile.fedraltaxid || "N/A"}</p>
               </div>
-              <div className="info-row">
-                <div className="info-group">
-                  <h3>City</h3>
-                  <p>{companyProfile.city || "N/A"}</p>
-                </div>
-                <div className="info-group">
-                  <h3>State</h3>
-                  <p>{companyProfile.state || "N/A"}</p>
-                </div>
+              <div className="info-group">
+                <h3>Industry</h3>
+                <p>{companyProfile.industry || "N/A"}</p>
               </div>
-              <div className="info-row">
-                <div className="info-group">
-                  <h3>ZIP Code</h3>
-                  <p>{companyProfile.zip || "N/A"}</p>
-                </div>
-                <div className="info-group">
-                  <h3>Country</h3>
-                  <p>{companyProfile.country || "N/A"}</p>
-                </div>
+              <div className="info-group">
+                <h3>Email</h3>
+                <p>{companyProfile.email || "N/A"}</p>
+              </div>
+              <div className="info-group">
+                <h3>Phone</h3>
+                <p>{companyProfile.phone || "N/A"}</p>
+              </div>
+              <div className="info-group">
+                <h3>Website</h3>
+                <p>{companyProfile.website || "N/A"}</p>
+              </div>
+              <div className="info-group">
+                <h3>Address Line 1</h3>
+                <p>{companyProfile.address1 || "N/A"}</p>
+              </div>
+              <div className="info-group">
+                <h3>Address Line 2</h3>
+                <p>{companyProfile.address2 || "N/A"}</p>
+              </div>
+              <div className="info-group">
+                <h3>City</h3>
+                <p>{companyProfile.city || "N/A"}</p>
+              </div>
+              <div className="info-group">
+                <h3>State</h3>
+                <p>{companyProfile.state || "N/A"}</p>
+              </div>
+              <div className="info-group">
+                <h3>ZIP Code</h3>
+                <p>{companyProfile.zip || "N/A"}</p>
+              </div>
+              <div className="info-group">
+                <h3>Country</h3>
+                <p>{companyProfile.country || "N/A"}</p>
+              </div>
+              <div className="info-group">
+                <h3>LinkedIn</h3>
+                <p>{companyProfile.linkedin || "N/A"}</p>
+              </div>
+              <div className="info-group">
+                <h3>Facebook</h3>
+                <p>{companyProfile.facebook || "N/A"}</p>
+              </div>
+              <div className="info-group">
+                <h3>Instagram</h3>
+                <p>{companyProfile.insta || "N/A"}</p>
+              </div>
+              <div className="info-group">
+                <h3>X (Twitter)</h3>
+                <p>{companyProfile.x || "N/A"}</p>
+              </div>
+              <div className="info-group">
+                <h3>YouTube</h3>
+                <p>{companyProfile.youtube || "N/A"}</p>
+              </div>
+              <div className="info-group">
+                <h3>Font Family</h3>
+                <p>{companyProfile.fontfamily || "N/A"}</p>
+              </div>
+              <div className="info-group">
+                <h3>Primary Color</h3>
+                <p
+                  style={{
+                    backgroundColor: companyProfile.color1 || "#ffffff",
+                    borderRadius: "3px",
+                    padding: "5px",
+                  }}
+                >
+                  {companyProfile.color1 || "N/A"}
+                </p>
+              </div>
+              <div className="info-group">
+                <h3>Secondary Color</h3>
+                <p
+                  style={{
+                    backgroundColor: companyProfile.color2 || "#ffffff",
+                    borderRadius: "3px",
+                    padding: "5px",
+                  }}
+                >
+                  {companyProfile.color2 || "N/A"}
+                </p>
+              </div>
+              <div className="info-group">
+                <h3>Tertiary Color</h3>
+                <p
+                  style={{
+                    backgroundColor: companyProfile.color3 || "#ffffff",
+                    borderRadius: "3px",
+                    padding: "5px",
+                  }}
+                >
+                  {companyProfile.color3 || "N/A"}
+                </p>
               </div>
             </div>
           </div>
@@ -328,7 +426,7 @@ export function CompanyProfile() {
           // Edit Mode
           <div className="company-details-edit">
             <form className="edit-company-form" onSubmit={handleSubmit}>
-              <div className="company-logo-section">
+              <div className="company-logo-section edit-logo">
                 <div className="logo-upload">
                   <label htmlFor="company-logo" className="logo-label">
                     Company Logo
@@ -346,87 +444,98 @@ export function CompanyProfile() {
                   className="profile-logo-preview"
                 />
               </div>
-
-              <div className="form-group">
-                <label htmlFor="cmpy-name">Company Name*</label>
-                <input
-                  type="text"
-                  id="cmpy-name"
-                  value={formData.companyName}
-                  onChange={handleInputChange}
-                  className={formErrors.companyName ? "error" : ""}
-                />
-                {formErrors.companyName && (
-                  <span className="error-message">
-                    {formErrors.companyName}
-                  </span>
-                )}
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="industry">Industry*</label>
-                <input
-                  type="text"
-                  id="industry"
-                  value={formData.industry}
-                  onChange={handleInputChange}
-                  className={formErrors.industry ? "error" : ""}
-                />
-                {formErrors.industry && (
-                  <span className="error-message">{formErrors.industry}</span>
-                )}
-              </div>
-
-              <div className="form-row">
+              
+              <div className="edit-form-input-container">
                 <div className="form-group">
-                  <label htmlFor="cmpy-email">Email*</label>
+                  <label htmlFor="cmpy-name">Company Name</label>
+                  <input
+                    type="text"
+                    id="cmpy-name"
+                    value={formData.companyName}
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="cmpy-dba">DBA</label>
+                  <input
+                    type="text"
+                    id="cmpy-dba"
+                    value={formData.dba}
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="cmpy-taxid">Federal Tax ID</label>
+                  <input
+                    type="text"
+                    id="cmpy-taxid"
+                    value={formData.fedraltaxid}
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="cmpy-industry">Industry</label>
+                  <input
+                    type="text"
+                    id="cmpy-industry"
+                    value={formData.industry}
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="cmpy-email">Email</label>
                   <input
                     type="email"
                     id="cmpy-email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className={formErrors.email ? "error" : ""}
                   />
-                  {formErrors.email && (
-                    <span className="error-message">{formErrors.email}</span>
-                  )}
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="cmpy-phone">Phone*</label>
+                  <label htmlFor="cmpy-phone">Phone</label>
                   <input
                     type="tel"
                     id="cmpy-phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className={formErrors.phone ? "error" : ""}
                   />
-                  {formErrors.phone && (
-                    <span className="error-message">{formErrors.phone}</span>
-                  )}
                 </div>
-              </div>
 
-              <div className="form-group">
-                <label htmlFor="cmpy-website">Website</label>
-                <input
-                  type="url"
-                  id="cmpy-website"
-                  value={formData.website}
-                  onChange={handleInputChange}
-                />
-              </div>
+                <div className="form-group">
+                  <label htmlFor="cmpy-website">Website</label>
+                  <input
+                    type="url"
+                    id="cmpy-website"
+                    value={formData.website}
+                    onChange={handleInputChange}
+                  />
+                </div>
 
-              <div className="form-group">
-                <label htmlFor="cmpy-address">Address</label>
-                <textarea
-                  id="cmpy-address"
-                  value={formData.address}
-                  onChange={handleInputChange}
-                />
-              </div>
+                <div className="form-group">
+                  <label htmlFor="cmpy-address1">Address Line 1</label>
+                  <input
+                    type="text"
+                    id="cmpy-address1"
+                    value={formData.address1}
+                    onChange={handleInputChange}
+                  />
+                </div>
 
-              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="cmpy-address2">Address Line 2</label>
+                  <input
+                    type="text"
+                    id="cmpy-address2"
+                    value={formData.address2}
+                    onChange={handleInputChange}
+                  />
+                </div>
+
                 <div className="form-group">
                   <label htmlFor="cmpy-city">City</label>
                   <input
@@ -446,9 +555,7 @@ export function CompanyProfile() {
                     onChange={handleInputChange}
                   />
                 </div>
-              </div>
 
-              <div className="form-row">
                 <div className="form-group">
                   <label htmlFor="cmpy-zip">ZIP Code</label>
                   <input
@@ -468,8 +575,100 @@ export function CompanyProfile() {
                     onChange={handleInputChange}
                   />
                 </div>
-              </div>
 
+                <div className="form-group">
+                  <label htmlFor="cmpy-linkedin">LinkedIn</label>
+                  <input
+                    type="url"
+                    id="cmpy-linkedin"
+                    value={formData.linkedin}
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="cmpy-facebook">Facebook</label>
+                  <input
+                    type="url"
+                    id="cmpy-facebook"
+                    value={formData.facebook}
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="cmpy-insta">Instagram</label>
+                  <input
+                    type="url"
+                    id="cmpy-insta"
+                    value={formData.insta}
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="cmpy-twitter">X (Twitter)</label>
+                  <input
+                    type="url"
+                    id="cmpy-twitter"
+                    value={formData.x}
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="cmpy-youtube">YouTube</label>
+                  <input
+                    type="url"
+                    id="cmpy-youtube"
+                    value={formData.youtube}
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="cmpy-fontfamily">Font Family</label>
+                  <input
+                    type="text"
+                    id="cmpy-fontfamily"
+                    value={formData.fontfamily}
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="cmpy-color1">Primary Color</label>
+                  <input
+                    type="color"
+                    id="cmpy-color1"
+                    className="edit-color-input"
+                    value={formData.color1}
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="cmpy-color2">Secondary Color</label>
+                  <input
+                    type="color"
+                    id="cmpy-color2"
+                    className="edit-color-input"
+                    value={formData.color2}
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="cmpy-color3">Tertiary Color</label>
+                  <input
+                    type="color"
+                    id="cmpy-color3"
+                    className="edit-color-input"
+                    value={formData.color3}
+                    onChange={handleInputChange}
+                  />
+                </div>
+              </div>
               <div className="form-actions">
                 <button
                   type="submit"
