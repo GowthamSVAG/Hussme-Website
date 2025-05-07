@@ -81,16 +81,17 @@
 .management-page {
   width: 100%;
   border-radius: 10px;
-  height: 91vh;
+  max-height: 100% !important;
   font-size: xx-large;
-    font-family: "Kumbh Sans",sans-serif !important; 
+  font-family: "Kumbh Sans", sans-serif !important;
   box-shadow: rgba(50, 50, 93, 0) 15px 1px 15px -0px,
     rgba(0, 0, 0, 0.3) 15px 0px 10px -1px;
 }
 
 .content-management-page {
   width: 100%;
-  min-height: 100%;
+  max-height: 100% !important;
+  /* overflow: hidden; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -300,7 +301,7 @@
   border: 2px solid #b81eff;
   width: 100%;
   height: 50px;
-    font-family: "Kumbh Sans",sans-serif !important; 
+  font-family: "Kumbh Sans", sans-serif !important;
   font-size: large;
   font-weight: 500;
   padding: 10px 10px;
@@ -315,7 +316,7 @@
   border: 2px solid #b81eff;
   width: 100%;
   min-height: 220px;
-    font-family: "Kumbh Sans",sans-serif !important; 
+  font-family: "Kumbh Sans", sans-serif !important;
   font-size: medium;
 
   font-weight: 500;
@@ -334,7 +335,7 @@
 }
 .new-task-date {
   width: 200px;
-    font-family: "Kumbh Sans",sans-serif !important; 
+  font-family: "Kumbh Sans", sans-serif !important;
   font-size: large;
   font-weight: 500;
   padding: 5px 10px;
@@ -370,8 +371,8 @@
 
 /* End of Assign new task  */
 /* Start of Temp Row */
-.temp-row-container{
-  min-width:94% ;
+.temp-row-container {
+  min-width: 94%;
   min-height: 270px;
   /* background-image: url('');  */
 
@@ -384,20 +385,18 @@
   /* justify-content: right; */
   align-items: center;
 }
-.tsk{
-  background-image: url('https://i.ibb.co/spYHqsSB/632.png');
+.tsk {
+  background-image: url("https://i.ibb.co/spYHqsSB/632.png");
 }
-.yet{
-  background-image: url('https://i.ibb.co/BVY3ptHC/555.png');
+.yet {
+  background-image: url("https://i.ibb.co/BVY3ptHC/555.png");
   justify-content: right;
-
 }
-.temp-title{
+.temp-title {
   font-weight: 550;
   width: 60%;
   font-size: xx-large;
   color: #ffff;
-
 }
 /* End of Temp Row */
 /* Start of Task Row Container */
@@ -406,7 +405,7 @@
   height: 100%;
   display: flex;
   align-items: center;
-    font-family: "Kumbh Sans",sans-serif !important; 
+  font-family: "Kumbh Sans", sans-serif !important;
   cursor: pointer;
 }
 
@@ -655,7 +654,7 @@
 .task-title-name-status,
 .task-des-name {
   padding-left: 10px;
-    font-family: "Kumbh Sans",sans-serif !important; 
+  font-family: "Kumbh Sans", sans-serif !important;
   text-align: left;
   font-size: 18px;
   font-weight: 500;
@@ -676,7 +675,7 @@
 .status-deadline-date input {
   width: 80%;
   padding: 5px;
-    font-family: "Kumbh Sans",sans-serif !important; 
+  font-family: "Kumbh Sans", sans-serif !important;
   font-size: medium;
   font-weight: 500;
   color: #686868;
@@ -728,7 +727,7 @@
 .feedback-textarea {
   width: 100%;
   min-height: 100px;
-    font-family: "Kumbh Sans",sans-serif !important; 
+  font-family: "Kumbh Sans", sans-serif !important;
   font-size: medium;
   font-weight: 500;
   padding: 5px 10px;
@@ -805,7 +804,7 @@
   border-radius: 10px;
   cursor: pointer;
   overflow: hidden;
-    font-family: "Kumbh Sans",sans-serif !important; 
+  font-family: "Kumbh Sans", sans-serif !important;
   isolation: isolate;
 }
 .custom-button-disable {
@@ -816,7 +815,7 @@
   cursor: not-allowed;
   opacity: 0.8;
   overflow: hidden;
-    font-family: "Kumbh Sans",sans-serif !important; 
+  font-family: "Kumbh Sans", sans-serif !important;
   isolation: isolate;
 }
 
@@ -1070,7 +1069,7 @@
   background-color: #9747ff;
   padding: 5px 10px 5px 10px;
   --color: #ffffff;
-    font-family: "Kumbh Sans",sans-serif !important; 
+  font-family: "Kumbh Sans", sans-serif !important;
   display: inline-block;
   margin-right: 20px;
   margin-bottom: 30px;
