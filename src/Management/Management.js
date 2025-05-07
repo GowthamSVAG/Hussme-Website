@@ -7,6 +7,7 @@ import { ContentManagement } from "./ContentManagement";
 import { TrainingProcess } from "./TrainingProcess";
 import { Hiring } from "./Hiring";
 import { CompanyProfile } from "./CompanyProfile";
+import logo from "../Components/Assets/Home-Header-Footer/hussme-sep-logo.png";
 
 export function Management() {
   const { user, logout } = useUser();
@@ -189,11 +190,7 @@ export function Management() {
           {/* Right side - Website Logo */}
           <div className="website-logo-container">
             <Link to="/">
-              <img
-                className="website-logo"
-                src="https://i.ibb.co/PvSFSPcB/hussme-Logo-2-1-white.jpg"
-                alt="Hussme"
-              />
+              <img className="website-logo" src={logo} alt="Hussme" />
             </Link>
           </div>
         </div>
