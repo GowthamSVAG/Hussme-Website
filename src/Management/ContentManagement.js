@@ -19,16 +19,18 @@ const formatDateForDisplay = (dateString) => {
 };
 
 export function ContentManagement() {
-  const { user, logout } = useUser();
+  //   const { user, logout } = useUser();
   const navigate = useNavigate();
-  const [showLogout, setShowLogout] = useState(false);
+  // const [showLogout, setShowLogout] = useState(false);
   const [companyProfile, setCompanyProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showFeedback, setShowFeedback] = useState(false);
   const [showTaskStatus, setShowTaskStatus] = useState(true);
-  const [buttonAction, setActiveButton] = useState(null);
+  const [buttonAction, setButtonAction] = useState(null);
   const scrollRef = useRef(null);
   const approvedScrollRef = useRef(null);
+  const [topRowTitleSection, setTopRowTitleSection] = useState(true);
+
   const [NewTask, setNewTask] = useState(false);
   const [showFirstHalf, setShowFirstHalf] = useState(true);
   const [showSecondHalf, setShowSecondHalf] = useState(true);
@@ -37,10 +39,19 @@ export function ContentManagement() {
   const [taskForm, setTaskForm] = useState({
     companyProfileId: "",
     title: "",
+    tagline: "",
+    taskpurpose: "",
+    headline: "",
+    offerormessage: "",
+    calltoaction: "",
+    guidlines: "",
+    additionalinfo: "",
     description: "",
     targetPostingDate: "",
     submissionForReview: "",
+    currentStatus: "Pending", // Optional: defaults to "Pending" on backend
   });
+
   const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
   const [feedbackText, setFeedbackText] = useState("");
@@ -70,8 +81,15 @@ export function ContentManagement() {
       }
 
       const formData = {
-        companyProfileId: companyProfile._id,
+        companyProfileId: companyProfile._id, // This overrides what's in taskForm, which is fine
         title: taskForm.title,
+        tagline: taskForm.tagline,
+        taskpurpose: taskForm.taskpurpose,
+        headline: taskForm.headline,
+        offerormessage: taskForm.offerormessage,
+        calltoaction: taskForm.calltoaction,
+        guidlines: taskForm.guidlines,
+        additionalinfo: taskForm.additionlinfo,
         description: taskForm.description,
         targetPostingDate: taskForm.targetPostingDate,
         submissionForReview: taskForm.submissionForReview,
@@ -94,10 +112,18 @@ export function ContentManagement() {
         setTaskForm({
           companyProfileId: "",
           title: "",
+          tagline: "",
+          taskpurpose: "",
+          headline: "",
+          offerormessage: "",
+          calltoaction: "",
+          guidlines: "",
+          additionalinfo: "",
           description: "",
           targetPostingDate: "",
           submissionForReview: "",
         });
+
         setNewTask(false);
         await fetchTasks(); // Refresh tasks
       }
@@ -292,6 +318,7 @@ export function ContentManagement() {
   const taskStatus = async (taskId) => {
     try {
       if (taskId === false) {
+        setTopRowTitleSection(true);
         setShowTaskStatus(true);
         setShowFirstHalf(true);
         setShowSecondHalf(true);
@@ -323,6 +350,8 @@ export function ContentManagement() {
       }
 
       setSelectedTask(response.data);
+      setTopRowTitleSection(false);
+
       setShowTaskStatus(false);
       setShowFirstHalf(false);
       setShowSecondHalf(false);
@@ -396,6 +425,7 @@ export function ContentManagement() {
       if (response.data) {
         toast.success("Task rolled back with feedback");
         setFeedbackText("");
+        setButtonAction("approve");
         setShowFeedback(false);
         await fetchTasks(); // Refresh tasks
         taskStatus(false); // Close detail view
@@ -409,6 +439,7 @@ export function ContentManagement() {
   const completedTask = async (taskId) => {
     try {
       if (taskId === false) {
+        setTopRowTitleSection(true);
         setShowTaskStatus(true);
         setShowFirstHalf(true);
         setShowSecondHalf(true);
@@ -420,6 +451,7 @@ export function ContentManagement() {
 
       const task = rolledBackTasks.find((t) => t._id === taskId);
       if (task) {
+        setTopRowTitleSection(false);
         setSelectedRolledBackTask(task);
         setShowTaskStatus(false);
         setShowFirstHalf(false);
@@ -442,24 +474,17 @@ export function ContentManagement() {
     );
   }
 
-  const showFeedbackForm = () => {
-    if (showFeedback == true) {
-      setShowFeedback(false);
-    } else {
-      setShowFeedback(true);
-    }
-  };
   const assignTask = () => {
     if (showTaskStatus == true) {
       setNewTask(true);
-      setShowTaskStatus(false);
       setShowFirstHalf(false);
       setShowSecondHalf(false);
+      setShowTaskStatus(false);
       setShowCompletedTaskStatus(false);
     } else {
-      setShowTaskStatus(true);
       setShowFirstHalf(true);
       setShowSecondHalf(true);
+      setShowTaskStatus(true);
       setShowCompletedTaskStatus(false);
       setNewTask(false);
     }
@@ -484,38 +509,37 @@ export function ContentManagement() {
     setShowSecondHalf(true);
     setShowCompletedTaskStatus(false);
   };
-  const disableButton = () => {
-    if (buttonAction == "approve") {
-      setActiveButton("diapprove");
-    } else {
-      setActiveButton("approve");
-    }
-  };
-  const showTempTaskRow = () => {
-    if (tempRowStatus == false) {
-      setTempRowStatus(true);
-    } else {
-      setTempRowStatus(false);
-    }
-  };
 
+  //  For in tsak row rollback feedback
+  const showFeedbackForm = () => {
+    if (showFeedback == true) {
+      setButtonAction("approve");
+      setShowFeedback(false);
+    } else {
+      setShowFeedback(true);
+      setShowFeedback(true);
+      setButtonAction("disapprove");
+    }
+  };
   return (
     <div className="content-management-page">
       <div className="task-row">
-        <div className="task-title-and-new-task">
-          <div className="task-title">Task Approval&Pending</div>
-          <div className="new-task-button" onClick={assignTask}>
-            + Assign New Task
-          </div>
-          <div className="approved-list-container">
-            <span className="tooltiptext">Launched Reports</span>
-            <div className="appproved-list-btn">
-              <LuNotepadText
-                style={{ height: "30px", width: "30px", color: "grey" }}
-              />
+        {topRowTitleSection && (
+          <div className="task-title-and-new-task">
+            <div className="task-title">Tasks</div>
+            <div className="new-task-button" onClick={assignTask}>
+              + Assign New Task
+            </div>
+            <div className="approved-list-container">
+              <span className="tooltiptext">Launched Reports</span>
+              <div className="appproved-list-btn">
+                <LuNotepadText
+                  style={{ height: "30px", width: "30px", color: "grey" }}
+                />
+              </div>
             </div>
           </div>
-        </div>
+        )}
         {/* First Half */}
         <div className="task-boxes">
           {NewTask && (
@@ -535,6 +559,7 @@ export function ContentManagement() {
               </div>
 
               <form className="new-task-form" onSubmit={taskHandleSubmit}>
+                {/* <div className="new-task-row task-row-2"> </div> */}
                 <div className="new-task-row">
                   <div className="new-task-row-input">
                     <label htmlFor="title">Task Title:</label>
@@ -546,6 +571,75 @@ export function ContentManagement() {
                       onChange={handleInputChange}
                     />
                   </div>
+
+                  <div className="new-task-row-input">
+                    <label htmlFor="tagline">Tagline or Slogan:</label>
+                    <input
+                      type="text"
+                      name="tagline"
+                      className="new-task-title"
+                      value={taskForm.tagline}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <div className="new-task-row-input">
+                    <label htmlFor="taskpurpose">Task Purpose/Objective:</label>
+                    <input
+                      type="text"
+                      name="taskpurpose"
+                      className="new-task-title"
+                      value={taskForm.taskpurpose}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <div className="new-task-row-input">
+                    <label htmlFor="headline">Main Headline:</label>
+                    <input
+                      type="text"
+                      name="headline"
+                      className="new-task-title"
+                      value={taskForm.headline}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <div className="new-task-row-input">
+                    <label htmlFor="offerormessage">
+                      Key Offer or Message:
+                    </label>
+                    <input
+                      type="text"
+                      name="offerormessage"
+                      className="new-task-title"
+                      value={taskForm.offerormessage}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <div className="new-task-row-input">
+                    <label htmlFor="calltoaction">Call to Action:</label>
+                    <input
+                      type="text"
+                      name="calltoaction"
+                      className="new-task-title"
+                      value={taskForm.calltoaction}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <div className="new-task-row-input">
+                    <label htmlFor="guidlines">Branding Guidelines:</label>
+                    <input
+                      type="text"
+                      name="guidlines"
+                      className="new-task-title"
+                      value={taskForm.guidlines}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
                   <div className="new-task-row-input">
                     <label htmlFor="description">Description:</label>
                     <textarea
@@ -555,9 +649,31 @@ export function ContentManagement() {
                       onChange={handleInputChange}
                     ></textarea>
                   </div>
-                </div>
 
-                <div className="new-task-row task-row-2">
+                  <div className="new-task-row-input">
+                    <label htmlFor="additionlinfo">
+                      Additional Information:
+                    </label>
+                    <input
+                      type="text"
+                      name="additionlinfo"
+                      className="new-task-title"
+                      value={taskForm.additionlinfo}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <div className="new-task-row-input">
+                    <label htmlFor="referenceimage">
+                      Reference Flyer or Product:
+                    </label>
+                    <input
+                      type="file"
+                      name="referenceimage"
+                      className="img-input"
+                    />
+                  </div>
+
                   <div className="new-task-input-box">
                     <label
                       htmlFor="submissionForReview"
@@ -573,6 +689,7 @@ export function ContentManagement() {
                       onChange={handleInputChange}
                     />
                   </div>
+
                   <div className="new-task-input-box">
                     <label
                       htmlFor="targetPostingDate"
@@ -588,19 +705,19 @@ export function ContentManagement() {
                       onChange={handleInputChange}
                     />
                   </div>
+                </div>
 
-                  <div className="new-task-row-submit">
-                    <button type="submit" className="new-task-row-submit-btn">
-                      Submit Task
-                      <VscTasklist
-                        style={{
-                          marginLeft: "8px",
-                          height: "30px",
-                          width: "30px",
-                        }}
-                      />
-                    </button>
-                  </div>
+                <div className="new-task-row-submit">
+                  <button type="submit" className="new-task-row-submit-btn">
+                    Submit Task
+                    <VscTasklist
+                      style={{
+                        marginLeft: "8px",
+                        height: "30px",
+                        width: "30px",
+                      }}
+                    />
+                  </button>
                 </div>
               </form>
             </div>
@@ -620,7 +737,10 @@ export function ContentManagement() {
                     .map((task) => (
                       <div className="box" key={task._id}>
                         {console.log("Rendering task:", task)}
-                        <div className="cart-task-box-wrapper">
+                        <div
+                          className="cart-task-box-wrapper"
+                          onClick={() => taskStatus(task._id)}
+                        >
                           <div className="cart-task-box">
                             <div className="top-id-card">
                               <div className="name-task">Task id:</div>
@@ -657,76 +777,146 @@ export function ContentManagement() {
           )}
           {showCurrentTaskStatus && (
             <div className="show-task-status-container">
-              <div className="status-col status-col-1">
-                <div className="status-task-id">
-                  <div className="task-id for-gradient-font">Task ID</div>
-                  <div className="task-id-number">#{selectedTask?.taskId}</div>
+              <div className="status-top-floor">
+                <div className="status-top-floor-row-1">
+                  <div className="status-col-1">
+                    <div className="status-row">
+                      <div className="status-task-id">
+                        <div className="task-id for-gradient-font">Task ID</div>
+                        <div className="task-id-number">
+                          #{selectedTask?.taskId}
+                        </div>
+                      </div>
+                      <div className="status-task-title">
+                        <div className="task-title-status for-gradient-font">
+                          Task Title
+                        </div>
+                        <div className="task-title-name-status">
+                          {selectedTask?.title}
+                        </div>
+                      </div>
+                      <div className="status-task-title">
+                        <div className="task-title-status for-gradient-font">
+                          Tagline or Slogan
+                        </div>
+                        <div className="task-title-name-status">
+                          {selectedTask?.tagline}
+                        </div>
+                      </div>
+                      <div className="status-task-title">
+                        <div className="task-title-status for-gradient-font">
+                          Purpose/Objective
+                        </div>
+                        <div className="task-title-name-status">
+                          {selectedTask?.taskpurpose}
+                        </div>
+                      </div>
+                      <div className="status-task-title">
+                        <div className="task-title-status for-gradient-font">
+                          Main Headline
+                        </div>
+                        <div className="task-title-name-status">
+                          {selectedTask?.headline}
+                        </div>
+                      </div>
+                      <div className="status-task-title">
+                        <div className="task-title-status for-gradient-font">
+                          Key Offer or Message
+                        </div>
+                        <div className="task-title-name-status">
+                          {selectedTask?.offerormessage}
+                        </div>
+                      </div>
+                      <div className="status-task-title">
+                        <div className="task-title-status for-gradient-font">
+                          Call to Action (CTA)
+                        </div>
+                        <div className="task-title-name-status">
+                          {selectedTask?.calltoaction}
+                        </div>
+                      </div>
+                      <div className="status-task-title">
+                        <div className="task-title-status for-gradient-font">
+                          Branding Guidelines
+                        </div>
+                        <div className="task-title-name-status">
+                          {selectedTask?.guidlines}
+                        </div>
+                      </div>
+                      <div className="status-task-title">
+                        <div className="task-title-status for-gradient-font">
+                          Additional Information
+                        </div>
+                        <div className="task-title-name-status">
+                          {selectedTask?.additionalinfo}
+                        </div>
+                      </div>
+                      <div className="status-task-des">
+                        <div className="task-des for-gradient-font">
+                          Task Description
+                        </div>
+                        <div className="task-des-name">
+                          {selectedTask?.description}
+                        </div>
+                      </div>
+                      <div className="status-task-dates">
+                        <label className="for-gradient-font">Target Date</label>
+                        <div className="status-target-date">
+                          <input
+                            type="date"
+                            name="targetPostingDate"
+                            value={formatDateForDisplay(
+                              selectedTask?.submissionForReview
+                            )}
+                            readOnly
+                          />
+                        </div>
+                      </div>
+                      <div className="status-task-dates">
+                        <label className="for-gradient-font">
+                          Deadline Date
+                        </label>
+                        <div className="status-deadline-date">
+                          <input
+                            type="date"
+                            name="submissionForReview"
+                            value={formatDateForDisplay(
+                              selectedTask?.targetPostingDate
+                            )}
+                            readOnly
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="status-col-2">
+                    <div className="status-title-preview for-gradient-font">
+                      Task Preview
+                    </div>
+                    <div className="task-preview-img-container">
+                      <img
+                        src="https://i.ibb.co/MxsfPnN5/9198056-4116738.jpg"
+                        className="task-preview-img"
+                        alt=""
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div className="status-task-title">
-                  <div className="task-title-status for-gradient-font">
-                    Task Title
-                  </div>
-                  <div className="task-title-name-status">
-                    {selectedTask?.title}
-                  </div>
-                </div>
-                <div className="status-task-des">
-                  <div className="task-des for-gradient-font">
-                    Task Description
-                  </div>
-                  <div className="task-des-name">
-                    {selectedTask?.description}
-                  </div>
-                </div>
-                <div className="status-task-dates">
-                  <label className="for-gradient-font">Target Date</label>
-                  <div className="status-target-date">
-                    <input
-                      type="date"
-                      name="targetPostingDate"
-                      value={formatDateForDisplay(
-                        selectedTask?.submissionForReview
-                      )}
-                      readOnly
-                    />
-                  </div>
-                  <label className="for-gradient-font">Deadline Date</label>
-                  <div className="status-deadline-date">
-                    <input
-                      type="date"
-                      name="submissionForReview"
-                      value={formatDateForDisplay(
-                        selectedTask?.targetPostingDate
-                      )}
-                      readOnly
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="status-col status-col-2">
-                <div className="status-title-preview for-gradient-font">
-                  Task Preview
-                </div>
-                <div className="task-preview-img-container">
+
+                <div className="status-top-floor-row-2">
                   <img
-                    src="https://i.ibb.co/MxsfPnN5/9198056-4116738.jpg"
-                    className="task-preview-img"
-                    alt=""
+                    onClick={() => taskStatus(false)}
+                    width="48"
+                    height="48"
+                    src="https://img.icons8.com/fluency/48/delete-sign.png"
+                    alt="delete-sign"
+                    className="status-cross-symbol"
                   />
                 </div>
               </div>
-              <div className="status-col status-col-3">
+
+              <div className="status-col-3">
                 <div className="status-task-btns">
-                  <div className="row-3-col-1-btn">
-                    <img
-                      onClick={() => taskStatus(false)}
-                      width="48"
-                      height="48"
-                      src="https://img.icons8.com/fluency/48/delete-sign.png"
-                      alt="delete-sign"
-                      className="status-cross-symbol"
-                    />
-                  </div>
                   <div className="row-3-col-2-btn">
                     <button
                       className={
@@ -741,38 +931,36 @@ export function ContentManagement() {
                         <span className="button-text">Approve</span>
                         <span className="button-icon">✅</span>
                       </span>
-                      <span className="button-background"></span>
                     </button>
                     <button
-                      className="custom-button"
+                      className="custom-button-2"
                       onClick={() => {
-                        setShowFeedback(true);
-                        disableButton();
+                        // setShowFeedback(true);
+                        showFeedbackForm();
                       }}
                     >
                       <span className="button-content">
                         <span className="button-text">Refer Back</span>
                         <span className="button-icon">🔄️</span>
                       </span>
-                      <span className="button-background-2"></span>
                     </button>
+                    {showFeedback && (
+                      <div className="status-feedback-form">
+                        <textarea
+                          className="feedback-textarea"
+                          placeholder="Leave your feedback"
+                          value={feedbackText}
+                          onChange={(e) => setFeedbackText(e.target.value)}
+                        ></textarea>
+                        <button
+                          className="submit-feedback-btn"
+                          onClick={handleRollback}
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    )}
                   </div>
-                  {showFeedback && (
-                    <div className="status-feedback-form">
-                      <textarea
-                        className="feedback-textarea"
-                        placeholder="Leave your feedback"
-                        value={feedbackText}
-                        onChange={(e) => setFeedbackText(e.target.value)}
-                      ></textarea>
-                      <button
-                        className="submit-feedback-btn"
-                        onClick={handleRollback}
-                      >
-                        Submit
-                      </button>
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
@@ -796,7 +984,11 @@ export function ContentManagement() {
                 ref={approvedScrollRef}
               >
                 {rolledBackTasks.map((task) => (
-                  <div className="yet-task-box-wrapper" key={task._id}>
+                  <div
+                    className="yet-task-box-wrapper"
+                    key={task._id}
+                    onClick={() => completedTask(task._id)}
+                  >
                     <div className="yet-task-box">
                       <div className="inner-triangle-container">
                         <div className="yet-task-id">
@@ -832,76 +1024,141 @@ export function ContentManagement() {
         </div>
       )}
       {showCompletedTaskStatus && (
-        <div className="show-task-status-container">
-          <div className="status-col status-col-1-completed">
-            <div className="status-task-id">
-              <div className="task-id for-gradient-font">Task ID</div>
-              <div className="task-id-number">
-                #{selectedRolledBackTask?.taskId}
+        <div className="yet-show-task-status-container">
+          <div className="status-top-floor">
+            <div className="status-top-floor-row-1">
+              <div className="status-col-1">
+                <div className="status-row">
+                  <div className="status-task-id">
+                    <div className="task-id for-gradient-font">Task ID</div>
+                    <div className="task-id-number">
+                      #{selectedRolledBackTask?.taskId}
+                    </div>
+                  </div>
+                  <div className="status-task-title">
+                    <div className="task-title-status for-gradient-font">
+                      Task Title
+                    </div>
+                    <div className="task-title-name-status">
+                      {selectedRolledBackTask?.title}
+                    </div>
+                  </div>
+                  <div className="status-task-title">
+                    <div className="task-title-status for-gradient-font">
+                      Tagline or Slogan
+                    </div>
+                    <div className="task-title-name-status">
+                      {selectedRolledBackTask?.tagline}
+                    </div>
+                  </div>
+                  <div className="status-task-title">
+                    <div className="task-title-status for-gradient-font">
+                      Purpose/Objective
+                    </div>
+                    <div className="task-title-name-status">
+                      {selectedRolledBackTask?.taskpurpose}
+                    </div>
+                  </div>
+                  <div className="status-task-title">
+                    <div className="task-title-status for-gradient-font">
+                      Main Headline
+                    </div>
+                    <div className="task-title-name-status">
+                      {selectedRolledBackTask?.headline}
+                    </div>
+                  </div>
+                  <div className="status-task-title">
+                    <div className="task-title-status for-gradient-font">
+                      Key Offer or Message
+                    </div>
+                    <div className="task-title-name-status">
+                      {selectedRolledBackTask?.offerormessage}
+                    </div>
+                  </div>
+                  <div className="status-task-title">
+                    <div className="task-title-status for-gradient-font">
+                      Call to Action (CTA)
+                    </div>
+                    <div className="task-title-name-status">
+                      {selectedRolledBackTask?.calltoaction}
+                    </div>
+                  </div>
+                  <div className="status-task-title">
+                    <div className="task-title-status for-gradient-font">
+                      Branding Guidelines
+                    </div>
+                    <div className="task-title-name-status">
+                      {selectedRolledBackTask?.guidlines}
+                    </div>
+                  </div>
+                  <div className="status-task-title">
+                    <div className="task-title-status for-gradient-font">
+                      Additional Information
+                    </div>
+                    <div className="task-title-name-status">
+                      {selectedRolledBackTask?.additionalinfo}
+                    </div>
+                  </div>
+                  <div className="status-task-des">
+                    <div className="task-des for-gradient-font">
+                      Task Description
+                    </div>
+                    <div className="task-des-name">
+                      {selectedRolledBackTask?.description}
+                    </div>
+                  </div>
+                  <div className="status-task-dates">
+                    <label className="for-gradient-font">Target Date</label>
+                    <div className="status-target-date">
+                      <input
+                        type="date"
+                        name="targetPostingDate"
+                        value={formatDateForDisplay(
+                          selectedRolledBackTask?.submissionForReview
+                        )}
+                        readOnly
+                      />
+                    </div>
+                  </div>
+                  <div className="status-task-dates">
+                    <label className="for-gradient-font">Deadline Date</label>
+                    <div className="status-deadline-date">
+                      <input
+                        type="date"
+                        name="submissionForReview"
+                        value={formatDateForDisplay(
+                          selectedRolledBackTask?.targetPostingDate
+                        )}
+                        readOnly
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="status-col-2">
+                <div className="status-title-preview for-gradient-font">
+                  Task Preview
+                </div>
+                <div className="task-preview-img-container">
+                  <img
+                    src="https://i.ibb.co/MxsfPnN5/9198056-4116738.jpg"
+                    className="yet-task-preview-img"
+                    alt=""
+                  />
+                </div>
               </div>
             </div>
-            <div className="status-task-title">
-              <div className="task-title-status for-gradient-font">
-                Task Title
-              </div>
-              <div className="task-title-name-status">
-                {selectedRolledBackTask?.title}
-              </div>
-            </div>
-            <div className="status-task-des">
-              <div className="task-des for-gradient-font">Task Description</div>
-              <div className="task-des-name">
-                {selectedRolledBackTask?.description}
-              </div>
-            </div>
-            <div className="status-task-dates">
-              <label className="for-gradient-font">Target Date</label>
-              <div className="status-target-date">
-                <input
-                  type="date"
-                  value={formatDateForDisplay(
-                    selectedRolledBackTask?.submissionForReview
-                  )}
-                  readOnly
-                />
-              </div>
-              <label className="for-gradient-font">Deadline Date</label>
-              <div className="status-deadline-date">
-                <input
-                  type="date"
-                  value={formatDateForDisplay(
-                    selectedRolledBackTask?.targetPostingDate
-                  )}
-                  readOnly
-                />
-              </div>
-            </div>
-          </div>
-          <div className="status-col status-col-2-completed">
-            <div className="status-title-preview for-gradient-font">
-              Task Preview
-            </div>
-            <div className="task-preview-img-container">
+
+            <div className="status-top-floor-row-2">
               <img
-                src={
-                  selectedRolledBackTask?.taskImage ||
-                  "https://i.ibb.co/MxsfPnN5/9198056-4116738.jpg"
-                }
-                className="task-preview-img"
-                alt=""
+                onClick={() => completedTask(false)}
+                width="48"
+                height="48"
+                src="https://img.icons8.com/fluency/48/delete-sign.png"
+                alt="delete-sign"
+                className="status-cross-symbol"
               />
             </div>
-          </div>
-          <div className="row-3-col-1-btn">
-            <img
-              onClick={() => completedTask(false)}
-              width="28"
-              height="28"
-              padding="10px"
-              src="https://img.icons8.com/fluency/48/delete-sign.png"
-              alt="delete-sign"
-              className="completed-status-cross-symbol"
-            />
           </div>
         </div>
       )}

@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import "../Management/NewCompanyProfile.css";
 import React, { useState } from "react";
-import { useUser } from "../Components/Context/UserContext";
+// import { useUser } from "../Components/Context/UserContext";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 export function NewCompanyProfile() {
-  const { user } = useUser();
+  // const { user } = useUser();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
