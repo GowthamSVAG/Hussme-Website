@@ -19,9 +19,7 @@ const formatDateForDisplay = (dateString) => {
 };
 
 export function ContentManagement() {
-  //   const { user, logout } = useUser();
   const navigate = useNavigate();
-  // const [showLogout, setShowLogout] = useState(false);
   const [companyProfile, setCompanyProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showFeedback, setShowFeedback] = useState(false);
@@ -30,7 +28,6 @@ export function ContentManagement() {
   const scrollRef = useRef(null);
   const approvedScrollRef = useRef(null);
   const [topRowTitleSection, setTopRowTitleSection] = useState(true);
-
   const [NewTask, setNewTask] = useState(false);
   const [showFirstHalf, setShowFirstHalf] = useState(true);
   const [showSecondHalf, setShowSecondHalf] = useState(true);
@@ -53,9 +50,9 @@ export function ContentManagement() {
   });
 
   const [tasks, setTasks] = useState([]);
+  const [approvedTasks, setApprovedTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
   const [feedbackText, setFeedbackText] = useState("");
-  const [rolledBackTasks, setRolledBackTasks] = useState([]);
   const [selectedRolledBackTask, setSelectedRolledBackTask] = useState(null);
   const [tempRowStatus, setTempRowStatus] = useState(true);
   const [tempYetRowStatus, setYetTempRowStatus] = useState(false);
@@ -80,28 +77,37 @@ export function ContentManagement() {
         return;
       }
 
-      const formData = {
-        companyProfileId: companyProfile._id, // This overrides what's in taskForm, which is fine
-        title: taskForm.title,
-        tagline: taskForm.tagline,
-        taskpurpose: taskForm.taskpurpose,
-        headline: taskForm.headline,
-        offerormessage: taskForm.offerormessage,
-        calltoaction: taskForm.calltoaction,
-        guidlines: taskForm.guidlines,
-        additionalinfo: taskForm.additionlinfo,
-        description: taskForm.description,
-        targetPostingDate: taskForm.targetPostingDate,
-        submissionForReview: taskForm.submissionForReview,
-      };
+      // Prepare form data
+      const formData = new FormData();
+      formData.append("companyProfileId", companyProfile._id); // Override what's in taskForm
+      formData.append("title", taskForm.title);
+      formData.append("tagline", taskForm.tagline);
+      formData.append("taskpurpose", taskForm.taskpurpose);
+      formData.append("headline", taskForm.headline);
+      formData.append("offerormessage", taskForm.offerormessage);
+      formData.append("calltoaction", taskForm.calltoaction);
+      formData.append("guidlines", taskForm.guidlines);
+      formData.append("additionalinfo", taskForm.additionalinfo);
+      formData.append("description", taskForm.description);
+      formData.append("targetPostingDate", taskForm.targetPostingDate);
+      formData.append("submissionForReview", taskForm.submissionForReview);
 
+      // Add referenceImage to the form data if a file is selected
+      const referenceImageInput = document.querySelector(
+        'input[name="referenceimage"]'
+      );
+      if (referenceImageInput && referenceImageInput.files[0]) {
+        formData.append("referenceImage", referenceImageInput.files[0]);
+      }
+
+      // Send the request to the server
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/task/create-task`,
         formData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data", // Important for file uploads
           },
         }
       );
@@ -141,22 +147,6 @@ export function ContentManagement() {
     }));
   };
 
-  // Function to toggle the logout dropdown
-  const toggleLogout = () => setShowLogout(!showLogout);
-
-  // Function to handle logout
-  const handleLogout = (e) => {
-    e.preventDefault();
-    logout();
-    setShowLogout(false);
-  };
-
-  // Function to navigate to change password page
-  const handleChangePassword = (e) => {
-    e.preventDefault();
-    setShowLogout(false);
-    navigate("/reset-password");
-  };
   // For showing list of task
   const fetchTasks = async () => {
     try {
@@ -179,8 +169,6 @@ export function ContentManagement() {
       const filteredTasks = response.data.filter(
         (task) => task.currentStatus !== "Approved"
       );
-
-      // Set tasks state
       setTasks(filteredTasks);
 
       // Update tempRowStatus based on whether there are tasks to show
@@ -209,13 +197,17 @@ export function ContentManagement() {
         }
       );
 
-      // Filter tasks with "Rolled Back" status
-      const rolledBack = response.data.filter(
-        (task) => task.currentStatus === "Approved"
-      );
-      setRolledBackTasks(rolledBack);
-      if (response.data.length > 0) {
+      if (response.data.filter((task) => task.currentStatus === "Approved")) {
         setYetTempRowStatus(true);
+        setApprovedTasks(
+          response.data.filter((task) => task.currentStatus === "Approved")
+        );
+      }
+      if (
+        response.data.filter((task) => task.currentStatus === "Approved")
+          .length === 0
+      ) {
+        setYetTempRowStatus(false);
       }
     } catch (error) {
       console.error("Error fetching rolled back tasks:", error);
@@ -671,6 +663,7 @@ export function ContentManagement() {
                       type="file"
                       name="referenceimage"
                       className="img-input"
+                      accept="image/*"
                     />
                   </div>
 
@@ -732,39 +725,38 @@ export function ContentManagement() {
               />
               {tempRowStatus ? (
                 <div className="task-row-container" ref={scrollRef}>
-                  {tasks
-                    .filter((task) => task.currentStatus !== "Approved")
-                    .map((task) => (
-                      <div className="box" key={task._id}>
-                        {console.log("Rendering task:", task)}
-                        <div
-                          className="cart-task-box-wrapper"
-                          onClick={() => taskStatus(task._id)}
-                        >
-                          <div className="cart-task-box">
-                            <div className="top-id-card">
-                              <div className="name-task">Task id:</div>
-                              <div className="task-number">#{task.taskId}</div>
-                            </div>
-                            <div className="bottom-title-card">
-                              <div className="task-box-title">{task.title}</div>
-                              <button
-                                className="cart-task-btn"
-                                onClick={() => taskStatus(task._id)}
-                              >
-                                <span>View</span>
-                              </button>
-                            </div>
+                  {tasks.map((task) => (
+                    <div className="box" key={task._id}>
+                      {console.log("Rendering task:", task)}
+                      <div
+                        className="cart-task-box-wrapper"
+                        onClick={() => taskStatus(task._id)}
+                      >
+                        <div className="cart-task-box">
+                          <div className="top-id-card">
+                            <div className="name-task">Task id:</div>
+                            <div className="task-number">#{task.taskId}</div>
+                          </div>
+                          <div className="bottom-title-card">
+                            <div className="task-box-title">{task.title}</div>
+                            <button
+                              className="cart-task-btn"
+                              onClick={() => taskStatus(task._id)}
+                            >
+                              <span>View</span>
+                            </button>
                           </div>
                         </div>
                       </div>
-                    ))}
+                    </div>
+                  ))}
                 </div>
               ) : (
                 <div className="temp-row-container tsk">
                   <div className="temp-title">
                     Click above to add your task!
                   </div>
+                  <div className="temp-img"> </div>
                 </div>
               )}
               <img
@@ -895,7 +887,7 @@ export function ContentManagement() {
                     </div>
                     <div className="task-preview-img-container">
                       <img
-                        src="https://i.ibb.co/MxsfPnN5/9198056-4116738.jpg"
+                        src={"https://i.ibb.co/MxsfPnN5/9198056-4116738.jpg"}
                         className="task-preview-img"
                         alt=""
                       />
@@ -983,7 +975,7 @@ export function ContentManagement() {
                 className="task-approved-row-container"
                 ref={approvedScrollRef}
               >
-                {rolledBackTasks.map((task) => (
+                {approvedTasks.map((task) => (
                   <div
                     className="yet-task-box-wrapper"
                     key={task._id}
@@ -1008,6 +1000,7 @@ export function ContentManagement() {
               </div>
             ) : (
               <div className="temp-row-container yet">
+                <div className="yet-temp-img"> </div>
                 <div className="temp-title">
                   Task nearly complete? Let’s check it off!
                 </div>
