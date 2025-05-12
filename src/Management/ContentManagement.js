@@ -428,6 +428,34 @@ export function ContentManagement() {
     }
   };
 
+  const fetchTaskDetails = async (taskId) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/task/${taskId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const task = response.data;
+      console.log("Task details:", task);
+
+      // Display rollback feedback
+      if (task.rollbackFeedback && task.rollbackFeedback.length > 0) {
+        task.rollbackFeedback.forEach((feedback) => {
+          console.log(
+            `Feedback: ${feedback.feedback}, Timestamp: ${feedback.timestamp}`
+          );
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching task details:", error);
+    }
+  };
+
   const completedTask = async (taskId) => {
     try {
       if (taskId === false) {
@@ -441,7 +469,7 @@ export function ContentManagement() {
         return;
       }
 
-      const task = rolledBackTasks.find((t) => t._id === taskId);
+      const task = approvedTasks.find((t) => t._id === taskId);
       if (task) {
         setTopRowTitleSection(false);
         setSelectedRolledBackTask(task);
@@ -648,9 +676,9 @@ export function ContentManagement() {
                     </label>
                     <input
                       type="text"
-                      name="additionlinfo"
+                      name="additionalinfo"
                       className="new-task-title"
-                      value={taskForm.additionlinfo}
+                      value={taskForm.additionalinfo}
                       onChange={handleInputChange}
                     />
                   </div>
@@ -780,15 +808,13 @@ export function ContentManagement() {
                         </div>
                       </div>
                       <div className="status-task-title">
-                        <div className="task-title-status for-gradient-font">
-                          Task Title
-                        </div>
+                        <div className="task-title-status">Task Title</div>
                         <div className="task-title-name-status">
                           {selectedTask?.title}
                         </div>
                       </div>
                       <div className="status-task-title">
-                        <div className="task-title-status for-gradient-font">
+                        <div className="task-title-status">
                           Tagline or Slogan
                         </div>
                         <div className="task-title-name-status">
@@ -796,7 +822,7 @@ export function ContentManagement() {
                         </div>
                       </div>
                       <div className="status-task-title">
-                        <div className="task-title-status for-gradient-font">
+                        <div className="task-title-status">
                           Purpose/Objective
                         </div>
                         <div className="task-title-name-status">
@@ -804,15 +830,13 @@ export function ContentManagement() {
                         </div>
                       </div>
                       <div className="status-task-title">
-                        <div className="task-title-status for-gradient-font">
-                          Main Headline
-                        </div>
+                        <div className="task-title-status">Main Headline</div>
                         <div className="task-title-name-status">
                           {selectedTask?.headline}
                         </div>
                       </div>
                       <div className="status-task-title">
-                        <div className="task-title-status for-gradient-font">
+                        <div className="task-title-status">
                           Key Offer or Message
                         </div>
                         <div className="task-title-name-status">
@@ -820,7 +844,7 @@ export function ContentManagement() {
                         </div>
                       </div>
                       <div className="status-task-title">
-                        <div className="task-title-status for-gradient-font">
+                        <div className="task-title-status ">
                           Call to Action (CTA)
                         </div>
                         <div className="task-title-name-status">
@@ -828,7 +852,7 @@ export function ContentManagement() {
                         </div>
                       </div>
                       <div className="status-task-title">
-                        <div className="task-title-status for-gradient-font">
+                        <div className="task-title-status ">
                           Branding Guidelines
                         </div>
                         <div className="task-title-name-status">
@@ -836,7 +860,7 @@ export function ContentManagement() {
                         </div>
                       </div>
                       <div className="status-task-title">
-                        <div className="task-title-status for-gradient-font">
+                        <div className="task-title-status  ">
                           Additional Information
                         </div>
                         <div className="task-title-name-status">
@@ -844,7 +868,7 @@ export function ContentManagement() {
                         </div>
                       </div>
                       <div className="status-task-des">
-                        <div className="task-des for-gradient-font">
+                        <div className="task-title-status">
                           Task Description
                         </div>
                         <div className="task-des-name">
@@ -852,7 +876,7 @@ export function ContentManagement() {
                         </div>
                       </div>
                       <div className="status-task-dates">
-                        <label className="for-gradient-font">Target Date</label>
+                        <label className="task-title-status">Target Date</label>
                         <div className="status-target-date">
                           <input
                             type="date"
@@ -865,7 +889,7 @@ export function ContentManagement() {
                         </div>
                       </div>
                       <div className="status-task-dates">
-                        <label className="for-gradient-font">
+                        <label className="task-title-status">
                           Deadline Date
                         </label>
                         <div className="status-deadline-date">
@@ -882,12 +906,12 @@ export function ContentManagement() {
                     </div>
                   </div>
                   <div className="status-col-2">
-                    <div className="status-title-preview for-gradient-font">
-                      Task Preview
-                    </div>
+                    <div className="status-title-preview">Task Preview</div>
                     <div className="task-preview-img-container">
                       <img
-                        src={"https://i.ibb.co/MxsfPnN5/9198056-4116738.jpg"}
+                        src={
+                          "https://i.ibb.co/1YsMLsWC/freepicdownloader-com-female-freelancer-working-home-vector-illustration-large.jpg"
+                        }
                         className="task-preview-img"
                         alt=""
                       />
@@ -909,7 +933,23 @@ export function ContentManagement() {
 
               <div className="status-col-3">
                 <div className="status-task-btns">
+                    {selectedTask.rollbackFeedback.length > 0 && (
+                      <div className="past-rollback">
+                        <h3>Rollback Feedback</h3>
+                        <ul>
+                          {selectedTask.rollbackFeedback.map(
+                            (feedback, index) => (
+                              <li key={index}>
+                                <p className="feed-index">{index+1}.</p>
+                                <p>{feedback.feedback}</p>
+                              </li>
+                            )
+                          )}
+                        </ul>
+                      </div>
+                    )}
                   <div className="row-3-col-2-btn">
+
                     <button
                       className={
                         buttonAction && buttonAction !== "approve"
@@ -1023,45 +1063,37 @@ export function ContentManagement() {
               <div className="status-col-1">
                 <div className="status-row">
                   <div className="status-task-id">
-                    <div className="task-id for-gradient-font">Task ID</div>
+                    <div className="task-id">Task ID</div>
                     <div className="task-id-number">
                       #{selectedRolledBackTask?.taskId}
                     </div>
                   </div>
                   <div className="status-task-title">
-                    <div className="task-title-status for-gradient-font">
-                      Task Title
-                    </div>
-                    <div className="task-title-name-status">
+                    <div className="task-title-status">Task Title</div>
+                    <div className="task-title-name-status task-h">
                       {selectedRolledBackTask?.title}
                     </div>
                   </div>
                   <div className="status-task-title">
-                    <div className="task-title-status for-gradient-font">
-                      Tagline or Slogan
-                    </div>
-                    <div className="task-title-name-status">
+                    <div className="task-title-status">Tagline or Slogan</div>
+                    <div className="task-title-name-status task-h">
                       {selectedRolledBackTask?.tagline}
                     </div>
                   </div>
                   <div className="status-task-title">
-                    <div className="task-title-status for-gradient-font">
-                      Purpose/Objective
-                    </div>
+                    <div className="task-title-status">Purpose/Objective</div>
                     <div className="task-title-name-status">
                       {selectedRolledBackTask?.taskpurpose}
                     </div>
                   </div>
                   <div className="status-task-title">
-                    <div className="task-title-status for-gradient-font">
-                      Main Headline
-                    </div>
-                    <div className="task-title-name-status">
+                    <div className="task-title-status">Main Headline</div>
+                    <div className="task-title-name-status task-h">
                       {selectedRolledBackTask?.headline}
                     </div>
                   </div>
                   <div className="status-task-title">
-                    <div className="task-title-status for-gradient-font">
+                    <div className="task-title-status">
                       Key Offer or Message
                     </div>
                     <div className="task-title-name-status">
@@ -1069,7 +1101,7 @@ export function ContentManagement() {
                     </div>
                   </div>
                   <div className="status-task-title">
-                    <div className="task-title-status for-gradient-font">
+                    <div className="task-title-status">
                       Call to Action (CTA)
                     </div>
                     <div className="task-title-name-status">
@@ -1077,15 +1109,13 @@ export function ContentManagement() {
                     </div>
                   </div>
                   <div className="status-task-title">
-                    <div className="task-title-status for-gradient-font">
-                      Branding Guidelines
-                    </div>
+                    <div className="task-title-status">Branding Guidelines</div>
                     <div className="task-title-name-status">
                       {selectedRolledBackTask?.guidlines}
                     </div>
                   </div>
                   <div className="status-task-title">
-                    <div className="task-title-status for-gradient-font">
+                    <div className="task-title-status">
                       Additional Information
                     </div>
                     <div className="task-title-name-status">
@@ -1093,9 +1123,7 @@ export function ContentManagement() {
                     </div>
                   </div>
                   <div className="status-task-des">
-                    <div className="task-des for-gradient-font">
-                      Task Description
-                    </div>
+                    <div className="task-title-status">Task Description</div>
                     <div className="task-des-name">
                       {selectedRolledBackTask?.description}
                     </div>
@@ -1129,12 +1157,10 @@ export function ContentManagement() {
                 </div>
               </div>
               <div className="status-col-2">
-                <div className="status-title-preview for-gradient-font">
-                  Task Preview
-                </div>
+                <div className="status-title-preview">Task Preview</div>
                 <div className="task-preview-img-container">
                   <img
-                    src="https://i.ibb.co/MxsfPnN5/9198056-4116738.jpg"
+                    src={selectedRolledBackTask?.referenceImage}
                     className="yet-task-preview-img"
                     alt=""
                   />
