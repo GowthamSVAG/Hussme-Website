@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { PendingTask } from "./PendingTask";
 import { ReferBackTask } from "./ReferBackTask";
 import { ApprovedTask } from "./ApprovedTask";
+import { TotalTask } from "./TotalTask";
 export function AdminDashboard() {
   const [taskStats, setTaskStats] = useState({
     total: 0,
@@ -104,22 +105,22 @@ export function AdminDashboard() {
             </li>
 
             <li  onClick={() => {
-                loadComponent(<CompanyListing />, 1);
+                loadComponent(<TotalTask />, 2);
                 fetchCompanyAllDetails();
               }}
               className={activeIndex === 2 ? "active-header-item" : ""} >Total Tasks: {taskStats.total}</li>
             <li  onClick={() => {
-                loadComponent(<PendingTask />, 1);
+                loadComponent(<PendingTask />, 3);
                 fetchCompanyAllDetails();
               }}
               className={activeIndex === 3 ? "active-header-item" : ""}>Pending Tasks: {taskStats.pending}</li>
             <li  onClick={() => {
-                loadComponent(<ReferBackTask/>, 1);
+                loadComponent(<ReferBackTask/>, 4);
                 fetchCompanyAllDetails();
               }}
               className={activeIndex === 4 ? "active-header-item" : ""}>Refer Back Tasks: {taskStats.referBack}</li>
             <li  onClick={() => {
-                loadComponent(<ApprovedTask />, 1);
+                loadComponent(<ApprovedTask />,5);
                 fetchCompanyAllDetails();
               }}
               className={activeIndex === 5 ? "active-header-item" : ""}>Approved Tasks: {taskStats.approved}</li>

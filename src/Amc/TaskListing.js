@@ -36,9 +36,7 @@ export function TaskListing() {
       );
 
       if (response.status === 200) {
-        toast.success("Company profile fetched successfully", {
-          autoClose: 500, // time in milliseconds (e.g., 3000ms = 3 seconds)
-        });
+        console.log("Successfull fetch All Task Section-1");
 
         const companies = response.data;
         const filteredCompanies = companies.filter(
@@ -74,13 +72,19 @@ export function TaskListing() {
   const getStatusClass = (status) => {
     switch (status) {
       case "Approved":
-        return "approved-task";
-      case "Roll Back":
-        return "rollback-task";
+        return {
+          backgroundColor: "#5eb35eb7",
+        };
       case "Pending":
-        return "pending-task";
+        return {
+          backgroundColor: "rgba(255, 145, 0, 0.69)",
+        };
+      case "Roll Back":
+        return {
+          backgroundColor: "rgba(245, 65, 0, 0.69)",
+        };
       default:
-        return "";
+        return {};
     }
   };
 
@@ -120,23 +124,32 @@ export function TaskListing() {
                 <div className="cmpy-task-lister" key={companyId}>
                   <div className="cmpy-detail-row">
                     <ul>
-                      <li>{index + 1}.</li>
+                      <li className="l1">{index + 1}.</li>
                       <li>
+                        <img
+                          src={companyData.company.logo}
+                          className="admin-cmpy-logo"
+                          alt=""
+                          srcset=""
+                        />
+                      </li>
+                      <li className="l2">
                         <h2>Company Name:</h2>
                         <p>{companyData.company.companyName}</p>
                       </li>
-                      <li>
+                      <li className="l3">
                         <h2>Mobile No:</h2>
                         <p>{companyData.company.phone}</p>
                       </li>
-                      <li>
+                      <li className="l4">
                         <h2>Email:</h2> <p>{companyData.company.email}</p>
                       </li>
-                      <li>
+                      <li className="l5">
                         <h2>Tasks Count:</h2>
                         <p>{companyData.tasks.length}</p>
                       </li>
                       <li
+                        className="l6 "
                         onClick={() => {
                           setCompanyProfile(companyData.company); // You need to define this in state
                           setShowCompaniseTasks(false);
@@ -176,9 +189,8 @@ export function TaskListing() {
                               <p>#{task.taskId}</p>
                             </div>
                             <div
-                              className={`status-card-text ${getStatusClass(
-                                task.currentStatus
-                              )}`}
+                              className="status-card-text"
+                              style={getStatusClass(task.currentStatus)}
                             >
                               {task.currentStatus}
                             </div>

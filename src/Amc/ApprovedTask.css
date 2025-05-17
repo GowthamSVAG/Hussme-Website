@@ -1,0 +1,36 @@
+.admin-approved-task-container {
+  font-family: "Kumbh Sans", sans-serif !important;
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.approved-task-row-container {
+  margin-top: 2%;
+  min-width: 98%;
+  max-width: 100%;
+  min-height: fit-content;
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  gap: 20px;
+}
+.grid-task-row-box {
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: repeat(1, 260px);
+  max-width: 260px;
+  min-height: 260px;
+  border-radius: 0 15px;
+  font-size: 20px !important;
+  background-image: linear-gradient(to bottom left, #ffffff, #ffffff);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.status-card-text {
+  padding-left: 30px;
+  padding-right: 10px;
+  margin-right: -0.5px;
+  padding-top: 5px;
+  border-radius: 5px 3px 0;
+  padding-bottom: 5px;
+  clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+  color: rgb(255, 255, 255);
+}

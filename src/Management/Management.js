@@ -214,7 +214,7 @@ export function Management() {
                   <span className="mgmt-tooltiptext">Content Management</span>
                 </NavLink>
               </li>
-              <li
+              {/* <li
                 onClick={() => loadComponent(<TrainingProcess />, 1)}
                 className={activeIndex === 1 ? "active-sidebar-item" : ""}
               >
@@ -226,8 +226,8 @@ export function Management() {
                   <span className="mgmt-sidebar-title">Process & Training</span>
                   <span className="mgmt-tooltiptext">Process &Training</span>
                 </NavLink>
-              </li>
-              <li
+              </li> */}
+              {/* <li
                 onClick={() => loadComponent(<Hiring />, 2)}
                 className={activeIndex === 2 ? "active-sidebar-item" : ""}
               >
@@ -239,7 +239,7 @@ export function Management() {
                   <span className="mgmt-sidebar-title">Hiring</span>
                   <span className="mgmt-tooltiptext">Hiring</span>
                 </NavLink>
-              </li>
+              </li> */}
               <li
                 onClick={() => loadComponent(<CompanyProfile />, 3)}
                 className={activeIndex === 3 ? "active-sidebar-item" : ""}

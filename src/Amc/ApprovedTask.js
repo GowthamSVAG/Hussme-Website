@@ -26,27 +26,21 @@ export function ApprovedTask() {
       );
 
       if (response.status === 200) {
-        toast.success("Approved Task fetched successfully", {
-          autoClose: 500,
-        });
+        console.log("Successfull fetch Approved Task Section-6");
+        // Only include companies that have at least one approved task
+        const approvedCompanies = response.data
+          .map((company) => ({
+            ...company,
+            tasks: company.tasks.filter(
+              (task) => task.currentStatus === "Approved"
+            ),
+          }))
+          .filter((company) => company.tasks.length > 0);
 
-        const approvedTask = response.data;
-        const filteredTask = approvedTask.filter(
-          (item) => item.tasks && item.tasks.length > 0
-        );
-
-        const priority = { Pending: 1, "Roll Back": 2, Approved: 3 };
-
-        filteredTask.forEach((company) => {
-          company.tasks.sort(
-            (a, b) => priority[a.currentStatus] - priority[b.currentStatus]
-          );
-        });
-
-        if (filteredTask.length > 0) {
-          setApprovedCompanies(filteredTask);
+        if (approvedCompanies.length > 0) {
+          setApprovedCompanies(approvedCompanies);
         } else {
-          toast.info("No company has tasks.");
+           console.log("No Task Found");
         }
       } else {
         toast.error("Failed to fetch company profile");
@@ -64,13 +58,19 @@ export function ApprovedTask() {
   const getStatusClass = (status) => {
     switch (status) {
       case "Approved":
-        return "status-approved";
+        return {
+          backgroundColor: "#5eb35eb7",
+        };
       case "Pending":
-        return "status-pending";
+        return {
+          backgroundColor: "rgba(255, 145, 0, 0.69)",
+        };
       case "Roll Back":
-        return "status-rollback";
+        return {
+          backgroundColor: "rgba(245, 65, 0, 0.69)",
+        };
       default:
-        return "";
+        return {};
     }
   };
 
@@ -81,58 +81,54 @@ export function ApprovedTask() {
 
   return (
     <>
-      <ToastContainer />
       <div className="admin-approved-task-container">
         {showApprovedTaskGrid && (
-          <div className="cmpy-task-row-container-navigation">
-            <div className="cmpy-task-row-container">
-              {approvedCompanies.map((company) =>
-                company.tasks.map((task) => (
-                  <div
-                    className="cmpy-task-row-box"
-                    onClick={() => {
-                      setSelectedApprovedTask(task);
-                      setShowSelectedTaskWindow(true);
-                      setShowApprovedTaskGrid(false);
-                    }}
-                    key={task._id}
-                  >
-                    <div className="cmpy-id-status">
-                      <div className="cmpy-task-id">
-                        <h5>TaskId: </h5>
-                        <p>#{task.taskId}</p>
-                      </div>
-                      <div
-                        className={`status-card-text ${getStatusClass(
-                          task.currentStatus
-                        )}`}
-                      >
-                        {task.currentStatus}
-                      </div>
+          <div className="approved-task-row-container">
+            {approvedCompanies.map((company) =>
+              company.tasks.map((task) => (
+                <div
+                  className="grid-task-row-box"
+                  onClick={() => {
+                    setSelectedApprovedTask(task);
+                    setShowSelectedTaskWindow(true);
+                    setShowApprovedTaskGrid(false);
+                  }}
+                  key={task._id}
+                >
+                  <div className="cmpy-id-status">
+                    <div className="cmpy-task-id">
+                      <h5>TaskId: </h5>
+                      <p>#{task.taskId}</p>
                     </div>
-                    <div className="cmpy-task-title">
-                      <h5>Title: </h5>
-                      <p className="overflow-control">{task.title}</p>
-                    </div>
-                    <div className="cmpy-task-review-date">
-                      <h5>Review Date: </h5>
-                      <p>
-                        {new Date(task.submissionForReview).toLocaleDateString()}
-                      </p>
-                    </div>
-                    <div className="cmpy-task-review-date">
-                      <h5>Target Date: </h5>
-                      <p>
-                        {new Date(task.targetPostingDate).toLocaleDateString()}
-                      </p>
-                    </div>
-                    <div className="cmpy-task-view-btn-container">
-                      <div className="cmpy-task-view-btn">View</div>
+                    <div
+                      className="status-card-text"
+                      style={getStatusClass(task.currentStatus)}
+                    >
+                      {task.currentStatus}
                     </div>
                   </div>
-                ))
-              )}
-            </div>
+                  <div className="cmpy-task-title">
+                    <h5>Title: </h5>
+                    <p className="overflow-control">{task.title}</p>
+                  </div>
+                  <div className="cmpy-task-review-date">
+                    <h5>Review Date: </h5>
+                    <p>
+                      {new Date(task.submissionForReview).toLocaleDateString()}
+                    </p>
+                  </div>
+                  <div className="cmpy-task-review-date">
+                    <h5>Target Date: </h5>
+                    <p>
+                      {new Date(task.targetPostingDate).toLocaleDateString()}
+                    </p>
+                  </div>
+                  <div className="cmpy-task-view-btn-container">
+                    <div className="cmpy-task-view-btn">View</div>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         )}
 
@@ -272,6 +268,7 @@ export function ApprovedTask() {
           </div>
         )}
       </div>
+      <ToastContainer />
     </>
   );
 }
