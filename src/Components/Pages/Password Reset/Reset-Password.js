@@ -77,7 +77,7 @@ export function Reset() {
   return (
     <>
       <div className="reset-page">
-        <ToastContainer position="top-right" autoClose={3000} />
+        <ToastContainer position="top-right" autoClose={1000} />
         
         {/* Page 1: Email Input */}
         <div className="reset-page-1" style={{ display: showPage1 ? "flex" : "none" }}>

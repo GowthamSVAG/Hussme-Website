@@ -14,11 +14,16 @@ import { Reset } from "./Components/Pages/Password Reset/Reset-Password";
 import { Otp } from "./Components/Pages/Password Reset/Otp";
 import { Management } from "./Management/Management";
 import { NewCompanyProfile } from "./Management/NewCompanyProfile";
-import { Admin } from "./Components/Admin";
+import { Alogin } from "../src/Amc/alogin";
+import { AdminDashboard } from "./Amc/AdminDashboard";
 
 function AppContent() {
   const location = useLocation();
-  const hideHeaderFooter = location.pathname.startsWith("/management") || location.pathname.startsWith("/new-company")||location.pathname.startsWith("/admin");;
+  const hideHeaderFooter =
+    location.pathname.startsWith("/management") ||
+    location.pathname.startsWith("/new-company") ||
+    location.pathname.startsWith("/admin/dashboard") ||
+    location.pathname.startsWith("/admin/login");
 
   return (
     <div className="container">
@@ -30,12 +35,13 @@ function AppContent() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/digital" element={<Digital />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/login" element={<Alogin />} />
         <Route path="/login" element={<Login />} />
         <Route path="/reset-password" element={<Reset />} />
         <Route path="/otp" element={<Otp />} />
         <Route path="/management" element={<Management />} />
-        <Route path="/new-company" element={<NewCompanyProfile/>} />
+        <Route path="/new-company" element={<NewCompanyProfile />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Routes>
       {!hideHeaderFooter && <Footer />}
     </div>

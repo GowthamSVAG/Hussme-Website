@@ -270,7 +270,7 @@ export function CompanyProfile() {
 
   return (
     <div className="company-profile-page">
-      <ToastContainer position="top-right" autoClose={3000} />
+      <ToastContainer position="top-right" autoClose={1000} />
 
       <div className="profile-management-content">
         <div className="info-row"></div>

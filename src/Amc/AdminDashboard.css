@@ -1,0 +1,58 @@
+.admin-header {
+  width: 100%;
+  min-height: fit-content;
+  padding: 10px 0 0 0;
+  background-color: #1b1525;
+}
+.header-title {
+  font-family: "Kumbh Sans", sans-serif !important;
+  background: linear-gradient(to bottom left, #ff7b2f 40%, #8731f7 80%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-size: 30px;
+  font-weight: 600;
+}
+.admin-page {
+  height: fit-content;
+  min-width: 100%;
+
+  font-family: "Kumbh Sans", sans-serif !important;
+  /* background-image: url("https://i.ibb.co/gF9QyShx/95071642-10111455.jpg"); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+}
+.admin-header-2 {
+  max-width: 100%;
+  height: fit-content;
+  background-color: #1b1525;
+  padding: 0px 20px;
+  outline: none;
+}
+.admin-header-2 ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.admin-header-2 ul li {
+  list-style: none;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 10px 15px 10px 15px;
+  border-radius: 0px 10px 0 0;
+  color: #ffffff;
+  cursor: pointer;
+}
+.admin-header-2 ul li:hover {
+  background-color: #ffffff;
+  color: #000000 !important;
+}
+.active-header-item {
+  background-color: #ffffff;
+  color: #000000 !important;
+}

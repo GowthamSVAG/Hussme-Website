@@ -909,7 +909,7 @@ export function ContentManagement() {
                     <div className="status-title-preview">Task Preview</div>
                     <div className="task-preview-img-container">
                       <img
-                        src={
+                        src={selectedTask?.doneTaskImage||
                           "https://i.ibb.co/1YsMLsWC/freepicdownloader-com-female-freelancer-working-home-vector-illustration-large.jpg"
                         }
                         className="task-preview-img"
@@ -1160,7 +1160,7 @@ export function ContentManagement() {
                 <div className="status-title-preview">Task Preview</div>
                 <div className="task-preview-img-container">
                   <img
-                    src={selectedRolledBackTask?.referenceImage}
+                    src={selectedRolledBackTask?.doneTaskImage}
                     className="yet-task-preview-img"
                     alt=""
                   />

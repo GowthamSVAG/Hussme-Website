@@ -1,0 +1,94 @@
+.company-listing-container {
+  min-width: 100%;
+  min-height: fit-content;
+  font-family: "Kumbh Sans", sans-serif !important;
+}
+.admin-cmpy-detail-row {
+  margin-top: 5px;
+  width: 100%;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(1, auto);
+  /* gap: 10px; */
+  /* max-height:50px; */
+  background-color: #e9def9;
+  border-radius: 5px;
+}
+
+.admin-cmpy-detail-row ul {
+  /* margin: 10px 0 0; */
+  padding: 0;
+  min-width: 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-evenly !important;
+  /* border-bottom:2px solid #858383 ; */
+}
+.admin-cmpy-detail-row ul li {
+  font-size: 19px;
+  font-weight: 500;
+  color: rgb(100, 101, 101);
+}
+.admin-cmpy-detail-row ul li h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  font-weight: 550;
+  color: #9a56f3;
+}
+.admin-cmpy-detail-row ul li p {
+  text-indent: 5px;
+  margin: 0;
+  padding: 0;
+}
+.admin-cmpy-detail-row ul li:last-child {
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.admin-cmpy-detail-row ul li:last-child:hover {
+  background-color: #ffffff;
+  color: #8731f7;
+}
+.admin-cmpy-detail-row ul li .eye-icn {
+  margin-left: 5px;
+  cursor: pointer;
+  height: 30px;
+  object-fit: contain;
+  width: 30px;
+}
+.l1 {
+  min-width: fit-content;
+  max-width: fit-content;
+}
+.l2 {
+  min-width: 250px;
+  max-width: 400px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.l3 {
+  min-width: fit-content;
+  max-width: fit-content;
+}
+.l4 {
+  max-width: 300px;
+  min-width: 300px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.l5 {
+  /* min-width: fit-content; */
+  max-width: 200px;
+}
+.l6 {
+  min-width: fit-content;
+  max-width: fit-content;
+}
