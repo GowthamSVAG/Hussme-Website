@@ -30,7 +30,7 @@ export const UserProvider = ({ children }) => {
         })
         .catch((error) => {
           console.error("Error fetching user data:", error);
-          localStorage.removeItem("token");
+          // localStorage.removeItem("token");
           setUser(null);
         });
     }
@@ -56,7 +56,7 @@ export const UserProvider = ({ children }) => {
       })
       .catch((error) => {
         console.error("Error during login:", error);
-        localStorage.removeItem("token");
+        // localStorage.removeItem("token");
         setUser(null);
       });
   };

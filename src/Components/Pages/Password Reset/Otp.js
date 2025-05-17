@@ -125,7 +125,7 @@ export function Otp() {
 
   return (
     <div className="otp-page">
-      <ToastContainer position="top-right" autoClose={3000} />
+      <ToastContainer position="top-right" autoClose={1000} />
       
       {/* OTP Verification Box */}
       <div className="otp-input-box" style={{ display: showOtpBox ? "flex" : "none" }}>

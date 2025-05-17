@@ -1,0 +1,124 @@
+.alogin-container {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../Components/Assets/Our\ Levers/3333.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: "Kumbh Sans", sans-serif !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.alogin-form {
+  min-width: 30%;
+  max-width: fit-content;
+  padding: 30px;
+  height: 40%;
+  background-color: #ffffff92;
+  border-radius: 15px;
+  box-shadow: 0 2px 10px rgba(255, 20, 232, 0.582);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.alogin-header {
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  font-size: 45px;
+  text-align: left;
+  background: linear-gradient(to bottom right, #ff7b2f 0%, #8731f7 60%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: 600;
+}
+.alogin-input-box {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.alogin-input-box label {
+  margin-bottom: 5px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #ffffff;
+}
+.alogin-input-box input {
+  font-family: "Kumbh Sans", sans-serif !important;
+  font-size: 21px;
+  font-weight: 500;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 2px solid #8731f77b;
+  background-color: #ffffffb3;
+  width: 93%;
+}
+.alogin-input-box input:focus {
+  outline: none;
+  border: 2px solid#8731f7c4;
+  background-color: #ffffff;
+}
+
+/* From Uiverse.io by adamgiebl */
+.cssbuttons-io-button {
+  background-image: linear-gradient(to bottom right, #ff7b2f 20%, #8731f7 80%);
+  color: white;
+  font-family: inherit;
+  padding: 0.35em;
+  font-family: "Kumbh Sans", sans-serif !important;
+  padding-left: 1.2em;
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 0.9em;
+  border: none;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 1.6em -0.6em #714da6;
+  overflow: hidden;
+  position: relative;
+  height: 50px;
+  padding-right: 3.3em;
+  cursor: pointer;
+}
+
+.cssbuttons-io-button .icon-1 {
+  background: white;
+  margin-left: 1em;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 2.2em;
+  border-radius: 0.7em;
+  box-shadow: 0.1em 0.1em 0.6em 0.2em #7b52b9;
+  right: 0.3em;
+  transition: all 0.3s;
+}
+
+.cssbuttons-io-button:hover .icon-1 {
+  width: calc(100% - 0.6em);
+}
+
+.cssbuttons-io-button .icon-1 svg {
+  width: 1.1em;
+  transition: transform 0.3s;
+  color: #7b52b9;
+}
+
+.cssbuttons-io-button:hover .icon-1 svg {
+  transform: translateX(0.1em);
+}
+
+.cssbuttons-io-button:active .icon-1 {
+  transform: scale(0.95);
+}

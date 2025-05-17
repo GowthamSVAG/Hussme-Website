@@ -250,7 +250,7 @@ export function NewCompanyProfile() {
 
   return (
     <div className="new-cmpy">
-      <ToastContainer position="top-right" autoClose={3000} />
+      <ToastContainer position="top-right" autoClose={1000} />
       <div className="new-company-name">Create New Company Profile</div>
       <div className="new-cmpy-form-conatiner">
         <form className="new-cmpy-form" onSubmit={handleSubmit}>
