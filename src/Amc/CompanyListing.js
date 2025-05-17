@@ -29,17 +29,11 @@ export function CompanyListing() {
       );
 
       if (response.status === 200) {
-        toast.success("Company profile fetched successfully", {
-          autoClose: 500, // time in milliseconds (e.g., 3000ms = 3 seconds)
-        });
-
+        console.log("Successfull fetch Company Listing Section-2");
         const companies = response.data;
-        const filteredCompanies = companies
-          .filter((item) => item.tasks && item.tasks.length > 0)
-          .sort((a, b) => b.tasks.length - a.tasks.length); // descending order
 
-        if (filteredCompanies.length > 0) {
-          setCompaniesWithTasks(filteredCompanies);
+        if (companies.length > 0) {
+          setCompaniesWithTasks(companies);
         } else {
           toast.info("No company has tasks.");
         }
@@ -66,6 +60,14 @@ export function CompanyListing() {
             >
               <ul>
                 <li className="l1">{index + 1}.</li>
+                <li>
+                  <img
+                    src={companyData.company.logo}
+                    className="admin-cmpy-logo"
+                    alt=""
+                    srcset=""
+                  />
+                </li>
                 <li className="l2">
                   <h2>Name:</h2>
                   <p>{companyData.company.companyName}</p>

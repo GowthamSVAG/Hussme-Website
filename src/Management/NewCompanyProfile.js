@@ -110,7 +110,7 @@ export function NewCompanyProfile() {
       setFormData((prev) => ({ ...prev, logoUrl: imageUrlOnly })); // Add to formData
     } catch (err) {
       console.error("Image upload error:", err);
-      toast.error("Logo upload failed.");
+      // toast.error("Logo upload failed.");
     }
   };
 

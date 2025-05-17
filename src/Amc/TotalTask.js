@@ -4,14 +4,12 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export function PendingTask() {
+export function TotalTask() {
   const [approvedCompanies, setApprovedCompanies] = useState([]); // companies with tasks
   const [selectedApprovedTask, setSelectedApprovedTask] = useState(null); // single task
   const [showSelectedTaskWindow, setShowSelectedTaskWindow] = useState(false);
   const [showApprovedTaskGrid, setShowApprovedTaskGrid] = useState(true);
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [isUploading, setIsUploading] = useState(false);
-  const [showTaskpreview, setShowTaskpreview] = useState(null);
+
   const fetchCompanyAllDetails = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -28,21 +26,15 @@ export function PendingTask() {
       );
 
       if (response.status === 200) {
-        console.log("Successfull fetch Pending Task Section-4");
-        // Only include companies that have at least one approved task
-        const approvedCompanies = response.data
-          .map((company) => ({
-            ...company,
-            tasks: company.tasks.filter(
-              (task) => task.currentStatus === "Pending"
-            ),
-          }))
-          .filter((company) => company.tasks.length > 0);
+        console.log("Successfull fetch Total Task Section-3");
+        const approvedCompanies = response.data.filter(
+          (company) => company.tasks.length > 0
+        );
 
         if (approvedCompanies.length > 0) {
           setApprovedCompanies(approvedCompanies);
         } else {
-           console.log("No Task Found");
+          console.log("No Task Found");
         }
       } else {
         toast.error("Failed to fetch company profile");
@@ -75,6 +67,7 @@ export function PendingTask() {
         return {};
     }
   };
+
   const formatDateForDisplay = (dateString) => {
     const date = new Date(dateString);
     return date.toISOString().split("T")[0]; // yyyy-mm-dd format
@@ -85,8 +78,20 @@ export function PendingTask() {
       <div className="admin-approved-task-container">
         {showApprovedTaskGrid && (
           <div className="approved-task-row-container">
-            {approvedCompanies.map((company) =>
-              company.tasks.map((task) => (
+            {approvedCompanies.map((company) => {
+              const orderedTasks = [...company.tasks].sort((a, b) => {
+                const statusOrder = {
+                  "Roll Back": 0,
+                  Pending: 1,
+                  Approved: 2,
+                };
+                return (
+                  (statusOrder[a.currentStatus] ?? 3) -
+                  (statusOrder[b.currentStatus] ?? 3)
+                );
+              });
+
+              return orderedTasks.map((task) => (
                 <div
                   className="grid-task-row-box"
                   onClick={() => {
@@ -128,8 +133,8 @@ export function PendingTask() {
                     <div className="cmpy-task-view-btn">View</div>
                   </div>
                 </div>
-              ))
-            )}
+              ));
+            })}
           </div>
         )}
 
@@ -249,128 +254,20 @@ export function PendingTask() {
                     </div>
                   </div>
                 </div>
-                {selectedApprovedTask.rollbackFeedback.length > 0 && (
-                  <div className="admin-past-rollback">
-                    <h3>Rollback Feedback</h3>
-                    <ul>
-                      {selectedApprovedTask.rollbackFeedback.map(
-                        (feedback, index) => (
-                          <li key={index}>
-                            <p className="feed-index">{index + 1}.</p>
-                            <p>{feedback.feedback}</p>
-                          </li>
-                        )
-                      )}
-                    </ul>
+
+                <div className="status-col-2">
+                  <div className="task-preview-container">
+                    <div className="status-title-preview">
+                      Approved Task Image
+                    </div>
                     <div className="task-preview-img-container">
                       <img
                         src={selectedApprovedTask.doneTaskImage}
-                        className="yet-task-preview-img admin-img-btm"
-                        alt="Task Preview"
+                        className="yet-task-preview-img"
+                        alt="Task Has No Preview"
                       />
                     </div>
                   </div>
-                )}
-
-                <div className="status-col-2">
-                  <div className="admin-upload-image">
-                    <label htmlFor="referenceimage">Upload Task Image:</label>
-                    <input
-                      type="file"
-                      name="adminuploadtaskimage"
-                      className="img-input admin-input"
-                      accept="image/*"
-                      onChange={(e) => {
-                        const file = e.target.files[0];
-                        setSelectedFile(file);
-                        if (file) {
-                          const preview = URL.createObjectURL(file);
-                          setPreviewUrl(preview);
-                        }
-                      }}
-                    />
-                    <button
-                      className="button-uploade"
-                      disabled={!selectedFile || isUploading}
-                      onClick={async () => {
-                        if (!selectedRolledBackTask || !selectedFile) return;
-
-                        const formData = new FormData();
-                        formData.append("image", selectedFile);
-
-                        try {
-                          setIsUploading(true);
-                          const token = localStorage.getItem("token");
-
-                          const response = await axios.post(
-                            `${process.env.REACT_APP_API_URL}/admin/upload-task-image/${selectedRolledBackTask._id}`,
-                            formData,
-                            {
-                              headers: {
-                                "Content-Type": "multipart/form-data",
-                                Authorization: `Bearer ${token}`,
-                              },
-                            }
-                          );
-
-                          if (response.status === 200) {
-                            toast.success("Task image uploaded successfully", {
-                              autoClose: 500,
-                            });
-                            setShowTaskpreview(true);
-                            setSelectedRolledBackTask((prev) => ({
-                              ...prev,
-                              referenceImage: response.data.task.image,
-                            }));
-                            setSelectedFile(null);
-                          } else {
-                            setShowTaskpreview(false);
-                            toast.error("Image upload failed");
-                          }
-                        } catch (err) {
-                          toast.error("Error uploading image: " + err.message);
-                        } finally {
-                          setIsUploading(false);
-                        }
-                      }}
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
-                          strokeLinejoin="round"
-                          strokeLinecap="round"
-                        ></path>
-                      </svg>
-                      <span className="text">
-                        {isUploading ? "Uploading..." : "Upload"}
-                      </span>
-                    </button>
-                  </div>
-                  {showTaskpreview && (
-                    <div className="task-preview-container">
-                      <div className="status-title-preview">Task Preview</div>
-                      <div className="task-preview-img-container">
-                        {previewUrl ? (
-                          <img
-                            src={previewUrl}
-                            className="yet-task-preview-img"
-                            alt="Task Preview"
-                          />
-                        ) : (
-                          <div className="yet-task-preview-img-placeholder">
-                            No image selected
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
