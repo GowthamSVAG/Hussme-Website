@@ -1,8 +1,60 @@
+@media screen and (max-width: 1100px) {
+  .admin-page {
+    justify-content: end !important;
+    align-items: end !important;
+  }
+  .admin-header-mble {
+    display: flex;
+    justify-content: space-between !important;
+    min-width: 100% !important;
+    flex-direction: row !important;
+  }
+  .admin-menu {
+    display: flex !important;
+    padding-right: 25px;
+  }
+  .admin-header-2 {
+    display: none !important;
+  }
+  .admin-header-2-mble {
+    display: none !important;
+  }
+  .admin-header-2-mble {
+    position: absolute !important;
+    display: flex !important;
+    padding: 0px !important;
+    min-width: fit-content !important;
+    max-width: fit-content !important;
+    height: fit-content;
+    background-color: #1b1525 !important;
+    outline: none;
+    display: flex;
+    justify-content: end;
+    border-radius: 0 0 0 10px;
+    font-size: 20px;
+    font-weight: 500;
+    /* background-color: #3c3744 !important; */
+  }
+  .admin-header-2-mble ul {
+    background-color: #1b1525 !important;
+    /* background-color: #ff7b2f; */
+    min-width: fit-content !important;
+    max-width: 20% !important;
+    flex-direction: column !important;
+    justify-content: right !important;
+    align-items: start !important;
+  }
+}
 .admin-header {
   width: 100%;
   min-height: fit-content;
+  display: flex;
+  justify-content: center;
   padding: 10px 0 0 0;
   background-color: #1b1525;
+}
+.admin-menu {
+  display: none;
 }
 .header-title {
   font-family: "Kumbh Sans", sans-serif !important;
@@ -13,11 +65,11 @@
   color: transparent;
   font-size: 30px;
   font-weight: 600;
+  max-width: fit-content;
 }
 .admin-page {
   height: fit-content;
   min-width: 100%;
-
   font-family: "Kumbh Sans", sans-serif !important;
   /* background-image: url("https://i.ibb.co/gF9QyShx/95071642-10111455.jpg"); */
   background-repeat: no-repeat;
@@ -25,11 +77,20 @@
   display: flex;
   flex-direction: column;
 }
+.admin-menu {
+  height: 50px;
+  width: 50px;
+}
+.admin-menu img {
+  height: 50px;
+  width: 50px;
+}
 .admin-header-2 {
+  top: 60px;
+  min-width: 100%;
   max-width: 100%;
-  height: fit-content;
+  /* height: fit-content; */
   background-color: #1b1525;
-  padding: 0px 20px;
   outline: none;
 }
 .admin-header-2 ul {

@@ -9,9 +9,12 @@
   min-width: 98%;
   max-width: 100%;
   min-height: fit-content;
-  display: grid;
-  grid-template-columns: repeat(5, auto);
-  gap: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 15px;
 }
 .grid-task-row-box {
   cursor: pointer;
