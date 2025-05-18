@@ -1,3 +1,10 @@
+@media screen and (max-width: 1100px) {
+  .cmpy-detail-row ul {
+    /* grid-template-columns: repeat(5, 1fr) !important; */
+    /* justify-content: center !important; */
+    /* align-items: left !important; */
+  }
+}
 .task-listing-container-page {
   min-height: fit-content;
   min-width: 100%;
@@ -37,19 +44,24 @@
   margin: 10px 0 0;
   padding: 0;
   min-width: 100%;
-  max-width: 100%;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-evenly !important;
-  /* border-bottom:2px solid #858383 ; */
+  justify-content: space-around;
+  gap: 5px;
 }
+
 .cmpy-detail-row ul li {
+  min-width: fit-content;
+  max-width: fit-content;
   font-size: 19px;
   font-weight: 500;
   color: rgb(100, 101, 101);
 }
+
 .cmpy-detail-row ul li h2 {
+  min-width: fit-content;
   margin: 0;
   padding: 0;
   font-size: 20px;
@@ -57,6 +69,7 @@
   color: #9a56f3;
 }
 .cmpy-detail-row ul li p {
+  min-width: fit-content;
   text-indent: 5px;
   margin: 0;
   padding: 0;
@@ -79,6 +92,7 @@
   width: 30px;
 }
 .admin-cmpy-logo {
+  padding-left: 10px;
   border-radius: 50%;
   height: 45px;
   object-fit: cover;
@@ -264,7 +278,7 @@
   gap: 20px !important;
 }
 .admin-company-details-view {
-   font-family: "Kumbh Sans", sans-serif !important;
+  font-family: "Kumbh Sans", sans-serif !important;
   margin: 2% auto 2% auto;
   display: flex;
   width: fit-content;

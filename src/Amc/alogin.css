@@ -57,13 +57,13 @@
   font-weight: 500;
   padding: 10px 15px;
   border-radius: 10px;
-  border: 2px solid #8731f77b;
+  border: 2px solid #8731f7c4;
   background-color: #ffffffb3;
   width: 93%;
 }
 .alogin-input-box input:focus {
   outline: none;
-  border: 2px solid#8731f7c4;
+  border: 2px solid#8731f7;
   background-color: #ffffff;
 }
 

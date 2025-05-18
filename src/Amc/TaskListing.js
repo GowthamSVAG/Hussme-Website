@@ -91,14 +91,14 @@ export function TaskListing() {
   const scrollLeft = (companyId) => {
     const ref = scrollRefs.current[companyId];
     if (ref) {
-      ref.scrollBy({ left: -350, behavior: "smooth" });
+      ref.scrollBy({ left: -260, behavior: "smooth" });
     }
   };
 
   const scrollRight = (companyId) => {
     const ref = scrollRefs.current[companyId];
     if (ref) {
-      ref.scrollBy({ left: 350, behavior: "smooth" });
+      ref.scrollBy({ left: 260, behavior: "smooth" });
     }
   };
 
@@ -124,32 +124,31 @@ export function TaskListing() {
                 <div className="cmpy-task-lister" key={companyId}>
                   <div className="cmpy-detail-row">
                     <ul>
-                      <li className="l1">{index + 1}.</li>
                       <li>
+                        {index + 1}.{" "}
                         <img
                           src={companyData.company.logo}
                           className="admin-cmpy-logo"
                           alt=""
-                          srcset=""
                         />
                       </li>
-                      <li className="l2">
-                        <h2>Company Name:</h2>
+
+                      <li>
+                        <h2>Name:</h2>
                         <p>{companyData.company.companyName}</p>
                       </li>
-                      <li className="l3">
+                      <li>
                         <h2>Mobile No:</h2>
                         <p>{companyData.company.phone}</p>
                       </li>
-                      <li className="l4">
+                      <li>
                         <h2>Email:</h2> <p>{companyData.company.email}</p>
                       </li>
-                      <li className="l5">
-                        <h2>Tasks Count:</h2>
+                      <li>
+                        <h2>Tasks:</h2>
                         <p>{companyData.tasks.length}</p>
                       </li>
                       <li
-                        className="l6 "
                         onClick={() => {
                           setCompanyProfile(companyData.company); // You need to define this in state
                           setShowCompaniseTasks(false);

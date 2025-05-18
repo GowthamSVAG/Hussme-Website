@@ -21,10 +21,11 @@
   min-width: 100%;
   max-width: 100%;
   display: flex;
-  align-items: center;
   flex-direction: row;
-  justify-content: space-evenly !important;
-  /* border-bottom:2px solid #858383 ; */
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  gap: 15px;
 }
 .admin-cmpy-detail-row ul li {
   font-size: 19px;

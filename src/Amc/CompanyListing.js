@@ -59,32 +59,31 @@ export function CompanyListing() {
               className="admin-cmpy-detail-row"
             >
               <ul>
-                <li className="l1">{index + 1}.</li>
                 <li>
+                  {index + 1}.{" "}
                   <img
                     src={companyData.company.logo}
                     className="admin-cmpy-logo"
                     alt=""
-                    srcset=""
                   />
                 </li>
-                <li className="l2">
+            
+                <li>
                   <h2>Name:</h2>
                   <p>{companyData.company.companyName}</p>
                 </li>
-                <li className="l3">
-                  <h2>Mobile:</h2>
+                <li>
+                  <h2>Mobile No:</h2>
                   <p>{companyData.company.phone}</p>
                 </li>
-                <li className="l4">
+                <li>
                   <h2>Email:</h2> <p>{companyData.company.email}</p>
                 </li>
-                <li className="l5">
+                <li>
                   <h2>Tasks:</h2>
                   <p>{companyData.tasks.length}</p>
                 </li>
                 <li
-                  className="l6"
                   onClick={() => {
                     setCompanyProfile(companyData.company);
                     setShowSectionTwoSelectedCompanyDetail(true);

@@ -10,7 +10,9 @@ import { PendingTask } from "./PendingTask";
 import { ReferBackTask } from "./ReferBackTask";
 import { ApprovedTask } from "./ApprovedTask";
 import { TotalTask } from "./TotalTask";
+import menu from "../Components/Assets/Admin-Assets/admin-menu.png";
 export function AdminDashboard() {
+  const [isMobileMenu, setIsMobileMenu] = useState(false);
   const [taskStats, setTaskStats] = useState({
     total: 0,
     pending: 0,
@@ -79,14 +81,22 @@ export function AdminDashboard() {
   useEffect(() => {
     fetchCompanyAllDetails();
   }, []);
+  const toggleMenu = () => {
+    setIsMobileMenu((prev) => !prev);
+  };
   return (
     <>
-      <div className="admin-header">
+      <div className="admin-header admin-header-mble">
         <ToastContainer position="top-right" autoClose={500} />
-        <div className="header-title">Hussme Admin Dashboard</div>{" "}
+        <div className="header-title ">Hussme Admin Dashboard</div>{" "}
+        <div className="admin-menu" onClick={toggleMenu}>
+          <img src={menu} alt="" />
+        </div>
       </div>
       <div className="admin-page">
-        <div className="admin-header-2">
+        <div
+          className={isMobileMenu ? "admin-header-2 admin-header-2-mble" : "admin-header-2"}
+        >
           <ul>
             <li
               onClick={() => loadComponent(<TaskListing />, 0)}
@@ -104,26 +114,42 @@ export function AdminDashboard() {
               Companies
             </li>
 
-            <li  onClick={() => {
+            <li
+              onClick={() => {
                 loadComponent(<TotalTask />, 2);
                 fetchCompanyAllDetails();
               }}
-              className={activeIndex === 2 ? "active-header-item" : ""} >Total Tasks: {taskStats.total}</li>
-            <li  onClick={() => {
+              className={activeIndex === 2 ? "active-header-item" : ""}
+            >
+              Total Tasks: {taskStats.total}
+            </li>
+            <li
+              onClick={() => {
                 loadComponent(<PendingTask />, 3);
                 fetchCompanyAllDetails();
               }}
-              className={activeIndex === 3 ? "active-header-item" : ""}>Pending Tasks: {taskStats.pending}</li>
-            <li  onClick={() => {
-                loadComponent(<ReferBackTask/>, 4);
+              className={activeIndex === 3 ? "active-header-item" : ""}
+            >
+              Pending Tasks: {taskStats.pending}
+            </li>
+            <li
+              onClick={() => {
+                loadComponent(<ReferBackTask />, 4);
                 fetchCompanyAllDetails();
               }}
-              className={activeIndex === 4 ? "active-header-item" : ""}>Refer Back Tasks: {taskStats.referBack}</li>
-            <li  onClick={() => {
-                loadComponent(<ApprovedTask />,5);
+              className={activeIndex === 4 ? "active-header-item" : ""}
+            >
+              Refer Back Tasks: {taskStats.referBack}
+            </li>
+            <li
+              onClick={() => {
+                loadComponent(<ApprovedTask />, 5);
                 fetchCompanyAllDetails();
               }}
-              className={activeIndex === 5 ? "active-header-item" : ""}>Approved Tasks: {taskStats.approved}</li>
+              className={activeIndex === 5 ? "active-header-item" : ""}
+            >
+              Approved Tasks: {taskStats.approved}
+            </li>
           </ul>
         </div>
       </div>
