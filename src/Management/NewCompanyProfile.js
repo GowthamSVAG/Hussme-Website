@@ -43,32 +43,75 @@ export function NewCompanyProfile() {
   const [logoFile, setLogoFile] = useState(null);
   const [input, setInput] = useState("");
   const [showList, setShowList] = useState(false);
+  const [brandRelateImages, setBrandRelateImages] = useState({
+    brandRelateImage1: null,
+    brandRelateImage2: null,
+    brandRelateImage3: null,
+    brandRelateImage4: null,
+    brandRelateImage5: null,
+    brandRelateImage6: null,
+  });
 
-  const usaCities = [
-    "New York",
-    "Los Angeles",
-    "Chicago",
-    "Houston",
-    "Phoenix",
-    "Philadelphia",
-    "San Antonio",
-    "San Diego",
-    "Dallas",
-    "San Jose",
-    "Austin",
-    "Jacksonville",
-    "Fort Worth",
-    "Columbus",
-    "Charlotte",
+  const usaStateCodes = [
+    "AL",
+    "AK",
+    "AZ",
+    "AR",
+    "CA",
+    "CO",
+    "CT",
+    "DE",
+    "FL",
+    "GA",
+    "HI",
+    "ID",
+    "IL",
+    "IN",
+    "IA",
+    "KS",
+    "KY",
+    "LA",
+    "ME",
+    "MD",
+    "MA",
+    "MI",
+    "MN",
+    "MS",
+    "MO",
+    "MT",
+    "NE",
+    "NV",
+    "NH",
+    "NJ",
+    "NM",
+    "NY",
+    "NC",
+    "ND",
+    "OH",
+    "OK",
+    "OR",
+    "PA",
+    "RI",
+    "SC",
+    "SD",
+    "TN",
+    "TX",
+    "UT",
+    "VT",
+    "VA",
+    "WA",
+    "WV",
+    "WI",
+    "WY",
   ];
 
-  const filteredCities = usaCities.filter((city) =>
+  const filteredCities = usaStateCodes.filter((city) =>
     city.toLowerCase().startsWith(input.toLowerCase())
   );
 
-  const handleSelect = (city) => {
-    setFormData({ ...formData, city });
-    setInput(city);
+  const handleSelect = (state) => {
+    setFormData({ ...formData, state });
+    setInput(state);
     setShowList(false);
   };
 
@@ -147,6 +190,15 @@ export function NewCompanyProfile() {
     });
   };
 
+  // Handler for brand image file changes
+  const handleBrandImageChange = (event) => {
+    const { id, files } = event.target;
+    setBrandRelateImages((prev) => ({
+      ...prev,
+      [id]: files[0] || null,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = validateForm();
@@ -200,6 +252,13 @@ export function NewCompanyProfile() {
         // If a logo URL is provided, append it as a string
         formDataToSubmit.append("logoUrl", formData.logoUrl);
       }
+
+      // Add brand images to the form data (optional)
+      Object.entries(brandRelateImages).forEach(([key, file]) => {
+        if (file) {
+          formDataToSubmit.append(key, file);
+        }
+      });
 
       // Send the request to the server
       const response = await axios.post(
@@ -350,20 +409,35 @@ export function NewCompanyProfile() {
               onChange={handleInputChange}
               value={formData.address2}
             />
+            <input
+              type="text"
+              id="cmpy-city"
+              placeholder="City"
+              onChange={handleInputChange}
+              value={formData.city}
+            />
+
+            <input
+              type="text"
+              id="cmpy-zip"
+              placeholder="Zip Code"
+              onChange={handleInputChange}
+              value={formData.zip}
+            />
             <div className="city-list">
               <input
                 type="text"
-                id="cmpy-city"
-                value={formData.city}
+                id="cmpy-state"
+                value={formData.state}
                 onChange={(e) => {
                   const value = e.target.value;
-                  setFormData({ ...formData, city: value });
+                  setFormData({ ...formData, state: value });
                   setInput(value);
                   setShowList(true);
                 }}
                 onFocus={() => setShowList(true)}
                 onBlur={() => setTimeout(() => setShowList(false), 150)}
-                placeholder="City"
+                placeholder="State"
                 autoComplete="off"
               />
 
@@ -377,7 +451,7 @@ export function NewCompanyProfile() {
                     top: "100%",
                     left: 0,
                     right: 0,
-                    minWidth: "110%",
+                    minWidth: "50%",
                     maxHeight: "220px",
                     overflowY: "auto",
                     border: "0.5px solid #ccc",
@@ -398,21 +472,6 @@ export function NewCompanyProfile() {
               )}
             </div>
 
-            <input
-              type="text"
-              id="cmpy-zip"
-              placeholder="Zip Code"
-              onChange={handleInputChange}
-              value={formData.zip}
-            />
-
-            <input
-              type="text"
-              id="cmpy-state"
-              placeholder="State"
-              onChange={handleInputChange}
-              value={formData.state}
-            />
             <input
               type="text"
               id="cmpy-country"
@@ -462,8 +521,74 @@ export function NewCompanyProfile() {
             />
           </div>
 
-          <div className="cmpy-brand-title">Company Brand Details</div>
+          <div className="cmpy-brand-title">
+            Company Brand Details{" "}
+            <span>
+              (Brand Logos, Website/Promo Banner, Product or Service Image, etc)
+            </span>
+          </div>
           <div className="new-cmpny-input-brand-sec">
+            <div className="brand-col-img">
+              <label htmlFor="brandRelateImage1">Brand Relate Image 1</label>
+              <input
+                className="logo-input"
+                type="file"
+                onChange={handleBrandImageChange}
+                accept="image/*"
+                id="brandRelateImage1"
+              />
+            </div>
+            <div className="brand-col-img">
+              <label htmlFor="brandRelateImage2">Brand Relate Image 2</label>
+              <input
+                className="logo-input"
+                type="file"
+                onChange={handleBrandImageChange}
+                accept="image/*"
+                id="brandRelateImage2"
+              />
+            </div>
+            <div className="brand-col-img">
+              <label htmlFor="brandRelateImage3">Brand Relate Image 3</label>
+              <input
+                className="logo-input"
+                type="file"
+                onChange={handleBrandImageChange}
+                accept="image/*"
+                id="brandRelateImage3"
+              />
+            </div>
+            <div className="brand-col-img">
+              <label htmlFor="brandRelateImage4">Brand Relate Image 4</label>
+              <input
+                className="logo-input"
+                type="file"
+                onChange={handleBrandImageChange}
+                accept="image/*"
+                id="brandRelateImage4"
+              />
+            </div>
+            <div className="brand-col-img">
+              <label htmlFor="brandRelateImage5">Brand Relate Image 5</label>
+              <input
+                className="logo-input"
+                type="file"
+                onChange={handleBrandImageChange}
+                accept="image/*"
+                id="brandRelateImage5"
+              />
+            </div>
+
+            <div className="brand-col-img">
+              <label htmlFor="brandRelateImage6">Brand Relate Image 6</label>
+              <input
+                className="logo-input"
+                type="file"
+                onChange={handleBrandImageChange}
+                accept="image/*"
+                id="brandRelateImage6"
+              />
+            </div>
             <div className="brand-row">
               <input
                 type="text"

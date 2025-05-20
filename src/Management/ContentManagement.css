@@ -510,7 +510,7 @@
 }
 .task-box-title {
   padding-left: 5px;
-  font-size: 19px;
+  font-size: 21px;
   /* overflow-x: hidden; */
   font-weight: 500;
   color: #000000;
@@ -603,15 +603,14 @@
     min-width: fit-content !important;
     min-height: max-content !important;
     /* justify-content: end !important; */
-    align-items: end !important;
+    /* align-items: end !important; */
   }
   .task-preview-img {
     min-width: 90% !important;
     max-height: 550px !important;
   }
   .yet-task-preview-img {
-    position: relative !important;
-    right: -5% !important;
+  
     width: 95% !important;
     max-height: 550px !important;
   }
@@ -669,6 +668,8 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 .yet-show-task-status-container {
@@ -696,13 +697,14 @@
 }
 .status-top-floor {
   /* background-color: wheat; */
-  width: 100%;
+  min-width: 100%;
   display: flex;
-  flex-direction: row;
+
+  justify-content: center;
 }
 .status-top-floor-row-1 {
+  /* min-width: fit-content; */
   min-width: 95%;
-  max-width: 95%;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 15px;
@@ -770,7 +772,8 @@
 }
 
 .status-row {
-  min-width: 100%;
+  font-family: "Kumbh Sans", sans-serif !important;
+  min-width: 98%;
   padding-left: 15px;
   padding-top: 15px;
   display: grid;
@@ -781,7 +784,7 @@
   /* gap: 5px; */
 }
 .task-title-status {
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 500;
   text-align: left;
   color: #9747ffdb;
@@ -800,7 +803,7 @@
 .task-id,
 .task-id-number {
   max-height: fit-content;
-  font-size: larger;
+  font-size: 23px;
   font-weight: 550;
   color: #000000;
 }
@@ -813,6 +816,7 @@
   color: transparent;
 }
 .status-task-title {
+  font-size: 26px;
   max-height: min-content;
   text-align: left;
   padding: 0;
@@ -823,7 +827,7 @@
   padding-right: 5px;
   font-family: "Kumbh Sans", sans-serif !important;
   text-align: justify;
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 500;
   color: #575656;
 }
@@ -834,20 +838,22 @@
 .task-des-name {
   height: fit-content;
   text-indent: 15px;
-  font-size: 17px;
+  font-size: 20px;
   line-height: 20px;
 }
 .status-task-dates {
-  width: 100%;
+  min-width: 100%;
   display: flex;
   flex-direction: column;
+  /* justify-content: left ; */
+  align-items: start;
 }
 .status-target-date input,
 .status-deadline-date input {
-  width: 80%;
-  padding: 5px;
+  min-width:80%;
+  padding: 5px 10px ;
   font-family: "Kumbh Sans", sans-serif !important;
-  font-size: medium;
+  font-size: 20px;
   font-weight: 500;
   color: #686868;
   border-radius: 5px;
@@ -1264,7 +1270,7 @@
 .yet-task-title {
   width: 89%;
   font-family: "Kumbh Sans", sans-serif;
-  font-size: 20px;
+  font-size: 21px;
   font-weight: 550;
   text-align: right;
   padding-bottom: 5px;

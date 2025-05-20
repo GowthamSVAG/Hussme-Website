@@ -1,8 +1,25 @@
 @media screen and (max-width: 1100px) {
-  .cmpy-detail-row ul {
-    /* grid-template-columns: repeat(5, 1fr) !important; */
-    /* justify-content: center !important; */
-    /* align-items: left !important; */
+  .admin-company-details-view{
+    min-width: 90% !important;
+  }
+.admin-alt-gap {
+  grid-template-columns: repeat(2, 1fr) !important;
+}
+}
+@media screen and (max-width: 700px) {
+   .admin-company-details-view{
+    min-width: 70% !important;
+  }
+.admin-alt-gap {
+  grid-template-columns: repeat(1, 1fr) !important;
+}
+}
+@media screen and (max-width: 900px) {
+  .admin-upload-image {
+    flex-direction: column !important;
+    gap: 10px;
+    align-items: left !important;
+    margin-left: 4%;
   }
 }
 .task-listing-container-page {
@@ -53,6 +70,7 @@
 }
 
 .cmpy-detail-row ul li {
+  padding: 0 5px;
   min-width: fit-content;
   max-width: fit-content;
   font-size: 19px;
@@ -155,7 +173,7 @@
   padding-top: 5px;
   border-radius: 5px;
   padding-bottom: 5px;
-  clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+  /* clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%); */
   color: white;
 }
 
@@ -281,25 +299,26 @@
   font-family: "Kumbh Sans", sans-serif !important;
   margin: 2% auto 2% auto;
   display: flex;
-  width: fit-content;
+  min-width: 80%;
   max-height: fit-content;
-  flex-direction: row !important;
+  flex-direction: column !important;
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   padding-left: 12px;
   padding-bottom: 12px;
 }
 .admin-alt-gap {
-  min-width: 90%;
+  max-width: 95%;
+  min-width: 95%;
   display: grid;
-  grid-template-columns: repeat(3, 350px);
+  grid-template-columns: repeat(3, 1fr);
   row-gap: 15px;
 }
 .admin-close-button-row {
   max-width: 10%;
 }
 .admin-past-rollback {
-  margin-left: 50px;
+  /* margin-left: 50px; */
   max-width: 100%;
   min-width: 58%;
   border-radius: 15px;
@@ -324,7 +343,7 @@
 .admin-show-task-status-container {
   margin: 5% auto 5% auto;
   max-height: fit-content;
-  width: 90%;
+  width: 70%;
   /* margin: 0px auto; */
   padding-bottom: 15px;
   background-size: cover;

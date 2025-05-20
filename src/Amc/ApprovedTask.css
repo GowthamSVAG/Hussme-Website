@@ -37,3 +37,10 @@
   clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
   color: rgb(255, 255, 255);
 }
+
+@media screen and (max-width: 1100px) {
+  .status-card-text {
+    clip-path: none !important;
+    padding-left: 10px !important;
+  }
+}

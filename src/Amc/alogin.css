@@ -1,6 +1,6 @@
 .alogin-container {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  min-height: 100vh;
   background-image: url("../Components/Assets/Our\ Levers/3333.jpg");
   background-size: cover;
   background-position: center;
@@ -8,13 +8,25 @@
   font-family: "Kumbh Sans", sans-serif !important;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
 }
-
+@media screen and (max-width: 800px) {
+  .alogin-container {
+    /* justify-content: top !important; */
+  }
+  .alogin-form {
+    margin-top: 40% !important;
+    min-width: 50% !important;
+    max-width: 85% !important;
+    padding: 15px !important ;
+  }
+}
 .alogin-form {
-  min-width: 30%;
-  max-width: fit-content;
+  margin-top: auto;
+  margin-bottom: auto;
+  min-width: 10%;
+  max-width: 30%;
   padding: 30px;
   height: 40%;
   background-color: #ffffff92;

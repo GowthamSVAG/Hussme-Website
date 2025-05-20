@@ -67,16 +67,16 @@ export function CompanyListing() {
                     alt=""
                   />
                 </li>
-            
-                <li>
+
+                <li className="l1">
                   <h2>Name:</h2>
                   <p>{companyData.company.companyName}</p>
                 </li>
-                <li>
+                <li className="l2">
                   <h2>Mobile No:</h2>
                   <p>{companyData.company.phone}</p>
                 </li>
-                <li>
+                <li className="l3">
                   <h2>Email:</h2> <p>{companyData.company.email}</p>
                 </li>
                 <li>
@@ -218,7 +218,7 @@ export function CompanyListing() {
               </p>
             </div>
           </div>
-          <div className="admin-close-button-row">
+          <div className="close-button-row">
             <img
               onClick={() => {
                 setShowSectionTwoSelectedCompanyDetail(false);

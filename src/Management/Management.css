@@ -75,18 +75,19 @@
   }
   .mgmt-tooltiptext {
     visibility: hidden;
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 15px;
+    font-size: 20px;
+    font-weight: 450;
+    line-height: 20px;
     min-width: min-content;
     background-color: rgba(0, 0, 0, 0.253);
     color: #fff;
     text-align: center;
     border-radius: 6px;
-    padding: 5px;
+    padding: 10px;
     position: absolute;
     z-index: 1;
-    max-width: 15ch;
+     max-width: 25ch !important;
+    min-width: max-content !important;
     left: 180% !important;
   }
   .mgmt-sidebar ul li:hover .mgmt-tooltiptext {
@@ -94,44 +95,50 @@
   }
 }
 
-@media screen and (max-width: 710px) {
+@media screen and (max-width: 770px) {
   .mgmt-sidebar ul {
-    justify-content: space-between !important;
+    /* justify-content: space-between !important; */
   }
   .mgmt-tooltiptext {
-    max-width: 15ch;
+    max-width: 15ch !important;
+    min-width: min-content !important;
+     padding: 5px !important;
+     font-size: 18px !important;
+     font-weight: 400 !important;
+     line-height: 19px !important;
     right: 0% !important;
   }
-  .for-mble {
+  /* .for-mble {
     left: -450% !important;
-  }
+  } */
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 480px) {
   .mgmt-sidebar {
-    top: 92% !important;
+    /* top: 94% !important; */
   }
   .mgmt-sidebar ul {
-    margin-top: 0 !important;
-    justify-content: space-between !important;
+    /* margin-top: 0 !important; */
+    justify-content: center !important;
   }
   .mgmt-tooltiptext {
-    padding: 2px 5px !important;
-    left: 150% !important;
+    /* padding: 2px 5px !important; */
+    left: -700% !important;
     border-radius: 4px !important;
     font-weight: 400;
-    margin-top: 250% !important;
+    margin-top: 0% !important;
+    padding: 0px 0px !important;
     /* background-color: transparent !important; */
-    left: -40% !important;
-    max-width: 25ch !important;
-    min-width: max-content !important;
+    /* left: 170% !important; */
+    max-width: 15ch !important;
+    min-width: min-content !important;
   }
   .center-company-name {
     font-size: larger !important;
     font-weight: 500 !important;
   }
   .for-mble {
-    left: -380% !important;
+    left: 300% !important;
   }
 }
 

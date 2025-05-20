@@ -251,6 +251,7 @@ export function Management() {
                   />
                   <span className="mgmt-sidebar-title">Company Profile</span>
                   <span className="mgmt-tooltiptext for-mble">Company Profile</span>
+                  
                 </NavLink>
               </li>
             </ul>

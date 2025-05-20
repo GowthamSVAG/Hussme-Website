@@ -143,6 +143,14 @@
   gap: 20px;
   flex-direction: column;
 }
+.brand-col-img {
+  width: 100%;
+  min-height: 100%;
+  justify-content: space-between;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}
 .logo-label {
   font-size: 25px;
   font-weight: 500;
@@ -158,8 +166,10 @@
   font-size: larger;
   line-height: 20px;
   color: rgb(35, 38, 59);
-  margin-right: 20px;
-  margin-top: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 4px;
+  /* margin-bottom:10px; */
   border: none;
   background: #922ee9;
   padding: 10px 20px;
@@ -213,18 +223,23 @@
 }
 
 .cmpy-brand-title {
-  margin: -10px 0;
+  margin: -5px 0;
   font-size: 25px;
   font-weight: 550;
-  line-height: 28px;
+  /* line-height: 28px; */
   width: 100%;
   text-align: left;
   color: #8b34fc;
 }
+.cmpy-brand-title span{
+  font-size: 18px;
+  font-weight: 450;
+  color: #8c8c8d;
+}
 .new-cmpny-input-brand-sec {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 }
 .brand-input {

@@ -3,7 +3,11 @@
     justify-content: end !important;
     align-items: end !important;
   }
+  .admin-header {
+    padding: 0px 0 0 0 !important;
+  }
   .admin-header-mble {
+    align-items: center !important;
     display: flex;
     justify-content: space-between !important;
     min-width: 100% !important;
@@ -39,10 +43,19 @@
     background-color: #1b1525 !important;
     /* background-color: #ff7b2f; */
     min-width: fit-content !important;
+    padding-right: 25px !important;
+    border-radius: 5px;
     max-width: 20% !important;
     flex-direction: column !important;
     justify-content: right !important;
     align-items: start !important;
+  }
+  .admin-header-2-mble ul li:last-child{
+    margin-bottom: 20px !important;
+  }
+  .admin-header-2-mble ul li:focus.admin-header-2-mble{
+    display: none !important;
+
   }
 }
 .admin-header {
@@ -86,7 +99,7 @@
   width: 50px;
 }
 .admin-header-2 {
-  top: 60px;
+  top: 50px;
   min-width: 100%;
   max-width: 100%;
   /* height: fit-content; */

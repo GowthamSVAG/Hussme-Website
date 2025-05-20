@@ -61,35 +61,27 @@
   object-fit: contain;
   width: 30px;
 }
-.l1 {
-  min-width: fit-content;
-  max-width: fit-content;
-}
-.l2 {
-  min-width: 250px;
-  max-width: 400px;
+.l1 p {
   text-align: left;
+  min-width: 20ch !important;
+  max-width: 20ch !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.l3 {
-  min-width: fit-content;
-  max-width: fit-content;
-}
-.l4 {
-  max-width: 300px;
-  min-width: 300px;
+.l2 p {
   text-align: left;
+  min-width: 15ch !important;
+  max-width: 15ch !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.l5 {
-  /* min-width: fit-content; */
-  max-width: 200px;
-}
-.l6 {
-  min-width: fit-content;
-  max-width: fit-content;
+.l3 p {
+  text-align: left;
+  min-width: 20ch !important;
+  max-width: 20ch !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
