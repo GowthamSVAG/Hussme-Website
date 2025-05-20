@@ -1,6 +1,14 @@
+@media screen and (max-width: 1100px) {
+  .profile-management-content {
+    margin-bottom: 10%;
+  }
+  .brand-relate-image-container {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
 @media screen and (max-width: 800px) {
-  .profile-management-content{
-    margin-bottom: 15% ;
+  .profile-management-content {
+    margin-bottom: 15%;
   }
   .company-info-section {
     grid-template-columns: repeat(2, 1fr) !important;
@@ -8,19 +16,24 @@
   .edit-form-input-container {
     grid-template-columns: repeat(2, 1fr) !important;
   }
+  .brand-relate-image-container {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
 }
 @media screen and (max-width: 550px) {
   .edit-form-input-container {
     grid-template-columns: repeat(1, 1fr) !important;
   }
+ 
 }
 @media screen and (max-width: 450px) {
-  .profile-management-content{
-    margin-bottom: 23% ;
+  .profile-management-content {
+    margin-bottom: 23%;
   }
-  .company-details-view{
-    max-width:85% !important ;
+  .company-details-view {
+    max-width: 85% !important ;
   }
+
   .company-info-section {
     grid-template-columns: repeat(1, 1fr) !important;
   }
@@ -30,23 +43,32 @@
   .company-logo-section {
     flex-direction: column !important;
   }
-}
-.profile-management-content {
-  width: 100%;
-  min-height: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+   .brand-relate-image-container {
+    grid-template-columns: repeat(1, 1fr) !important;
+    justify-content: center !important;
+  }
 }
 .company-profile-page {
-  width: 100%;
+  min-width: 100%;
   min-height: fit-content;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   font-family: "Kumbh Sans", sans-serif !important;
 }
+.profile-management-content {
+  background-color: rgb(255, 255, 255);
+  min-height: 80vh !important;
+  max-width: 100%;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
 .edit-form-input-container {
   width: 100%;
 }
@@ -89,14 +111,14 @@
 /* View Mode Styling */
 .company-details-view {
   display: flex;
-  width: 94%;
-  min-height: 100vh;
-  flex-direction: column !important;
-  /* background-color: rgb(188, 85, 85); */
+  max-width: 85%;
+  min-height: fit-content;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  /* padding: 2rem; */
-  gap: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.122);
+  margin-bottom: 25px;
 }
 
 .company-logo-section {
@@ -117,20 +139,48 @@
 }
 
 .company-info-section {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  row-gap: 35px;
-  /* gap: 25px; */
+  margin-top: 25px;
+  margin-bottom: 25px;
+  min-width: 100%;
+  max-width: 100%;
+  /* display: grid;
+  grid-template-columns: repeat(3, 1fr); */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: start;
+  justify-content: left;
+  /* gap: ; */
+  gap: 20px;
 }
-
-.info-group {
+.cmpy-logo-carrier {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
+}
+.info-group {
+  padding: 5px 15px;
+  display: flex;
+  flex-direction: column;
   align-items: start;
+  width: fit-content;
+  height: 100%;
+  justify-content: center;
+}
+.info-group-img {
+  padding: 5px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: fit-content;
+  height: 100%;
+  justify-content: center;
+}
+.info-group-img label {
+  text-align: left;
+  color: #8035e0;
 }
 
 .info-group h3 {
@@ -138,8 +188,8 @@
   color: #9747ffe5;
   margin: 0;
   padding: 0;
-  font-size: 19px;
-  font-weight: 450;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .info-group p {
@@ -147,10 +197,15 @@
   margin: 0;
   padding-top: 3px;
   color: #333;
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 450;
 }
-
+.view-social-link {
+  max-width: 25ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .info-row {
   display: flex;
   flex-direction: row;
@@ -159,12 +214,25 @@
 
 /* Edit Mode Styling */
 .company-details-edit {
-  min-width: 94%;
+  min-width: 90% !important;
+  max-width: 95% !important;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.037);
   padding: 5px 20px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  background-color: #ffffff;
+  /* flex-direction: column; */
+}
+.brand-relate-image-container {
+  min-width: 100%;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 .edit-company-form {
   padding: 0;
@@ -197,7 +265,20 @@
   border: 1px solid #ddd;
   border-radius: 4px;
 }
-
+.cmpy-brand-title-in-edit {
+  margin: 10px 0;
+  font-size: 25px;
+  font-weight: 550;
+  line-height: 28px;
+  width: 100%;
+  text-align: left;
+  color: #8b34fc;
+}
+.cmpy-brand-title-in-edit span {
+  font-size: 18px;
+  font-weight: 450;
+  color: #8c8c8d;
+}
 .profile-logo-preview {
   max-width: 200px;
   max-height: 200px;
@@ -256,7 +337,7 @@
 }
 
 .save-button {
-  padding:  10px 10px;
+  padding: 10px 10px;
   background-color: #9747ff;
   color: white;
   border: none;

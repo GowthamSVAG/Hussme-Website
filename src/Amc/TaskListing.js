@@ -133,15 +133,15 @@ export function TaskListing() {
                         />
                       </li>
 
-                      <li>
+                      <li className="l1">
                         <h2>Name:</h2>
                         <p>{companyData.company.companyName}</p>
                       </li>
-                      <li>
+                      <li className="l2">
                         <h2>Mobile No:</h2>
                         <p>{companyData.company.phone}</p>
                       </li>
-                      <li>
+                      <li className="l3">
                         <h2>Email:</h2> <p>{companyData.company.email}</p>
                       </li>
                       <li>
@@ -491,6 +491,20 @@ export function TaskListing() {
       )}
       {showSelectedCompanyDetail && (
         <div className="admin-company-details-view ">
+          <div className="close-button-row">
+            <img
+              onClick={() => {
+                setShowCompaniseTasks(true);
+                setShowSelectedTaskWindow(false);
+                setShowSelectedCompanyDetail(false);
+              }}
+              width="48"
+              height="48"
+              src="https://img.icons8.com/fluency/48/delete-sign.png"
+              alt="delete-sign"
+              className="status-cross-symbol"
+            />
+          </div>
           <div className="admin-alt-gap">
             <img
               src={companyProfile.logo}
@@ -551,23 +565,31 @@ export function TaskListing() {
             </div>
             <div className="info-group">
               <h3>LinkedIn</h3>
-              <p>{companyProfile.linkedin || "N/A"}</p>
+              <p className="view-social-link">
+                {companyProfile.linkedin || "N/A"}
+              </p>
             </div>
             <div className="info-group">
               <h3>Facebook</h3>
-              <p>{companyProfile.facebook || "N/A"}</p>
+              <p className="view-social-link">
+                {companyProfile.facebook || "N/A"}
+              </p>
             </div>
             <div className="info-group">
               <h3>Instagram</h3>
-              <p>{companyProfile.insta || "N/A"}</p>
+              <p className="view-social-link">
+                {companyProfile.insta || "N/A"}
+              </p>
             </div>
             <div className="info-group">
               <h3>X (Twitter)</h3>
-              <p>{companyProfile.x || "N/A"}</p>
+              <p className="view-social-link">{companyProfile.x || "N/A"}</p>
             </div>
             <div className="info-group">
               <h3>YouTube</h3>
-              <p>{companyProfile.youtube || "N/A"}</p>
+              <p className="view-social-link">
+                {companyProfile.youtube || "N/A"}
+              </p>
             </div>
             <div className="info-group">
               <h3>Font Family</h3>
@@ -609,20 +631,6 @@ export function TaskListing() {
                 {companyProfile.color3 || "N/A"}
               </p>
             </div>
-          </div>
-          <div className="admin-close-button-row">
-            <img
-              onClick={() => {
-                setShowCompaniseTasks(true);
-                setShowSelectedTaskWindow(false);
-                setShowSelectedCompanyDetail(false);
-              }}
-              width="48"
-              height="48"
-              src="https://img.icons8.com/fluency/48/delete-sign.png"
-              alt="delete-sign"
-              className="status-cross-symbol"
-            />
           </div>
         </div>
       )}

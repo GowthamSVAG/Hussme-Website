@@ -664,7 +664,7 @@ export function ContentManagement() {
                     <label htmlFor="description">Description:</label>
                     <textarea
                       name="description"
-                      className="new-task-des"
+                      className="new-task-title"
                       value={taskForm.description}
                       onChange={handleInputChange}
                     ></textarea>
@@ -797,8 +797,19 @@ export function ContentManagement() {
           )}
           {showCurrentTaskStatus && (
             <div className="show-task-status-container">
+              <div className="close-button-row">
+                <img
+                  onClick={() => taskStatus(false)}
+                  width="48"
+                  height="48"
+                  src="https://img.icons8.com/fluency/48/delete-sign.png"
+                  alt="delete-sign"
+                  className="status-cross-symbol"
+                />
+              </div>
               <div className="status-top-floor">
-                <div className="status-top-floor-row-1">
+                <div
+                  className="status-top-floor-row-1">
                   <div className="status-col-1">
                     <div className="status-row">
                       <div className="status-task-id">
@@ -871,7 +882,7 @@ export function ContentManagement() {
                         <div className="task-title-status">
                           Task Description
                         </div>
-                        <div className="task-des-name">
+                        <div className="task-title-name-status">
                           {selectedTask?.description}
                         </div>
                       </div>
@@ -909,7 +920,8 @@ export function ContentManagement() {
                     <div className="status-title-preview">Task Preview</div>
                     <div className="task-preview-img-container">
                       <img
-                        src={selectedTask?.doneTaskImage||
+                        src={
+                          selectedTask?.doneTaskImage ||
                           "https://i.ibb.co/1YsMLsWC/freepicdownloader-com-female-freelancer-working-home-vector-illustration-large.jpg"
                         }
                         className="task-preview-img"
@@ -918,38 +930,26 @@ export function ContentManagement() {
                     </div>
                   </div>
                 </div>
-
-                <div className="status-top-floor-row-2">
-                  <img
-                    onClick={() => taskStatus(false)}
-                    width="48"
-                    height="48"
-                    src="https://img.icons8.com/fluency/48/delete-sign.png"
-                    alt="delete-sign"
-                    className="status-cross-symbol"
-                  />
-                </div>
               </div>
 
               <div className="status-col-3">
                 <div className="status-task-btns">
-                    {selectedTask.rollbackFeedback.length > 0 && (
-                      <div className="past-rollback">
-                        <h3>Rollback Feedback</h3>
-                        <ul>
-                          {selectedTask.rollbackFeedback.map(
-                            (feedback, index) => (
-                              <li key={index}>
-                                <p className="feed-index">{index+1}.</p>
-                                <p>{feedback.feedback}</p>
-                              </li>
-                            )
-                          )}
-                        </ul>
-                      </div>
-                    )}
+                  {selectedTask.rollbackFeedback.length > 0 && (
+                    <div className="past-rollback">
+                      <h3>Rollback Feedback</h3>
+                      <ul>
+                        {selectedTask.rollbackFeedback.map(
+                          (feedback, index) => (
+                            <li key={index}>
+                              <p className="feed-index">{index + 1}.</p>
+                              <p>{feedback.feedback}</p>
+                            </li>
+                          )
+                        )}
+                      </ul>
+                    </div>
+                  )}
                   <div className="row-3-col-2-btn">
-
                     <button
                       className={
                         buttonAction && buttonAction !== "approve"
@@ -1058,6 +1058,16 @@ export function ContentManagement() {
       )}
       {showCompletedTaskStatus && (
         <div className="yet-show-task-status-container">
+          <div className=" close-button-row">
+              <img
+                onClick={() => completedTask(false)}
+                width="48"
+                height="48"
+                src="https://img.icons8.com/fluency/48/delete-sign.png"
+                alt="delete-sign"
+                className="status-cross-symbol"
+              />
+            </div>
           <div className="status-top-floor">
             <div className="status-top-floor-row-1">
               <div className="status-col-1">
@@ -1124,7 +1134,7 @@ export function ContentManagement() {
                   </div>
                   <div className="status-task-des">
                     <div className="task-title-status">Task Description</div>
-                    <div className="task-des-name">
+                    <div className="task-title-name-status">
                       {selectedRolledBackTask?.description}
                     </div>
                   </div>
@@ -1168,16 +1178,7 @@ export function ContentManagement() {
               </div>
             </div>
 
-            <div className="status-top-floor-row-2">
-              <img
-                onClick={() => completedTask(false)}
-                width="48"
-                height="48"
-                src="https://img.icons8.com/fluency/48/delete-sign.png"
-                alt="delete-sign"
-                className="status-cross-symbol"
-              />
-            </div>
+            
           </div>
         </div>
       )}

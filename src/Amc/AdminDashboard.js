@@ -10,7 +10,7 @@ import { PendingTask } from "./PendingTask";
 import { ReferBackTask } from "./ReferBackTask";
 import { ApprovedTask } from "./ApprovedTask";
 import { TotalTask } from "./TotalTask";
-import menu from "../Components/Assets/Admin-Assets/admin-menu.png";
+import menu from "../Components/Assets/Admin-Assets/menu.png";
 export function AdminDashboard() {
   const [isMobileMenu, setIsMobileMenu] = useState(false);
   const [taskStats, setTaskStats] = useState({
@@ -26,6 +26,7 @@ export function AdminDashboard() {
   const loadComponent = (component, index) => {
     setActiveComponent(component);
     setActiveIndex(index);
+    toggleMenu();
   };
 
   const navigate = useNavigate();
@@ -98,7 +99,7 @@ export function AdminDashboard() {
           className={isMobileMenu ? "admin-header-2 admin-header-2-mble" : "admin-header-2"}
         >
           <ul>
-            <li
+            <li 
               onClick={() => loadComponent(<TaskListing />, 0)}
               className={activeIndex === 0 ? "active-header-item" : ""}
             >

@@ -7,15 +7,28 @@ import "react-toastify/dist/ReactToastify.css";
 import "../Management/CompanyProfile.css";
 
 export function CompanyProfile() {
-  const { user, logout } = useUser();
   const navigate = useNavigate();
-  const [showLogout, setShowLogout] = useState(false);
   const [companyProfile, setCompanyProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [editMode, setEditMode] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [preview, setPreview] = useState(null);
   const [logoFile, setLogoFile] = useState(null);
+  const [brandRelateImages, setBrandRelateImages] = useState({
+    brandRelateImage1: null,
+    brandRelateImage2: null,
+    brandRelateImage3: null,
+    brandRelateImage4: null,
+    brandRelateImage5: null,
+    brandRelateImage6: null,
+  });
+  const handleBrandImageChange = (event) => {
+    const { id, files } = event.target;
+    setBrandRelateImages((prev) => ({
+      ...prev,
+      [id]: files[0] || null,
+    }));
+  };
   const [formData, setFormData] = useState({
     companyName: "",
     dba: "",
@@ -36,29 +49,13 @@ export function CompanyProfile() {
     x: "",
     youtube: "",
     fontfamily: "",
-    color1: "#ffffff",
+    color1: "#ffffff", // Using the color you specified
     color2: "#ffffff",
     color3: "#ffffff",
+    logoUrl: "", // Add this to store the logo URL
   });
 
   const [formErrors, setFormErrors] = useState({});
-
-  // Function to toggle the logout dropdown
-  const toggleLogout = () => setShowLogout(!showLogout);
-
-  // Function to handle logout
-  const handleLogout = (e) => {
-    e.preventDefault();
-    logout();
-    setShowLogout(false);
-  };
-
-  // Function to navigate to change password page
-  const handleChangePassword = (e) => {
-    e.preventDefault();
-    setShowLogout(false);
-    navigate("/reset-password");
-  };
 
   // Fetch company profile data
   useEffect(() => {
@@ -185,74 +182,143 @@ export function CompanyProfile() {
     return errors;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
-    // Validate form
-    const errors = validateForm();
-    setFormErrors(errors);
+  //   // Validate form
+  //   const errors = validateForm();
+  //   setFormErrors(errors);
 
-    // If there are errors, don't submit
-    if (Object.keys(errors).length > 0) {
-      toast.error("Please fill in all required fields");
+  //   // If there are errors, don't submit
+  //   if (Object.keys(errors).length > 0) {
+  //     toast.error("Please fill in all required fields");
+  //     return;
+  //   }
+
+  //   setIsSubmitting(true);
+
+  //   try {
+  //     // Get the token from localStorage
+  //     const token = localStorage.getItem("token");
+
+  //     if (!token) {
+  //       toast.error("You must be logged in to update company profile");
+  //       navigate("/login");
+  //       return;
+  //     }
+
+  //     // Create a FormData object for multipart/form-data submission
+  //     const formDataToSubmit = new FormData();
+
+  //     // Add all text fields
+  //     Object.keys(formData).forEach((key) => {
+  //       formDataToSubmit.append(key, formData[key]);
+  //     });
+
+  //     // Add the logo file if it exists
+  //     if (logoFile) {
+  //       formDataToSubmit.append("logo", logoFile);
+  //     }
+
+  //     // Make API request
+  //     const response = await axios.post(
+  //       process.env.REACT_APP_API_URL + "/company/update-company-profile",
+  //       formDataToSubmit,
+  //       {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+
+  //     // Handle success
+  //     toast.success("Company profile updated successfully!");
+  //     setEditMode(false);
+
+  //     // Update local state with the latest data
+  //     setCompanyProfile(response.data.companyProfile);
+  //     setLogoFile(null); // Reset file input
+  //   } catch (error) {
+  //     // Handle error
+  //     console.error("Error updating company profile:", error);
+  //     toast.error(
+  //       error.response?.data?.message || "Failed to update company profile"
+  //     );
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  // Validate form
+  const errors = validateForm();
+  setFormErrors(errors);
+
+  if (Object.keys(errors).length > 0) {
+    toast.error("Please fill in all required fields");
+    return;
+  }
+
+  setIsSubmitting(true);
+
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("You must be logged in to update company profile");
+      navigate("/login");
       return;
     }
 
-    setIsSubmitting(true);
+    const formDataToSubmit = new FormData();
+    Object.keys(formData).forEach((key) => {
+      formDataToSubmit.append(key, formData[key]);
+    });
 
-    try {
-      // Get the token from localStorage
-      const token = localStorage.getItem("token");
-
-      if (!token) {
-        toast.error("You must be logged in to update company profile");
-        navigate("/login");
-        return;
-      }
-
-      // Create a FormData object for multipart/form-data submission
-      const formDataToSubmit = new FormData();
-
-      // Add all text fields
-      Object.keys(formData).forEach((key) => {
-        formDataToSubmit.append(key, formData[key]);
-      });
-
-      // Add the logo file if it exists
-      if (logoFile) {
-        formDataToSubmit.append("logo", logoFile);
-      }
-
-      // Make API request
-      const response = await axios.post(
-        process.env.REACT_APP_API_URL + "/company/update-company-profile",
-        formDataToSubmit,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      // Handle success
-      toast.success("Company profile updated successfully!");
-      setEditMode(false);
-
-      // Update local state with the latest data
-      setCompanyProfile(response.data.companyProfile);
-      setLogoFile(null); // Reset file input
-    } catch (error) {
-      // Handle error
-      console.error("Error updating company profile:", error);
-      toast.error(
-        error.response?.data?.message || "Failed to update company profile"
-      );
-    } finally {
-      setIsSubmitting(false);
+    if (logoFile) {
+      formDataToSubmit.append("logo", logoFile);
     }
-  };
 
+    // Add brand images to the form data (optional)
+    Object.entries(brandRelateImages).forEach(([key, file]) => {
+      if (file) {
+        formDataToSubmit.append(key, file);
+      }
+    });
+
+    const response = await axios.post(
+      process.env.REACT_APP_API_URL + "/company/update-company-profile",
+      formDataToSubmit,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    toast.success("Company profile updated successfully!");
+    setEditMode(false);
+    setCompanyProfile(response.data.companyProfile);
+    setLogoFile(null);
+    setBrandRelateImages({
+      brandRelateImage1: null,
+      brandRelateImage2: null,
+      brandRelateImage3: null,
+      brandRelateImage4: null,
+      brandRelateImage5: null,
+      brandRelateImage6: null,
+    });
+  } catch (error) {
+    console.error("Error updating company profile:", error);
+    toast.error(
+      error.response?.data?.message || "Failed to update company profile"
+    );
+  } finally {
+    setIsSubmitting(false);
+  }
+};
   const toggleEditMode = () => {
     setEditMode(!editMode);
     // Reset any form errors when toggling edit mode
@@ -287,127 +353,300 @@ export function CompanyProfile() {
         </div>
 
         {!editMode ? (
-          // View Mode
-          <div className="company-details-view">
-            <div className="company-info-section">
+          // View Mode !!!
+          <div className="company-details-edit">
+            <div className="cmpy-logo-carrier">
               <img
                 src={companyProfile.logo}
-                // src={getImageUrl(companyProfile.logo)}
                 alt={companyProfile.companyName}
                 className="profile-logo"
               />
-              <div className="info-group">
-                <h3>Company Name</h3>
-                <p>{companyProfile.companyName || "N/A"}</p>
+            </div>
+            <div className="edit-form-input-container">
+              <div className="form-group">
+                <label htmlFor="cmpy-name">Company Name</label>
+                <input
+                  type="text"
+                  id="cmpy-name"
+                  value={formData.companyName}
+                  disabled
+                />
               </div>
-              <div className="info-group">
-                <h3>Doing Business As (DBA)</h3>
-                <p>{companyProfile.dba || "N/A"}</p>
+
+              <div className="form-group">
+                <label htmlFor="cmpy-dba">DBA</label>
+                <input
+                  type="text"
+                  id="cmpy-dba"
+                  value={formData.dba}
+                  disabled
+                />
               </div>
-              <div className="info-group">
-                <h3>Federal Tax ID</h3>
-                <p>{companyProfile.fedraltaxid || "N/A"}</p>
+
+              <div className="form-group">
+                <label htmlFor="cmpy-taxid">Federal Tax ID</label>
+                <input
+                  type="text"
+                  id="cmpy-taxid"
+                  value={formData.fedraltaxid}
+                  disabled
+                />
               </div>
-              <div className="info-group">
-                <h3>Industry</h3>
-                <p>{companyProfile.industry || "N/A"}</p>
+
+              <div className="form-group">
+                <label htmlFor="cmpy-industry">Industry</label>
+                <input
+                  type="text"
+                  id="cmpy-industry"
+                  value={formData.industry}
+                  disabled
+                />
               </div>
-              <div className="info-group">
-                <h3>Email</h3>
-                <p>{companyProfile.email || "N/A"}</p>
+
+              <div className="form-group">
+                <label htmlFor="cmpy-email">Email</label>
+                <input
+                  type="email"
+                  id="cmpy-email"
+                  value={formData.email}
+                  disabled
+                />
               </div>
-              <div className="info-group">
-                <h3>Phone</h3>
-                <p>{companyProfile.phone || "N/A"}</p>
+
+              <div className="form-group">
+                <label htmlFor="cmpy-phone">Phone</label>
+                <input
+                  type="tel"
+                  id="cmpy-phone"
+                  value={formData.phone}
+                  disabled
+                />
               </div>
-              <div className="info-group">
-                <h3>Website</h3>
-                <p>{companyProfile.website || "N/A"}</p>
+
+              <div className="form-group">
+                <label htmlFor="cmpy-website">Website</label>
+                <input
+                  type="url"
+                  id="cmpy-website"
+                  value={formData.website}
+                  disabled
+                />
               </div>
-              <div className="info-group">
-                <h3>Address Line 1</h3>
-                <p>{companyProfile.address1 || "N/A"}</p>
+
+              <div className="form-group">
+                <label htmlFor="cmpy-address1">Address Line 1</label>
+                <input
+                  type="text"
+                  id="cmpy-address1"
+                  value={formData.address1}
+                  disabled
+                />
               </div>
-              <div className="info-group">
-                <h3>Address Line 2</h3>
-                <p>{companyProfile.address2 || "N/A"}</p>
+
+              <div className="form-group">
+                <label htmlFor="cmpy-address2">Address Line 2</label>
+                <input
+                  type="text"
+                  id="cmpy-address2"
+                  value={formData.address2}
+                  disabled
+                />
               </div>
-              <div className="info-group">
-                <h3>City</h3>
-                <p>{companyProfile.city || "N/A"}</p>
+
+              <div className="form-group">
+                <label htmlFor="cmpy-city">City</label>
+                <input
+                  type="text"
+                  id="cmpy-city"
+                  value={formData.city}
+                  disabled
+                />
               </div>
-              <div className="info-group">
-                <h3>State</h3>
-                <p>{companyProfile.state || "N/A"}</p>
+
+              <div className="form-group">
+                <label htmlFor="cmpy-state">State</label>
+                <input
+                  type="text"
+                  id="cmpy-state"
+                  value={formData.state}
+                  disabled
+                />
               </div>
-              <div className="info-group">
-                <h3>ZIP Code</h3>
-                <p>{companyProfile.zip || "N/A"}</p>
+
+              <div className="form-group">
+                <label htmlFor="cmpy-zip">ZIP Code</label>
+                <input
+                  type="text"
+                  id="cmpy-zip"
+                  value={formData.zip}
+                  disabled
+                />
               </div>
-              <div className="info-group">
-                <h3>Country</h3>
-                <p>{companyProfile.country || "N/A"}</p>
+
+              <div className="form-group">
+                <label htmlFor="cmpy-country">Country</label>
+                <input
+                  type="text"
+                  id="cmpy-country"
+                  value={formData.country}
+                  disabled
+                />
               </div>
-              <div className="info-group">
-                <h3>LinkedIn</h3>
-                <p>{companyProfile.linkedin || "N/A"}</p>
+
+              <div className="form-group">
+                <label htmlFor="cmpy-linkedin">LinkedIn</label>
+                <input
+                  type="url"
+                  id="cmpy-linkedin"
+                  value={formData.linkedin}
+                  disabled
+                />
               </div>
-              <div className="info-group">
-                <h3>Facebook</h3>
-                <p>{companyProfile.facebook || "N/A"}</p>
+
+              <div className="form-group">
+                <label htmlFor="cmpy-facebook">Facebook</label>
+                <input
+                  type="url"
+                  id="cmpy-facebook"
+                  value={formData.facebook}
+                  disabled
+                />
               </div>
-              <div className="info-group">
-                <h3>Instagram</h3>
-                <p>{companyProfile.insta || "N/A"}</p>
+
+              <div className="form-group">
+                <label htmlFor="cmpy-insta">Instagram</label>
+                <input
+                  type="url"
+                  id="cmpy-insta"
+                  value={formData.insta}
+                  disabled
+                />
               </div>
-              <div className="info-group">
-                <h3>X (Twitter)</h3>
-                <p>{companyProfile.x || "N/A"}</p>
+
+              <div className="form-group">
+                <label htmlFor="cmpy-twitter">X (Twitter)</label>
+                <input
+                  type="url"
+                  id="cmpy-twitter"
+                  value={formData.x}
+                  disabled
+                />
               </div>
-              <div className="info-group">
-                <h3>YouTube</h3>
-                <p>{companyProfile.youtube || "N/A"}</p>
+
+              <div className="form-group">
+                <label htmlFor="cmpy-youtube">YouTube</label>
+                <input
+                  type="url"
+                  id="cmpy-youtube"
+                  value={formData.youtube}
+                  disabled
+                />
               </div>
-              <div className="info-group">
-                <h3>Font Family</h3>
-                <p>{companyProfile.fontfamily || "N/A"}</p>
+
+              <div className="form-group">
+                <label htmlFor="cmpy-fontfamily">Font Family</label>
+                <input
+                  type="text"
+                  id="cmpy-fontfamily"
+                  value={formData.fontfamily}
+                  disabled
+                />
               </div>
-              <div className="info-group">
-                <h3>Primary Color</h3>
-                <p
-                  style={{
-                    backgroundColor: companyProfile.color1 || "#ffffff",
-                    borderRadius: "3px",
-                    padding: "5px",
-                  }}
-                >
-                  {companyProfile.color1 || "N/A"}
-                </p>
+
+              <div className="form-group">
+                <label htmlFor="cmpy-color1">Primary Color</label>
+                <input
+                  type="color"
+                  id="cmpy-color1"
+                  className="edit-color-input"
+                  value={formData.color1}
+                  disabled
+                />
               </div>
-              <div className="info-group">
-                <h3>Secondary Color</h3>
-                <p
-                  style={{
-                    backgroundColor: companyProfile.color2 || "#ffffff",
-                    borderRadius: "3px",
-                    padding: "5px",
-                  }}
-                >
-                  {companyProfile.color2 || "N/A"}
-                </p>
+
+              <div className="form-group">
+                <label htmlFor="cmpy-color2">Secondary Color</label>
+                <input
+                  type="color"
+                  id="cmpy-color2"
+                  className="edit-color-input"
+                  value={formData.color2}
+                  disabled
+                />
               </div>
-              <div className="info-group">
-                <h3>Tertiary Color</h3>
-                <p
-                  style={{
-                    backgroundColor: companyProfile.color3 || "#ffffff",
-                    borderRadius: "3px",
-                    padding: "5px",
-                  }}
-                >
-                  {companyProfile.color3 || "N/A"}
-                </p>
+
+              <div className="form-group">
+                <label htmlFor="cmpy-color3">Tertiary Color</label>
+                <input
+                  type="color"
+                  id="cmpy-color3"
+                  className="edit-color-input"
+                  value={formData.color3}
+                  disabled
+                />
               </div>
+            </div>
+            <div className="brand-relate-image-container">
+              {companyProfile.brandRelateImage1 !== "null" && (
+                <div className="info-group-img">
+                  <label htmlFor="">Brand Relate Image 1</label>
+                  <img
+                    src={companyProfile.brandRelateImage1}
+                    alt={companyProfile.companyName}
+                    className="profile-logo"
+                  />
+                </div>
+              )}
+              {companyProfile.brandRelateImage2 !== "null" && (
+                <div className="info-group-img">
+                  <label htmlFor="">Brand Relate Image2</label>
+                  <img
+                    src={companyProfile.brandRelateImage2}
+                    alt={companyProfile.companyName}
+                    className="profile-logo"
+                  />
+                </div>
+              )}
+              {companyProfile.brandRelateImage3 !== "null" && (
+                <div className="info-group-img">
+                  <label htmlFor="">Brand Relate Image3</label>
+                  <img
+                    src={companyProfile.brandRelateImage3}
+                    alt={companyProfile.companyName}
+                    className="profile-logo"
+                  />
+                </div>
+              )}
+              {companyProfile.brandRelateImage4 !== "null" && (
+                <div className="info-group-img">
+                  <label htmlFor="">Brand Relate Image4</label>
+                  <img
+                    src={companyProfile.brandRelateImage4}
+                    alt={companyProfile.companyName}
+                    className="profile-logo"
+                  />
+                </div>
+              )}
+              {companyProfile.brandRelateImage5 !== "null" && (
+                <div className="info-group-img">
+                  <label htmlFor="">Brand Relate Image5</label>
+                  <img
+                    src={companyProfile.brandRelateImage5}
+                    alt={companyProfile.companyName}
+                    className="profile-logo"
+                  />
+                </div>
+              )}
+              {companyProfile.brandRelateImage6 !== "null" && (
+                <div className="info-group-img">
+                  <label htmlFor="">Brand Relate Image6</label>
+                  <img
+                    src={companyProfile.brandRelateImage6}
+                    alt="NA"
+                    className="profile-logo"
+                  />
+                </div>
+              )}
             </div>
           </div>
         ) : (
@@ -654,6 +893,88 @@ export function CompanyProfile() {
                     className="edit-color-input"
                     value={formData.color3}
                     onChange={handleInputChange}
+                  />
+                </div>
+              </div>
+              <div className="cmpy-brand-title-in-edit ">
+                Company Brand Details{" "}
+                <span>
+                  (Brand Logos, Website/Promo Banner, Product or Service Image,
+                  etc)
+                </span>
+              </div>
+              <div className="new-cmpny-input-brand-sec">
+                <div className="brand-col-img">
+                  <label htmlFor="brandRelateImage1">
+                    Brand Relate Image 1
+                  </label>
+                  <input
+                    className="logo-input"
+                    type="file"
+                    onChange={handleBrandImageChange}
+                    accept="image/*"
+                    id="brandRelateImage1"
+                  />
+                </div>
+                <div className="brand-col-img">
+                  <label htmlFor="brandRelateImage2">
+                    Brand Relate Image 2
+                  </label>
+                  <input
+                    className="logo-input"
+                    type="file"
+                    onChange={handleBrandImageChange}
+                    accept="image/*"
+                    id="brandRelateImage2"
+                  />
+                </div>
+                <div className="brand-col-img">
+                  <label htmlFor="brandRelateImage3">
+                    Brand Relate Image 3
+                  </label>
+                  <input
+                    className="logo-input"
+                    type="file"
+                    onChange={handleBrandImageChange}
+                    accept="image/*"
+                    id="brandRelateImage3"
+                  />
+                </div>
+                <div className="brand-col-img">
+                  <label htmlFor="brandRelateImage4">
+                    Brand Relate Image 4
+                  </label>
+                  <input
+                    className="logo-input"
+                    type="file"
+                    onChange={handleBrandImageChange}
+                    accept="image/*"
+                    id="brandRelateImage4"
+                  />
+                </div>
+                <div className="brand-col-img">
+                  <label htmlFor="brandRelateImage5">
+                    Brand Relate Image 5
+                  </label>
+                  <input
+                    className="logo-input"
+                    type="file"
+                    onChange={handleBrandImageChange}
+                    accept="image/*"
+                    id="brandRelateImage5"
+                  />
+                </div>
+
+                <div className="brand-col-img">
+                  <label htmlFor="brandRelateImage6">
+                    Brand Relate Image 6
+                  </label>
+                  <input
+                    className="logo-input"
+                    type="file"
+                    onChange={handleBrandImageChange}
+                    accept="image/*"
+                    id="brandRelateImage6"
                   />
                 </div>
               </div>
