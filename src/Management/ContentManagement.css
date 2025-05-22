@@ -29,14 +29,17 @@
 }
 
 .task-title-and-new-task {
+  position: relative;
   display: flex;
   width: 95%;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   height: fit-content;
   margin-bottom: 1%;
 }
 .task-title {
+  position: absolute;
+left: 0%;
   width: fit-content;
   height: 50px;
   display: flex;
@@ -49,7 +52,7 @@
 }
 .new-task-button {
   position: relative;
-  right: 5%;
+  /* right: 5%; */
   padding: 0px 20px;
   width: fit-content;
   height: 50px;

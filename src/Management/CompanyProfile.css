@@ -24,7 +24,6 @@
   .edit-form-input-container {
     grid-template-columns: repeat(1, 1fr) !important;
   }
- 
 }
 @media screen and (max-width: 450px) {
   .profile-management-content {
@@ -43,7 +42,7 @@
   .company-logo-section {
     flex-direction: column !important;
   }
-   .brand-relate-image-container {
+  .brand-relate-image-container {
     grid-template-columns: repeat(1, 1fr) !important;
     justify-content: center !important;
   }
@@ -228,6 +227,11 @@
 .brand-relate-image-container {
   min-width: 100%;
   max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #b82de6 #f3f3f3;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   flex-direction: row;

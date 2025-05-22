@@ -129,9 +129,9 @@ export function ContentManagement() {
           targetPostingDate: "",
           submissionForReview: "",
         });
-
-        setNewTask(false);
+        await fetchRolledBackTasks(); // <-- refresh approved tasks
         await fetchTasks(); // Refresh tasks
+        setNewTask(false);
       }
     } catch (error) {
       console.error("Error creating task:", error);
@@ -310,9 +310,9 @@ export function ContentManagement() {
   const taskStatus = async (taskId) => {
     try {
       if (taskId === false) {
+        setShowFirstHalf(true);
         setTopRowTitleSection(true);
         setShowTaskStatus(true);
-        setShowFirstHalf(true);
         setShowSecondHalf(true);
         setShowCurrentTaskStatus(false);
         setSelectedTask(null);
@@ -341,11 +341,11 @@ export function ContentManagement() {
         return;
       }
 
+      setShowFirstHalf(false);
       setSelectedTask(response.data);
       setTopRowTitleSection(false);
 
       setShowTaskStatus(false);
-      setShowFirstHalf(false);
       setShowSecondHalf(false);
       setShowCurrentTaskStatus(true);
       await fetchTasks(); // Refresh tasks
@@ -379,6 +379,7 @@ export function ContentManagement() {
       if (response.data) {
         toast.success("Task approved successfully");
         await fetchTasks(); // Refresh tasks
+        await fetchRolledBackTasks();
         taskStatus(false); // Close detail view
       }
     } catch (error) {
@@ -441,7 +442,7 @@ export function ContentManagement() {
       );
 
       const task = response.data;
-      console.log("Task details:", task);
+      // console.log("Task details:", task);
 
       // Display rollback feedback
       if (task.rollbackFeedback && task.rollbackFeedback.length > 0) {
@@ -550,14 +551,14 @@ export function ContentManagement() {
             <div className="new-task-button" onClick={assignTask}>
               + Assign New Task
             </div>
-            <div className="approved-list-container">
+            {/* <div className="approved-list-container">
               <span className="tooltiptext">Launched Reports</span>
               <div className="appproved-list-btn">
                 <LuNotepadText
                   style={{ height: "30px", width: "30px", color: "grey" }}
                 />
               </div>
-            </div>
+            </div> */}
           </div>
         )}
         {/* First Half */}
@@ -579,7 +580,6 @@ export function ContentManagement() {
               </div>
 
               <form className="new-task-form" onSubmit={taskHandleSubmit}>
-                {/* <div className="new-task-row task-row-2"> </div> */}
                 <div className="new-task-row">
                   <div className="new-task-row-input">
                     <label htmlFor="title">Task Title:</label>
@@ -808,8 +808,7 @@ export function ContentManagement() {
                 />
               </div>
               <div className="status-top-floor">
-                <div
-                  className="status-top-floor-row-1">
+                <div className="status-top-floor-row-1">
                   <div className="status-col-1">
                     <div className="status-row">
                       <div className="status-task-id">
@@ -967,7 +966,6 @@ export function ContentManagement() {
                     <button
                       className="custom-button-2"
                       onClick={() => {
-                        // setShowFeedback(true);
                         showFeedbackForm();
                       }}
                     >
@@ -1028,7 +1026,10 @@ export function ContentManagement() {
                         </div>
                         <button
                           className="yet-preview-btn"
-                          onClick={() => completedTask(task._id)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            completedTask(task._id);
+                          }}
                         >
                           Preview
                         </button>
@@ -1059,15 +1060,15 @@ export function ContentManagement() {
       {showCompletedTaskStatus && (
         <div className="yet-show-task-status-container">
           <div className=" close-button-row">
-              <img
-                onClick={() => completedTask(false)}
-                width="48"
-                height="48"
-                src="https://img.icons8.com/fluency/48/delete-sign.png"
-                alt="delete-sign"
-                className="status-cross-symbol"
-              />
-            </div>
+            <img
+              onClick={() => completedTask(false)}
+              width="48"
+              height="48"
+              src="https://img.icons8.com/fluency/48/delete-sign.png"
+              alt="delete-sign"
+              className="status-cross-symbol"
+            />
+          </div>
           <div className="status-top-floor">
             <div className="status-top-floor-row-1">
               <div className="status-col-1">
@@ -1177,8 +1178,6 @@ export function ContentManagement() {
                 </div>
               </div>
             </div>
-
-            
           </div>
         </div>
       )}

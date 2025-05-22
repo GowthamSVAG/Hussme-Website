@@ -6,7 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../Management/CompanyProfile.css";
 
-export function CompanyProfile() {
+export function CompanyProfile({ onProfileUpdated }) {
   const navigate = useNavigate();
   const [companyProfile, setCompanyProfile] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -22,13 +22,15 @@ export function CompanyProfile() {
     brandRelateImage5: null,
     brandRelateImage6: null,
   });
-  const handleBrandImageChange = (event) => {
-    const { id, files } = event.target;
-    setBrandRelateImages((prev) => ({
-      ...prev,
-      [id]: files[0] || null,
-    }));
-  };
+const handleBrandImageChange = (event) => {
+  const { id, files } = event.target;
+  setBrandRelateImages((prev) => ({
+    ...prev,
+    // Only update the specific image if a new file is selected
+    ...(files && files[0] ? { [id]: files[0] } : {})
+    // If no file is selected, do not change anything
+  }));
+};
   const [formData, setFormData] = useState({
     companyName: "",
     dba: "",
@@ -182,143 +184,80 @@ export function CompanyProfile() {
     return errors;
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  //   // Validate form
-  //   const errors = validateForm();
-  //   setFormErrors(errors);
+    // Validate form
+    const errors = validateForm();
+    setFormErrors(errors);
 
-  //   // If there are errors, don't submit
-  //   if (Object.keys(errors).length > 0) {
-  //     toast.error("Please fill in all required fields");
-  //     return;
-  //   }
-
-  //   setIsSubmitting(true);
-
-  //   try {
-  //     // Get the token from localStorage
-  //     const token = localStorage.getItem("token");
-
-  //     if (!token) {
-  //       toast.error("You must be logged in to update company profile");
-  //       navigate("/login");
-  //       return;
-  //     }
-
-  //     // Create a FormData object for multipart/form-data submission
-  //     const formDataToSubmit = new FormData();
-
-  //     // Add all text fields
-  //     Object.keys(formData).forEach((key) => {
-  //       formDataToSubmit.append(key, formData[key]);
-  //     });
-
-  //     // Add the logo file if it exists
-  //     if (logoFile) {
-  //       formDataToSubmit.append("logo", logoFile);
-  //     }
-
-  //     // Make API request
-  //     const response = await axios.post(
-  //       process.env.REACT_APP_API_URL + "/company/update-company-profile",
-  //       formDataToSubmit,
-  //       {
-  //         headers: {
-  //           "Content-Type": "multipart/form-data",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-
-  //     // Handle success
-  //     toast.success("Company profile updated successfully!");
-  //     setEditMode(false);
-
-  //     // Update local state with the latest data
-  //     setCompanyProfile(response.data.companyProfile);
-  //     setLogoFile(null); // Reset file input
-  //   } catch (error) {
-  //     // Handle error
-  //     console.error("Error updating company profile:", error);
-  //     toast.error(
-  //       error.response?.data?.message || "Failed to update company profile"
-  //     );
-  //   } finally {
-  //     setIsSubmitting(false);
-  //   }
-  // };
-const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  // Validate form
-  const errors = validateForm();
-  setFormErrors(errors);
-
-  if (Object.keys(errors).length > 0) {
-    toast.error("Please fill in all required fields");
-    return;
-  }
-
-  setIsSubmitting(true);
-
-  try {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      toast.error("You must be logged in to update company profile");
-      navigate("/login");
+    if (Object.keys(errors).length > 0) {
+      toast.error("Please fill in all required fields");
       return;
     }
 
-    const formDataToSubmit = new FormData();
-    Object.keys(formData).forEach((key) => {
-      formDataToSubmit.append(key, formData[key]);
-    });
+    setIsSubmitting(true);
 
-    if (logoFile) {
-      formDataToSubmit.append("logo", logoFile);
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        toast.error("You must be logged in to update company profile");
+        navigate("/login");
+        return;
+      }
+
+      const formDataToSubmit = new FormData();
+      Object.keys(formData).forEach((key) => {
+        formDataToSubmit.append(key, formData[key]);
+      });
+
+      if (logoFile) {
+        formDataToSubmit.append("logo", logoFile);
+      }
+
+      // Add brand images to the form data (optional)
+      Object.entries(brandRelateImages).forEach(([key, file]) => {
+        if (file) {
+          formDataToSubmit.append(key, file);
+        }
+      });
+
+      const response = await axios.post(
+        process.env.REACT_APP_API_URL + "/company/update-company-profile",
+        formDataToSubmit,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      toast.success("Company profile updated successfully!");
+      setEditMode(false);
+      setCompanyProfile(response.data.companyProfile);
+      setLogoFile(null);
+      setBrandRelateImages({
+        brandRelateImage1: null,
+        brandRelateImage2: null,
+        brandRelateImage3: null,
+        brandRelateImage4: null,
+        brandRelateImage5: null,
+        brandRelateImage6: null,
+      });
+      // Refresh parent data
+      if (onProfileUpdated) {
+        onProfileUpdated();
+      }
+    } catch (error) {
+      console.error("Error updating company profile:", error);
+      toast.error(
+        error.response?.data?.message || "Failed to update company profile"
+      );
+    } finally {
+      setIsSubmitting(false);
     }
-
-    // Add brand images to the form data (optional)
-    Object.entries(brandRelateImages).forEach(([key, file]) => {
-      if (file) {
-        formDataToSubmit.append(key, file);
-      }
-    });
-
-    const response = await axios.post(
-      process.env.REACT_APP_API_URL + "/company/update-company-profile",
-      formDataToSubmit,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    toast.success("Company profile updated successfully!");
-    setEditMode(false);
-    setCompanyProfile(response.data.companyProfile);
-    setLogoFile(null);
-    setBrandRelateImages({
-      brandRelateImage1: null,
-      brandRelateImage2: null,
-      brandRelateImage3: null,
-      brandRelateImage4: null,
-      brandRelateImage5: null,
-      brandRelateImage6: null,
-    });
-  } catch (error) {
-    console.error("Error updating company profile:", error);
-    toast.error(
-      error.response?.data?.message || "Failed to update company profile"
-    );
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+  };
   const toggleEditMode = () => {
     setEditMode(!editMode);
     // Reset any form errors when toggling edit mode
@@ -587,7 +526,7 @@ const handleSubmit = async (e) => {
               </div>
             </div>
             <div className="brand-relate-image-container">
-              {companyProfile.brandRelateImage1 !== "null" && (
+              {companyProfile.brandRelateImage1 !== null && (
                 <div className="info-group-img">
                   <label htmlFor="">Brand Relate Image 1</label>
                   <img
@@ -597,7 +536,7 @@ const handleSubmit = async (e) => {
                   />
                 </div>
               )}
-              {companyProfile.brandRelateImage2 !== "null" && (
+              {companyProfile.brandRelateImage2 !== null && (
                 <div className="info-group-img">
                   <label htmlFor="">Brand Relate Image2</label>
                   <img
@@ -607,7 +546,7 @@ const handleSubmit = async (e) => {
                   />
                 </div>
               )}
-              {companyProfile.brandRelateImage3 !== "null" && (
+              {companyProfile.brandRelateImage3 !== null && (
                 <div className="info-group-img">
                   <label htmlFor="">Brand Relate Image3</label>
                   <img
@@ -617,7 +556,7 @@ const handleSubmit = async (e) => {
                   />
                 </div>
               )}
-              {companyProfile.brandRelateImage4 !== "null" && (
+              {companyProfile.brandRelateImage4 !== null && (
                 <div className="info-group-img">
                   <label htmlFor="">Brand Relate Image4</label>
                   <img
@@ -627,7 +566,7 @@ const handleSubmit = async (e) => {
                   />
                 </div>
               )}
-              {companyProfile.brandRelateImage5 !== "null" && (
+              {companyProfile.brandRelateImage5 !== null && (
                 <div className="info-group-img">
                   <label htmlFor="">Brand Relate Image5</label>
                   <img
@@ -637,7 +576,7 @@ const handleSubmit = async (e) => {
                   />
                 </div>
               )}
-              {companyProfile.brandRelateImage6 !== "null" && (
+              {companyProfile.brandRelateImage6 !== null && (
                 <div className="info-group-img">
                   <label htmlFor="">Brand Relate Image6</label>
                   <img

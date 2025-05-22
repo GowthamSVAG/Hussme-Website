@@ -70,41 +70,40 @@ export function Management() {
   };
 
   // Fetch company profile data on component mount
-  useEffect(() => {
-    const fetchCompanyProfile = async () => {
-      try {
-        const token = localStorage.getItem("token");
+  const fetchCompanyProfile = async () => {
+    try {
+      const token = localStorage.getItem("token");
 
-        if (!token) {
-          navigate("/login");
-          return;
-        }
-
-        const response = await axios.get(
-          process.env.REACT_APP_API_URL + "/company/get-company-profile",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        setCompanyProfile(response.data);
-      } catch (error) {
-        console.error("Error fetching company profile:", error);
-
-        // If profile not found, redirect to create profile
-        if (error.response && error.response.status === 404) {
-          navigate("/new-company");
-        }
-      } finally {
-        setLoading(false);
+      if (!token) {
+        navigate("/login");
+        return;
       }
-    };
 
+      const response = await axios.get(
+        process.env.REACT_APP_API_URL + "/company/get-company-profile",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setCompanyProfile(response.data);
+    } catch (error) {
+      console.error("Error fetching company profile:", error);
+
+      // If profile not found, redirect to create profile
+      if (error.response && error.response.status === 404) {
+        navigate("/new-company");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchCompanyProfile();
   }, [navigate]);
-
   // Add click handler to close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = () => {
@@ -169,7 +168,12 @@ export function Management() {
 
                 <Link
                   className="dropdown-item"
-                  onClick={(e) => loadComponent(<CompanyProfile />, 3)}
+                  onClick={(e) =>
+                    loadComponent(
+                      <CompanyProfile onProfileUpdated={fetchCompanyProfile} />,
+                      3
+                    )
+                  }
                 >
                   Edit Profile
                 </Link>
@@ -241,7 +245,12 @@ export function Management() {
                 </NavLink>
               </li> */}
               <li
-                onClick={() => loadComponent(<CompanyProfile />, 3)}
+                onClick={() =>
+                  loadComponent(
+                    <CompanyProfile onProfileUpdated={fetchCompanyProfile} />,
+                    3
+                  )
+                }
                 className={activeIndex === 3 ? "active-sidebar-item" : ""}
               >
                 <NavLink>
@@ -250,8 +259,9 @@ export function Management() {
                     className="mgmt-sidebar-icn"
                   />
                   <span className="mgmt-sidebar-title">Company Profile</span>
-                  <span className="mgmt-tooltiptext for-mble">Company Profile</span>
-                  
+                  <span className="mgmt-tooltiptext for-mble">
+                    Company Profile
+                  </span>
                 </NavLink>
               </li>
             </ul>
