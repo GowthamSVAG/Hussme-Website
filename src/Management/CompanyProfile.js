@@ -22,15 +22,15 @@ export function CompanyProfile({ onProfileUpdated }) {
     brandRelateImage5: null,
     brandRelateImage6: null,
   });
-const handleBrandImageChange = (event) => {
-  const { id, files } = event.target;
-  setBrandRelateImages((prev) => ({
-    ...prev,
-    // Only update the specific image if a new file is selected
-    ...(files && files[0] ? { [id]: files[0] } : {})
-    // If no file is selected, do not change anything
-  }));
-};
+  const handleBrandImageChange = (event) => {
+    const { id, files } = event.target;
+    setBrandRelateImages((prev) => ({
+      ...prev,
+      // Only update the specific image if a new file is selected
+      ...(files && files[0] ? { [id]: files[0] } : {}),
+      // If no file is selected, do not change anything
+    }));
+  };
   const [formData, setFormData] = useState({
     companyName: "",
     dba: "",
@@ -526,17 +526,17 @@ const handleBrandImageChange = (event) => {
               </div>
             </div>
             <div className="brand-relate-image-container">
-              {companyProfile.brandRelateImage1 !== null && (
+              {companyProfile.brandRelateImage1 && (
                 <div className="info-group-img">
                   <label htmlFor="">Brand Relate Image 1</label>
                   <img
                     src={companyProfile.brandRelateImage1}
-                    alt={companyProfile.companyName}
+                    alt="Yet to Upload Relate Image"
                     className="profile-logo"
                   />
                 </div>
               )}
-              {companyProfile.brandRelateImage2 !== null && (
+              {companyProfile.brandRelateImage2 && (
                 <div className="info-group-img">
                   <label htmlFor="">Brand Relate Image2</label>
                   <img
@@ -546,7 +546,7 @@ const handleBrandImageChange = (event) => {
                   />
                 </div>
               )}
-              {companyProfile.brandRelateImage3 !== null && (
+              {companyProfile.brandRelateImage3 && (
                 <div className="info-group-img">
                   <label htmlFor="">Brand Relate Image3</label>
                   <img
@@ -556,7 +556,7 @@ const handleBrandImageChange = (event) => {
                   />
                 </div>
               )}
-              {companyProfile.brandRelateImage4 !== null && (
+              {companyProfile.brandRelateImage4 && (
                 <div className="info-group-img">
                   <label htmlFor="">Brand Relate Image4</label>
                   <img
@@ -566,7 +566,8 @@ const handleBrandImageChange = (event) => {
                   />
                 </div>
               )}
-              {companyProfile.brandRelateImage5 !== null && (
+
+              {companyProfile.brandRelateImage5 && (
                 <div className="info-group-img">
                   <label htmlFor="">Brand Relate Image5</label>
                   <img
@@ -576,7 +577,7 @@ const handleBrandImageChange = (event) => {
                   />
                 </div>
               )}
-              {companyProfile.brandRelateImage6 !== null && (
+              {companyProfile.brandRelateImage6 && (
                 <div className="info-group-img">
                   <label htmlFor="">Brand Relate Image6</label>
                   <img

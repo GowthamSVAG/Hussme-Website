@@ -5,9 +5,10 @@
   align-items: center;
   justify-content: center;
   height: 80vh;
-  background-image: url('https://i.ibb.co/Fk2MMqFj/46755.jpg');
+  /* background-image: url('https://i.ibb.co/Fk2MMqFj/46755.jpg'); */
   background-repeat: no-repeat;
   background-size: cover;
+   font-family: "Kumbh Sans", sans-serif !important;
 
 }
 .otp-input-box {
