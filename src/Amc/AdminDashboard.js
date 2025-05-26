@@ -10,6 +10,7 @@ import { PendingTask } from "./PendingTask";
 import { ReferBackTask } from "./ReferBackTask";
 import { ApprovedTask } from "./ApprovedTask";
 import { TotalTask } from "./TotalTask";
+import { ReadyTaskForPosting } from "./ReadyTaskForPosting";
 import menu from "../Components/Assets/Admin-Assets/menu.png";
 export function AdminDashboard() {
   const [isMobileMenu, setIsMobileMenu] = useState(false);
@@ -150,6 +151,15 @@ export function AdminDashboard() {
               className={activeIndex === 5 ? "active-header-item" : ""}
             >
               Approved Tasks: {taskStats.approved}
+            </li>
+            <li
+              onClick={() => {
+                loadComponent(<ReadyTaskForPosting/>, 6);
+                fetchCompanyAllDetails();
+              }}
+              className={activeIndex === 6 ? "active-header-item" : ""}
+            >
+              Wait for Launch
             </li>
           </ul>
         </div>

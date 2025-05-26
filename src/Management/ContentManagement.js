@@ -33,6 +33,7 @@ export function ContentManagement() {
   const [showSecondHalf, setShowSecondHalf] = useState(true);
   const [showCurrentTaskStatus, setShowCurrentTaskStatus] = useState(false);
   const [showCompletedTaskStatus, setShowCompletedTaskStatus] = useState(false);
+  const [launchedTaskWindow, setLaunchedWindow] = useState(false);
   const [taskForm, setTaskForm] = useState({
     companyProfileId: "",
     title: "",
@@ -51,11 +52,17 @@ export function ContentManagement() {
 
   const [tasks, setTasks] = useState([]);
   const [approvedTasks, setApprovedTasks] = useState([]);
+  const [launchedTasks, setLaunchedTasks] = useState([]);
+  const [selectedLaunchedTasks, setSelectedLaunchedTasks] = useState([]);
+
   const [selectedTask, setSelectedTask] = useState(null);
   const [feedbackText, setFeedbackText] = useState("");
   const [selectedRolledBackTask, setSelectedRolledBackTask] = useState(null);
   const [tempRowStatus, setTempRowStatus] = useState(true);
   const [tempYetRowStatus, setYetTempRowStatus] = useState(false);
+  const [showLaunchedTaskDetail, setShowLaunchedTaskDetail] = useState(false);
+  const [tempYetLaunchedRowStatus, setTempYetLaunchedRowStatus] =
+    useState(false);
 
   const taskHandleSubmit = async (e) => {
     e.preventDefault();
@@ -209,6 +216,18 @@ export function ContentManagement() {
       ) {
         setYetTempRowStatus(false);
       }
+      if (response.data.filter((task) => task.currentStatus === "Posted")) {
+        setTempYetLaunchedRowStatus(true);
+        setLaunchedTasks(
+          response.data.filter((task) => task.currentStatus === "Posted")
+        );
+      }
+      if (
+        response.data.filter((task) => task.currentStatus === "Posted")
+          .length === 0
+      ) {
+        setTempYetLaunchedRowStatus(false);
+      }
     } catch (error) {
       console.error("Error fetching rolled back tasks:", error);
       toast.error("Error loading rolled back tasks");
@@ -255,7 +274,7 @@ export function ContentManagement() {
 
   useEffect(() => {
     if (companyProfile?._id) {
-      console.log("Fetching tasks for company:", companyProfile._id);
+      // console.log("Fetching tasks for company:", companyProfile._id);
       fetchTasks();
     }
   }, [companyProfile]);
@@ -265,12 +284,6 @@ export function ContentManagement() {
       fetchRolledBackTasks();
     }
   }, [companyProfile]);
-
-  useEffect(() => {
-    // Log when showCurrentTaskStatus changes
-    console.log("showCurrentTaskStatus:", showCurrentTaskStatus);
-    console.log("selectedTask:", selectedTask);
-  }, [showCurrentTaskStatus, selectedTask]);
 
   const scrollLeft = () => {
     if (scrollRef.current) {
@@ -510,19 +523,7 @@ export function ContentManagement() {
       setNewTask(false);
     }
   };
-  const completedTaskView = () => {
-    if (showTaskStatus == true) {
-      setShowTaskStatus(false);
-      setShowFirstHalf(false);
-      setShowSecondHalf(false);
-      setShowCompletedTaskStatus(true);
-    } else {
-      setShowTaskStatus(true);
-      setShowFirstHalf(true);
-      setShowSecondHalf(true);
-      setShowCompletedTaskStatus(false);
-    }
-  };
+
   const clickAssignSubmitButton = () => {
     setNewTask(false);
     setShowTaskStatus(true);
@@ -542,6 +543,30 @@ export function ContentManagement() {
       setButtonAction("disapprove");
     }
   };
+  const launchedTaskWindowController = () => {
+    if (launchedTaskWindow === true) {
+      setLaunchedWindow(false);
+      setShowFirstHalf(true);
+      setShowSecondHalf(true);
+      setTopRowTitleSection(true);
+    } else {
+      setLaunchedWindow(true);
+      setShowFirstHalf(false);
+      setShowSecondHalf(false);
+      setTopRowTitleSection(false);
+      setShowLaunchedTaskDetail(false);
+    }
+  };
+  const launchedTaskDetailWindowController = () => {
+    if (showLaunchedTaskDetail === true) {
+      setShowLaunchedTaskDetail(false);
+      setLaunchedWindow(true);
+    } else {
+      setShowLaunchedTaskDetail(true);
+      setLaunchedWindow(false);
+    }
+  };
+
   return (
     <div className="content-management-page">
       <div className="task-row">
@@ -551,14 +576,17 @@ export function ContentManagement() {
             <div className="new-task-button" onClick={assignTask}>
               + Assign New Task
             </div>
-            {/* <div className="approved-list-container">
+            <div className="approved-list-container">
               <span className="tooltiptext">Launched Reports</span>
-              <div className="appproved-list-btn">
+              <div
+                className="appproved-list-btn"
+                onClick={() => launchedTaskWindowController()}
+              >
                 <LuNotepadText
                   style={{ height: "30px", width: "30px", color: "grey" }}
                 />
               </div>
-            </div> */}
+            </div>
           </div>
         )}
         {/* First Half */}
@@ -755,7 +783,6 @@ export function ContentManagement() {
                 <div className="task-row-container" ref={scrollRef}>
                   {tasks.map((task) => (
                     <div className="box" key={task._id}>
-                      {console.log("Rendering task:", task)}
                       <div
                         className="cart-task-box-wrapper"
                         onClick={() => taskStatus(task._id)}
@@ -1172,6 +1199,208 @@ export function ContentManagement() {
                 <div className="task-preview-img-container">
                   <img
                     src={selectedRolledBackTask?.doneTaskImage}
+                    className="yet-task-preview-img"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {launchedTaskWindow && (
+        <div className="task-approved-row">
+          <div className="launched-page-title-exit-row">
+            <div className="approve-title"> Approved & Launched Tasks🚀 </div>
+            <div
+              className="appproved-list-btn"
+              onClick={() => launchedTaskWindowController()}
+            >
+              <img
+                width="48"
+                height="48"
+                src="https://img.icons8.com/fluency/48/delete-sign.png"
+                alt="delete-sign"
+                className="status-cross-symbol"
+              />
+            </div>
+          </div>
+
+          <div className="task-arrows">
+            <img
+              src={backicn}
+              alt=""
+              className="assign-task-btn back"
+              onClick={approvedScrollLeft}
+            />
+            {tempYetLaunchedRowStatus ? (
+              <div
+                className="task-approved-row-container"
+                ref={approvedScrollRef}
+              >
+                {launchedTasks.map((task) => (
+                  <div
+                    className="yet-task-box-wrapper"
+                    key={task._id}
+                    onClick={() => completedTask(task._id)}
+                  >
+                    <div
+                      className="yet-task-box"
+                      onClick={() => launchedTaskDetailWindowController()}
+                    >
+                      <div className="inner-triangle-container">
+                        <div className="yet-task-id">
+                          <div className="yet-id">#{task.taskId}</div>
+                        </div>
+                        <button
+                          className="yet-preview-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedLaunchedTasks(task);
+                            launchedTaskDetailWindowController();
+                          }}
+                        >
+                          Preview
+                        </button>
+                        <div className="yet-task-title">{task.title}</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="temp-row-container yet">
+                <div className="yet-temp-img"> </div>
+                <div className="temp-title">
+                  Task nearly complete? Let’s check it off!
+                </div>
+              </div>
+            )}
+
+            <img
+              src={nexticn}
+              alt=""
+              className="assign-task-btn next"
+              onClick={approvedScrollRight}
+            />
+          </div>
+        </div>
+      )}
+      {showLaunchedTaskDetail && (
+        <div className="yet-show-task-status-container">
+          <div className=" close-button-row">
+            <img
+              onClick={() => launchedTaskDetailWindowController()}
+              width="48"
+              height="48"
+              src="https://img.icons8.com/fluency/48/delete-sign.png"
+              alt="delete-sign"
+              className="status-cross-symbol"
+            />
+          </div>
+          <div className="status-top-floor">
+            <div className="status-top-floor-row-1">
+              <div className="status-col-1">
+                <div className="status-row">
+                  <div className="status-task-id">
+                    <div className="task-id">Task ID</div>
+                    <div className="task-id-number">
+                      #{selectedLaunchedTasks?.taskId}
+                    </div>
+                  </div>
+                  <div className="status-task-title">
+                    <div className="task-title-status">Task Title</div>
+                    <div className="task-title-name-status task-h">
+                      {selectedLaunchedTasks?.title}
+                    </div>
+                  </div>
+                  <div className="status-task-title">
+                    <div className="task-title-status">Tagline or Slogan</div>
+                    <div className="task-title-name-status task-h">
+                      {selectedLaunchedTasks?.tagline}
+                    </div>
+                  </div>
+                  <div className="status-task-title">
+                    <div className="task-title-status">Purpose/Objective</div>
+                    <div className="task-title-name-status">
+                      {selectedLaunchedTasks?.taskpurpose}
+                    </div>
+                  </div>
+                  <div className="status-task-title">
+                    <div className="task-title-status">Main Headline</div>
+                    <div className="task-title-name-status task-h">
+                      {selectedLaunchedTasks?.headline}
+                    </div>
+                  </div>
+                  <div className="status-task-title">
+                    <div className="task-title-status">
+                      Key Offer or Message
+                    </div>
+                    <div className="task-title-name-status">
+                      {selectedLaunchedTasks?.offerormessage}
+                    </div>
+                  </div>
+                  <div className="status-task-title">
+                    <div className="task-title-status">
+                      Call to Action (CTA)
+                    </div>
+                    <div className="task-title-name-status">
+                      {selectedLaunchedTasks?.calltoaction}
+                    </div>
+                  </div>
+                  <div className="status-task-title">
+                    <div className="task-title-status">Branding Guidelines</div>
+                    <div className="task-title-name-status">
+                      {selectedLaunchedTasks?.guidlines}
+                    </div>
+                  </div>
+                  <div className="status-task-title">
+                    <div className="task-title-status">
+                      Additional Information
+                    </div>
+                    <div className="task-title-name-status">
+                      {selectedLaunchedTasks?.additionalinfo}
+                    </div>
+                  </div>
+                  <div className="status-task-des">
+                    <div className="task-title-status">Task Description</div>
+                    <div className="task-title-name-status">
+                      {selectedLaunchedTasks?.description}
+                    </div>
+                  </div>
+                  <div className="status-task-dates">
+                    <label className="for-gradient-font">Target Date</label>
+                    <div className="status-target-date">
+                      <input
+                        type="date"
+                        name="targetPostingDate"
+                        value={formatDateForDisplay(
+                          selectedLaunchedTasks?.submissionForReview
+                        )}
+                        readOnly
+                      />
+                    </div>
+                  </div>
+                  <div className="status-task-dates">
+                    <label className="for-gradient-font">Deadline Date</label>
+                    <div className="status-deadline-date">
+                      <input
+                        type="date"
+                        name="submissionForReview"
+                        value={formatDateForDisplay(
+                          selectedLaunchedTasks?.targetPostingDate
+                        )}
+                        readOnly
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="status-col-2">
+                <div className="status-title-preview">Task Preview</div>
+                <div className="task-preview-img-container">
+                  <img
+                    src={selectedLaunchedTasks?.doneTaskImage}
                     className="yet-task-preview-img"
                     alt=""
                   />

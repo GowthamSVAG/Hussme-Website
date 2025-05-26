@@ -25,7 +25,6 @@ export const UserProvider = ({ children }) => {
           if (data.email) {
             // Store complete user data including username
             setUser(data);
-            console.log("User data loaded:", data);
           }
         })
         .catch((error) => {
@@ -52,7 +51,6 @@ export const UserProvider = ({ children }) => {
       })
       .then((data) => {
         setUser(data);
-        console.log("User logged in:", data);
       })
       .catch((error) => {
         console.error("Error during login:", error);
